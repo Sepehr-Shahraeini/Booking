@@ -1,0 +1,194 @@
+﻿<!--MainPage.css style file for this page-->
+<body>
+    <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
+        <div class="w3-display-middle" style="white-space:nowrap;">
+            <div class="w3-center w3-padding-small w3-black w3-xlarge w3-animate-opacity Title">مرکز دکتر محمد رضا خدابخش</div>
+            <div class="w3-center w3-black w3-xlarge w3-animate-opacity w3-display-middle reserveBtn" dx-button="btn_reserve"></div>
+        </div>
+    </div>
+
+    <div class="w3-content w3-container" id="about">
+
+        <h3 class="w3-center">درباره ما</h3>
+        <p style="font-size:17px; text-align:justify">
+            سلام من محمدرضا خدابخش هستم
+            دکتري تخصصي روانشناسی از دانشگاه علامه طباطبائی تهران
+            متخصص روانكاوي و روان درمانگري
+            سايكوتراپيست
+            داراي گواهي جامع چند تخصصي زوج درمانگر و اختلالات جنسي
+            عضو هيئت علمي دانشگاه
+            داراي سابقه تدريس در دانشگاه علامه طباطبايي تهران و ساير..
+            داراي ١٠٠ مقاله معتبر و بين المللي در زمينه روان
+            داراي گواهي single subject
+            عضو برترباشگاه پژوهشگران جوان و نخبگان كشور هستم
+            عضو انجمن روانشناسی ايران
+            داور مجلات علمی پژوهشی( پرستاري ايران، اصول بهداشت روانی، طب کار،سلامت کار ايران) و داور مجله isi
+            موفق در كسب رتبه هاي زير :
+            رتبه ۱ در مصاحبه ورودي دانشگاه علامه طباطبائی و رتبه دکتري ۳ در دانشگاه فردوسی مشهد.رتبه دکتري ۴ در دانشگاه اصفهان، رتبه دکتري ۷ در دانشگاه تربیت مدرس و رتبه کل ۸ و رتبه اول قبولی دوره دکتري در دانشگاه علامه طباطبايی تهران در سال۱۳۹۱
+
+            داراي نمره برتر آزمون زبان انگليسي MCHE و Tolimo
+            داور مجله (Iranian journal of public health (ISI
+            داور مجله هاي علمي -
+            ‏The international journal of occupational and environmental medicine
+
+            همايش ها :
+
+            اولين کنگره ملی روانشناسان و مشاوران ايران
+            کنگره بين المللی مامايی و بهداشت باروری ايران( با امتياز بازاموزی ۵)
+            ارائه سخنرانی در کنگره بين المللی مامايی و بهداشت باروری ايران
+
+            -همايش هاي بين المللي :
+
+            ‏5th World Conference on Psychology, Counseling and Guidance, WCPCG
+            " با عنوان:
+            ‏Investigation of relationship between humor styles with team cohesion among athletes
+            2. خلاصه مقاله پذيرفته شده در "2nd WORLD CONFERENCE on PSYCHOLOGY and SOCIOLOGY Occupational stressors among nurses: Review of coping mechanisms with stress
+        </p>
+        <div class="w3-row" id="discription">
+            <div class="w3-col m6 w3-center w3-padding-large">
+                <img src="/img/matt-duncan-IUY_3DvM__w-unsplash (2).jpg" class="w3-round w3-image" alt="Photo of Me" width="500" height="333">
+            </div>
+            <div class="w3-col m6  w3-padding-large">
+                <p style="font-size:17px; text-align:justify">
+                    در زمينه هاي زير ميتونم به شما كمك كنم :
+
+                    تشخيص هر نوع اختلال روان و بيماري مربوط به روان
+                    درمان اختلالات رواني و مشكلات ذهن
+                    ازدواج و تست هاي تخصصي قبل از ازدواج
+                    مشكلات بين زوجين و ريشه يابي (زوج درماني)
+                    كودك
+                    مشكلات فردي
+                    روابط
+                    اضطراب و استرس
+                    شخصيت
+                    انگيزش
+                    تحصيلي
+                    و غيره ....
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="selectDoctor" class="w3-modal" style="display:none;width:100%;height:100%">
+        <div class="w3-modal-content w3-animate-zoom" style="width:45%;height:auto;border-radius:5px;background-color:#fff">
+            <div class="field w3-modal-content w3-animate-zoom">
+                <div class="selectDr" dx-button="btn_MRKH"></div>
+                <div class="selectDr" dx-button="btn_other"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="chooseDoctor" class="w3-modal" style="display:none">
+        <div class="w3-modal-content w3-animate-zoom" style="width:45%;height:auto;border-radius:5px;background-color:#fff">
+            <div class="field w3-modal-content w3-animate-zoom">
+                <button class="selectDrr" ng-repeat="x in Psychoanalysts" ng-click="show(x.Name, x.LastName, x.WeekDays, x.Phone)">{{x.Name}} {{x.LastName}}</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="form" class="w3-modal" style="display:none">
+        <div class="w3-modal-content w3-animate-zoom" style="width:40%;background-color:#fff">
+            <div class="w3-container  w3-display-container">
+                <div class="field">
+                    <div dx-scroll-view="scrollViewOptions">
+                        <p class="inputTitle">نام</p>
+                        <div dx-text-box="txt_FirstName" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <p class="inputTitle">نام خانوادگی</p>
+                        <div dx-text-box="txt_LastName" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <p class="inputTitle">تلفن همراه</p>
+                        <div dx-text-box="txt_Mobile" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <p class="inputTitle">ایمیل</p>
+                        <div dx-text-box="txt_Email" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <p class="inputTitle">سن</p>
+                        <div dx-text-box="txt_Age" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <p class="inputTitle">تعداد فرزند</p>
+                        <div dx-text-box="txt_ChildrenNum" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <p class="inputTitle">شغل</p>
+                        <div dx-text-box="txt_Job" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <p class="inputTitle">وضعیت تحصیلی</p>
+                        <div dx-select-box="drop_Education" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <p class="inputTitle">رشته تحصیلی</p>
+                        <div dx-text-box="txt_FieldOfStudy" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <p class="inputTitle">وضعیت ازدواج</p>
+                        <div dx-select-box="drop_MaritalStatus" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <p class="inputTitle">موضوع</p>
+                        <div dx-text-box="txt_Subject" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <p class="inputTitle">علت مراجعه</p>
+                        <div dx-text-area="txt_Reason" class="input" style="height:10% !important" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <p class="inputTitle">معرف</p>
+                        <div dx-text-box="txt_Introduced" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <div style="margin:0px auto 0px auto">
+                            <button id="sun" class="dateBox" style="display:none" ng-click="sunBtn()">
+                                <p>یکشنبه</p>
+                                <p id="dateSun"></p>
+                                <p id="monthSun"></p>
+                            </button>
+                            <button id="mon" class="dateBox" style="display:none" ng-click="monBtn()">
+                                <p>دوشنبه</p>
+                                <p id="dateMon"></p>
+                                <p id="monthMon"></p>
+                            </button>
+                            <button id="tues" class="dateBox" style="display:none" ng-click="tuesBtn()">
+                                <p>سه شنبه</p>
+                                <p id="dateTues"></p>
+                                <p id="monthTues"></p>
+                            </button>
+                            <button id="wed" class="dateBox" style="display:none" ng-click="wedBtn()">
+                                <p>چهار شنبه</p>
+                                <p id="dateWed"></p>
+                                <p id="monthWed"></p>
+                            </button>
+                            <button id="thur" class="dateBox" style="display:none" ng-click="thurBtn()">
+                                <p>پنج شنبه</p>
+                                <p id="dateThur"></p>
+                                <p id="monthThur"></p>
+                            </button>
+                            <button id="fri" class="dateBox" style="display:none" ng-click="friBtn()">
+                                <p>جمعه</p>
+                                <p id="dateFri"></p>
+                                <p id="monthFri"></p>
+                            </button>
+                            <button id="sat" class="dateBox" style="display:none" ng-click="satBtn()">
+                                <p>شنبه</p>
+                                <p id="dateSat"></p>
+                                <p id="monthSat"></p>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="popSat" class="Time">
+                        <button class="button" ng-repeat="x in saturDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.StartTime}} {{x.EndTime}}</button>
+                    </div>
+                    <div id="popSun" class="Time">
+                        <button class="button" ng-repeat="x in sunDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.StartTime}} {{x.EndTime}}</button>
+                    </div>
+                    <div id="popMon" class="Time">
+                        <button class="button" ng-repeat="x in monDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.EndTime}} - {{x.StartTime}}</button>
+                    </div>
+                    <div id="popTues" class="Time">
+                        <button class="button" ng-repeat="x in tuesDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.StartTime}} {{x.EndTime}}</button>
+                    </div>
+                    <div id="popWed" class="Time">
+                        <button class="button" ng-repeat="x in wednesDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.StartTime}} {{x.EndTime}}</button>
+                    </div>
+                    <div id="popThur" class="Time">
+                        <button class="button" ng-repeat="x in thursDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.StartTime}} {{x.EndTime}}</button>
+                    </div>
+                    <div id="popFri" class="Time">
+                        <button class="button" ng-repeat="x in friDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.StartTime}} {{x.EndTime}}</button>
+                    </div>
+                    <div dx-button="btn_save"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
+        <p>تماس با ما </p>
+        <div class="w3-xlarge w3-section">
+            <a href="https://t.me/Dr_answer"><i class="fa fa-telegram w3-hover-opacity"></i></a>
+            <a href="https://www.instagram.com/dr_mrkhodabakhsh/"><i class="fa fa-instagram w3-hover-opacity"></i></a>
+        </div>
+    </footer>
+
+</body>
+

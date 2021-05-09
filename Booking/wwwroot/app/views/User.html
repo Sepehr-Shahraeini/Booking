@@ -1,0 +1,330 @@
+﻿
+<style>
+    table {
+        margin: 0px auto 0px auto;
+    }
+
+    th {
+        padding: 10px;
+        border: 1px solid black;
+        text-align: center
+    }
+
+    td {
+        padding: 10px;
+        border: 1px solid black;
+        text-align: center;
+    }
+
+    .time {
+        font-family: monospace;
+        width: 2ch;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    body, h1, h2, h3, h4, h5, h6 {
+        font-family: "Lato", sans-serif;
+    }
+
+    body, html {
+        height: 100%;
+        color: #777;
+        line-height: 1.8;
+    }
+
+    /* Create a Parallax Effect */
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    /* First image (Logo. Full height) */
+    .bgimg-1 {
+        background-image: url('/img/adrian-FrSEEdYr418-unsplash.jpg');
+        min-height: 100%;
+    }
+
+    /* Second image (Portfolio) */
+
+    .w3-wide {
+        letter-spacing: 10px;
+    }
+
+    .w3-hover-opacity {
+        cursor: pointer;
+    }
+
+    #discription {
+        padding-top: 120px
+    }
+
+    #about {
+        padding-top: 120px
+    }
+
+
+    @media (min-width:770px) {
+        .bgimg-1, .bgimg-2, .bgimg-3 {
+            background-attachment: scroll;
+            min-height: 400px;
+        }
+
+        .historyBtn, .reserveBtn {
+            width: 180px
+        }
+
+        .button {
+            background-color: white;
+            height: 40px;
+            border-radius: 5px;
+            margin: 2px 5px;
+            position: center;
+            border: 1px solid black;
+            width: 23%;
+        }
+
+            .button:hover {
+                background-color: black;
+                color: white
+            }
+
+
+        .field {
+            width: 100%;
+            display: inline-block;
+            padding-top: 25px;
+        }
+
+        .dx-placeholder {
+            color: black !important;
+            text-align: center !important;
+            width: 100% !important;
+        }
+
+        .historyBtn, .reserveBtn {
+            width: 180px
+        }
+
+        .dateBox {
+            background-color: white;
+            width: 10%;
+            height: 10%;
+            text-align: center;
+            margin: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            border: 2px solid #d9d9d9
+        }
+
+        .r1 {
+            margin: 0px auto 0px auto;
+        }
+
+
+        .r2 {
+            margin: 0px auto 0px auto
+        }
+
+
+        .r3 {
+            margin: 0px auto 0px auto
+        }
+
+        .Time, .Time2 {
+            display: none
+        }
+
+        #infoinput {
+            width: 100%;
+            border: 1px solid black;
+            border-radius: 5px
+        }
+
+        #title {
+            margin: 5px auto 0px auto
+        }
+
+        #historyNum {
+            width: 50%;
+            margin: 0 25% 2%;
+            border-radius: 5px
+        }
+
+        .ExistTimeButton {
+            background-color: white;
+            height: 40px;
+            border-radius: 5px;
+            margin: 2px 1.6%;
+            position: center;
+            border: 1px solid black;
+            width: 30%;
+            display: inline-block;
+        }
+    }
+
+
+    /* Turn off parallax scrolling for tablets and phones */
+    @media only screen and (max-device-width: 770px) {
+        .bgimg-1, .bgimg-2, .bgimg-3 {
+            background-attachment: scroll;
+            min-height: 400px;
+        }
+
+        .historyBtn, .reserveBtn {
+            width: 180px
+        }
+
+        .button {
+            background-color: white;
+            height: 30px;
+            border: 1px solid black;
+            border-radius: 5px;
+            margin: 2px 8px;
+            position: center;
+            color: black;
+            width: 43% !important
+        }
+
+
+        .field {
+            width: 100%;
+            display: inline-block;
+            padding-top: 25px;
+        }
+
+        .dx-placeholder {
+            color: black !important;
+            text-align: center !important;
+            width: 100% !important;
+        }
+
+        .dateBox {
+            background-color: white;
+            width: 20%;
+            height: 10%;
+            text-align: center;
+            margin: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            border: 2px solid #d9d9d9
+        }
+
+        .DatePicker {
+            margin: 0px auto 0px auto
+        }
+
+        .Time, .Time2 {
+            display: none
+        }
+
+        #infoinput {
+            width: 100%;
+            border: 1px solid black;
+            border-radius: 5px
+        }
+
+        #title {
+            margin: 5px auto 0px auto
+        }
+
+        #historyNum {
+            width: 50%;
+            margin: 0 25% 2%;
+            border-radius: 5px
+        }
+    }
+</style>
+
+<body>
+    <div style="width:100%">
+        <div>
+            <div class="header">
+                <div class="btn_user" dx-button="btn_changePassword"></div>
+                <div class="btn_user" dx-button="btn_changeVisitingTime"></div>
+
+            </div>
+
+            <div id="formChangePassword" class="w3-modal" style="display:none">
+                <div class="w3-modal-content w3-animate-zoom" style="width:30%;background-color:#fff">
+                    <div class="w3-container  w3-display-container">
+                        <p class="inputTitle">نام کاربری</p>
+                        <div dx-text-box="txt_UserName" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+
+                        <p class="inputTitle">رمز جدید</p>
+                        <div dx-text-box="txt_Password" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <div dx-button="btn_newPassword" style="width:100%; margin:4% auto 2% auto"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="formChangeVisitingTime" class="w3-modal" style="display:none">
+                <div class="w3-modal-content w3-animate-zoom" style="width:30%;background-color:#fff">
+                    <div class="w3-container  w3-display-container">
+                        <span class="w3-button" onclick="document.getElementById('formChangeVisitingTime').style.display = 'none', document.getElementById('changeVisitingTimeDay').style.display = 'block'">x</span>
+                        <div>
+                            <div style="width:50%;display:inline-block;padding-right:7%">
+                                <p class="inputTitle">ساعت شروع</p>
+                                <div dx-text-box="txt_startTime_minute" class="input" style="width: 15% !important; display: inline-block"></div>
+                                <p style="display: inline-block; font-size:x-large">:</p>
+                                <div dx-text-box="txt_startTime_hour" class="input" style="width: 15% !important; display: inline-block"></div>
+
+                                <p class="inputTitle">ساعت پایان</p>
+                                <div dx-text-box="txt_endTime_minute" class="input" style="width: 15% !important; display: inline-block"></div>
+                                <p style="display: inline-block; font-size:x-large">:</p>
+                                <div dx-text-box="txt_endTime_hour" class="input" style="width: 15% !important; display: inline-block"></div>
+                            </div>
+                            <div style="float: left; width:50%; display:inline-block; padding:10% 0 0 3%">
+                                <div id="btn_editTime" dx-button="btn_editTime" style="width:100%; margin:4% auto 2% auto; display:block"></div>
+                                <div id="btn_deleteTime" dx-button="btn_deleteTime" style="width:100%; margin:4% auto 2% auto; display:block"></div>
+                            </div>
+                        </div>
+                        <button class="ExistTimeButton" ng-repeat="x in ExistTime" ng-click="registeredTime(x.StartTime , x.EndTime, x.Mobile, x.ID, x.Weekdays)">{{x.EndTime}} - {{x.StartTime}}</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="changeVisitingTimeDay" class="w3-modal" style="display:none">
+                <div class="w3-modal-content w3-animate-zoom" style="width:30%;background-color:#fff">
+                    <div class="w3-container  w3-display-container">
+                        <span class="w3-button" onclick="document.getElementById('changeVisitingTimeDay').style.display = 'none'">x</span>
+                        <div class="DatePicker">
+                            <button dx-button="btn_sat" style="margin-bottom:1%"></button>
+                            <button dx-button="btn_sun" style="margin-bottom:1%"></button>
+                            <button dx-button="btn_mon" style="margin-bottom:1%"></button>
+                            <button dx-button="btn_tues" style="margin-bottom:1%"></button>
+                            <button dx-button="btn_wend" style="margin-bottom:1%"></button>
+                            <button dx-button="btn_thurs" style="margin-bottom:1%"></button>
+                            <button dx-button="btn_fri"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <table style="width:70%">
+                <thead>
+                    <tr>
+                        <th>نام</th>
+                        <th>نام خانوادگی</th>
+                        <th>تلفن همراه</th>
+                        <th>تاریخ</th>
+                        <th>زمان</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in patients">
+                        <td>{{x.Name}}</td>
+                        <td>{{x.LastName}}</td>
+                        <td>{{x.Mobile}}</td>
+                        <td>{{x.Date}}</td>
+                        <td class="time">{{x.Time}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>

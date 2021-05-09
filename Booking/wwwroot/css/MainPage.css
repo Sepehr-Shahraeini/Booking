@@ -1,0 +1,314 @@
+﻿body, h1, h2, h3, h4, h5, h6 {
+    font-family: "Lato", sans-serif;
+}
+
+body, html {
+    height: 100%;
+    color: #777;
+    line-height: 1.8;
+}
+
+/* Create a Parallax Effect */
+.bgimg-1, .bgimg-2, .bgimg-3 {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* First image (Logo. Full height) */
+.bgimg-1 {
+    background-image: url('/img/adrian-FrSEEdYr418-unsplash.jpg');
+    min-height: 100%;
+}
+
+/* Second image (Portfolio) */
+
+.w3-wide {
+    letter-spacing: 10px;
+}
+
+.w3-hover-opacity {
+    cursor: pointer;
+}
+
+#discription {
+    padding-top: 120px
+}
+
+#about {
+    padding-top: 120px;
+}
+
+
+
+.Time {
+    display: none
+}
+
+.btn_user{
+    display:contents;
+}
+
+.header{
+    width:50%;
+    margin:0 auto 0 auto
+}
+
+@media (min-width:770px) {
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+        background-attachment: scroll;
+        min-height: 400px;
+    }
+
+    .reserveBtn {
+        margin-top: 18% !important;
+        border-radius: 40px !important;
+        background-color: white !important;
+        color: black !important;
+        box-shadow: 5px 6px !important;
+    }
+
+    .button {
+        background-color: white;
+        height: 40px;
+        border-radius: 5px;
+        margin: 2px 5px;
+        position: center;
+        border: 1px solid black;
+        width: 23%;
+    }
+
+        .button:hover {
+            background-color: black;
+            color: white
+        }
+
+    .field {
+        width: auto;
+        margin: 0 2% 0 2%;
+        height: auto;
+        padding: 0.05%;
+    }
+
+    .dx-placeholder {
+        color: black !important;
+        text-align: center !important;
+        width: 100% !important;
+    }
+
+    .dateBox {
+        background-color: white;
+        width: 20%;
+        height: 10%;
+        text-align: center;
+        margin: 10px;
+        border-radius: 5px;
+        display: none;
+        border: 2px solid #d9d9d9;
+    }
+
+    .selectDoctor {
+        width: 40%;
+        height: 27%
+    }
+
+    .btn_drName {
+        width: 100%;
+        display: block;
+        border: 0px !important;
+        background-color: gainsboro;
+        margin-top: 2%;
+        border-radius: 5px;
+    }
+
+    .Title {
+        border-radius: 40px !important;
+        background-color: transparent !important;
+        font-size: 40px !important
+    }
+
+    .inputTitle {
+        text-align: right;
+        font-size: 15px;
+        margin-bottom: 0 !important
+    }
+
+    .input {
+        background: white;
+        margin-top: 7px;
+        border: 1px solid black;
+        height: 22px !important;
+        margin-top: 0 !important;
+        border-radius: 4px !important;
+        
+    }
+
+    .selectDr {
+        background-color: white !important;
+        color: black !important;
+        border: 1px solid black;
+        margin: 2% auto 2% auto !important;
+        display: block;
+    }
+
+    .selectDrr {
+        background-color: white !important;
+        color: black !important;
+        border: 1px solid black;
+        margin: 2% auto 2% auto !important;
+        display: block;
+        border-radius: 5px;
+        width: 100%
+    }
+
+    .loginInput{
+        height:35px !important
+    }
+
+}
+
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 770px) {
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+        background-attachment: scroll;
+        min-height: 400px;
+    }
+
+    
+
+    .button {
+        background-color: white;
+        height: 30px;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin: 2px 8px;
+        position: center;
+        color: black;
+        width: 43% !important
+    }
+
+    .field {
+        width: auto;
+        margin: 0 2% 0 2%;
+        height: auto;
+        padding: 0.05%;
+    }
+
+    .dx-placeholder {
+        color: black !important;
+        text-align: center !important;
+        width: 100% !important;
+    }
+
+    .dateBox {
+        background-color: white;
+        width: 40%;
+        height: 10%;
+        text-align: center;
+        margin: 10px;
+        border-radius: 5px;
+        display: none;
+        border: 2px solid #d9d9d9
+    }
+
+    .DatePicker {
+        margin: 0px auto 0px auto
+    }
+
+    #selectDoctor {
+        width: 80%;
+        height: 25%
+    }
+
+    .Title {
+        border-radius: 35px !important;
+        background-color: transparent !important;
+        font-size: 33px !important
+    }
+
+    .inputTitle {
+        text-align: right;
+        font-size: 12px
+    }
+
+    .inputTitle {
+        text-align: right;
+        font-size: 12px;
+        margin-bottom: 1px !important
+    }
+
+    .input {
+        background: white;
+        margin-top: 7px;
+        border: 1px solid black;
+        height: 20px !important;
+        margin-top: 0 !important;
+        border-radius: 4px !important
+    }
+
+    .selectDoctor {
+        width: 40%;
+        height: 27%
+    }
+
+    .reserveBtn {
+        margin-top: 18% !important;
+        border-radius: 40px !important;
+        background-color: white !important;
+        color: black !important;
+        box-shadow: 5px 6px !important;
+    }
+
+    .dx-button-content{
+        font-size:20px !important
+    }
+
+    .selectDr {
+        background-color: white !important;
+        color: black !important;
+        border: 1px solid black;
+        margin: 2% auto 2% auto !important;
+        display: block;
+    }
+
+    .selectDrr {
+        background-color: white !important;
+        color: black !important;
+        border: 1px solid black;
+        margin: 2% auto 2% auto !important;
+        display: block;
+        border-radius: 5px;
+        width: 100%
+    }
+
+    .dx-button-text{
+        font-size:13px
+    }
+}
+
+@media only screen and (max-device-height :1400px) {
+    .button {
+        background-color: white;
+        height: 30px;
+        width: 100px;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin: 2px 8px;
+        position: center;
+        color: black;
+        width: 45%
+    }
+
+    .dateBox {
+        background-color: white;
+        width: 26%;
+        height: 10%;
+        text-align: center;
+        margin: 10px;
+        border-radius: 5px;
+        display: inline-block;
+        border: 2px solid #d9d9d9
+    }
+}

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="wwwroot\content\videos\**" />
+      <Content Remove="wwwroot\content\videos\**" />
+      <EmbeddedResource Remove="wwwroot\content\videos\**" />
+      <None Remove="wwwroot\content\videos\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\API\API\API.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\content\images\" />
+      <Folder Include="wwwroot\content\styles\" />
+      <Folder Include="wwwroot\content\scripts\" />
+    </ItemGroup>
+
+    <ProjectExtensions><VisualStudio><UserProperties TemplateFeatures="NETCORE" /></VisualStudio></ProjectExtensions>
+
+</Project>
