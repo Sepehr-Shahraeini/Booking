@@ -27,9 +27,10 @@ namespace API
                 options.AddDefaultPolicy(builder =>
                 {
                     //   builder.WithOrigins("http://localhost:63136")
-                    builder.WithOrigins("http://localhost:63136")
+                    builder.WithOrigins("http://localhost:55497/")
                     .AllowAnyHeader()
-                    .AllowAnyMethod();
+                    .AllowAnyMethod()
+                    .AllowAnyOrigin();
                 });
             });
 
@@ -48,8 +49,8 @@ namespace API
                        ValidateIssuerSigningKey = true,
                        //ValidIssuer = "http://api.shgriffin.ir",
                        //ValidAudience = "http://api.shgriffin.ir",
-                       ValidIssuer = "http://localhost:63136",
-                       ValidAudience = "http://localhost:63136",
+                       ValidIssuer = "http://localhost:55497/",
+                       ValidAudience = "http://localhost:55497/",
                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
                    };
                });

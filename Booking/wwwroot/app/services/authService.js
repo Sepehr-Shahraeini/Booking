@@ -420,8 +420,9 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     }
 
 
-    var _saveRegistration = function (data) {
+    var _patientRegistration = function (data) {
         return $http.post(serviceBase + 'api/Patients', data).then(function (response) {
+           
             return response;
         });
 
@@ -465,7 +466,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     authServiceFactory.checkAuth = _checkAuth;
     authServiceFactory.isAuthorized = _isAuthorized;
     authServiceFactory.redirectToLogin = _redirectToLogin;
-    authServiceFactory.saveRegistration = _saveRegistration;
+    authServiceFactory.patientRegistration = _patientRegistration;
     authServiceFactory.login = _login;
     authServiceFactory.logOut = _logOut;
     authServiceFactory.fillAuthData = _fillAuthData;

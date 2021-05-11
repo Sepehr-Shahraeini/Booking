@@ -43,14 +43,14 @@ namespace API.Controllers
             return Ok(query);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<IEnumerable<Models.Calendar>>> SaveCalendar(int PatientId)
-        {
-            var patient = _context.patients.FirstOrDefault(q => q.Id == PatientId);
-            patient.calendars.Add(new Models.Calendar() { });
-            await _context.SaveChangesAsync();
-            return Ok();
-        }
+        //[HttpPost]
+        //public async Task<ActionResult<IEnumerable<Models.Calendar>>> SaveCalendar(int PatientId)
+        //{
+        //    var patient = _context.patients.FirstOrDefault(q => q.Id == PatientId);
+        //    patient.calendars.Add(new Models.Calendar() { });
+        //    await _context.SaveChangesAsync();
+        //    return Ok();
+        //}
 
 
         //[HttpGet("{mobile}"), Authorize]
@@ -62,11 +62,12 @@ namespace API.Controllers
         //}
 
         [HttpPost]
-        public async Task<ActionResult<Patient>> PostPatient(Patient patient, string date, string time)
+        public async Task<ActionResult<Patient>> PostPatient(Patient patient)
         {
             _context.patients.Add(patient);
             await _context.SaveChangesAsync();
-            return CreatedAtAction("GetPatient", new { id = patient.Id }, patient);
+            CreatedAtAction("GetPatient", new { id = patient.Id }, patient);
+            return Ok(patient.Id);
         }
 
 

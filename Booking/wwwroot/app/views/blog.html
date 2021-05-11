@@ -27,7 +27,7 @@
             </div>
 
             <div>
-                <button ng-click="btn_reserve">تایید</button>
+                <button ng-click="btn_reserve()">تایید</button>
             </div>
         </div>
     </div>
@@ -39,31 +39,44 @@
                 <div class="field">
                     <div dx-scroll-view="scrollViewOptions">
                         <p class="inputTitle">نام</p>
-                        <input ng-model="FirstName" class="input"/>
+                        <input ng-model="FirstName" class="input" />
+
                         <p class="inputTitle">نام خانوادگی</p>
-                        <div dx-text-box="txt_LastName" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <input ng-model="LastName" class="input" />
+                        
                         <p class="inputTitle">تلفن همراه</p>
-                        <div dx-text-box="txt_Mobile" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <input ng-model="Mobile" class="input" />
+                        
                         <p class="inputTitle">ایمیل</p>
-                        <div dx-text-box="txt_Email" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <input ng-model="Email" class="input" />
+                        
                         <p class="inputTitle">سن</p>
-                        <div dx-text-box="txt_Age" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <input ng-model="Age" class="input" />
+
                         <p class="inputTitle">تعداد فرزند</p>
-                        <div dx-text-box="txt_ChildrenNum" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <input ng-model="ChildrenNum" class="input" />
+
                         <p class="inputTitle">شغل</p>
-                        <div dx-text-box="txt_Job" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <input ng-model="Job" class="input" />
+
                         <p class="inputTitle">وضعیت تحصیلی</p>
-                        <div dx-select-box="drop_Education" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <input ng-model="Education" class="input" />
+
                         <p class="inputTitle">رشته تحصیلی</p>
-                        <div dx-text-box="txt_FieldOfStudy" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <input ng-model="FieldOfStudy" class="input" />
+
                         <p class="inputTitle">وضعیت ازدواج</p>
-                        <div dx-select-box="drop_MaritalStatus" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <input ng-model="MaritalStatus" class="input" />
+
                         <p class="inputTitle">موضوع</p>
-                        <div dx-text-box="txt_Subject" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <input ng-model="Subject" class="input" />
+
                         <p class="inputTitle">علت مراجعه</p>
-                        <div dx-text-area="txt_Reason" class="input" style="height:10% !important" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <input ng-model="Reason" class="input" />
+
                         <p class="inputTitle">معرف</p>
-                        <div dx-text-box="txt_Introduced" class="input" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+                        <input ng-model="Introduced" class="input" />
+                        
                         <div style="margin:0px auto 0px auto">
                             <button id="sun" class="dateBox" style="display:none" ng-click="sunBtn()">
                                 <p>یکشنبه</p>
@@ -123,7 +136,7 @@
                     <div id="popFri" class="Time">
                         <button class="button" ng-repeat="x in friDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.StartTime}} {{x.EndTime}}</button>
                     </div>
-                    <div dx-button="btn_save"></div>
+                    <button ng-click="btn_save()">تایید</button>
                 </div>
             </div>
         </div>

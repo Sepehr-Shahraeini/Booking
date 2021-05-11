@@ -180,7 +180,7 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
         height: 45,
         rtlEnabled: true,
         onClick: function (e) {
-            authService.saveRegistration($scope.entity, function () { })
+            authService.patientRegistration($scope.entity, function () { })
             authService.newTime($scope.time_entity, function () { })
         }
     };
