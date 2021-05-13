@@ -58,15 +58,16 @@
     }
 
 
-    function getWeekdays(phone, weekdays) {
-        authService.getExistTime(phone).then(function (response) {
+    function getWeekdays(psychoanalystId = 2, weekdays) {
+        authService.getExistTime(psychoanalystId).then(function (response) {
             $scope.Patients = response.data;
             $scope.Patients.forEach(function (x) {
                 $scope.PatientsTime = x.Time
+                console.log(response)
             })
         })
 
-        authService.getExistTime(phone).then(function (response) {
+        authService.getExistTime(psychoanalystId).then(function (response) {
             $scope.Patient = JSON.stringify(response)
 
             authService.getVisitingTime(1, 0).then(function (response) {
@@ -241,7 +242,7 @@
 
 
 
-    $scope.showPsychoanalysts = function (name, lastname, weekdays, phone) {
+    $scope.showPsychoanalysts = function (name, lastname, weekdays, psychoanalystId) {
         authService.getPsychoanalysts().then(function (response) {
             $scope.Psychoanalysts = response.data
         })
@@ -252,7 +253,7 @@
         }
 
 
-        getWeekdays(phone, weekdays);
+        getWeekdays(psychoanalystId, weekdays);
 
     }
 

@@ -24,10 +24,15 @@ namespace API.Controllers
             _context = context;
         }
 
+        [HttpGet("{Calendar}/{pyschoanalystId}")]
+        public async Task<ActionResult<IEnumerable<Models.Calendar>>> GetCalendar(int pyschoanalystId)
+        {
+            var result = _context.calendars.Where(q => q.PsychoanalystId  == pyschoanalystId).ToList();
+            return Ok(result);
+        }
 
         // GET: api/Patients
         [HttpGet]
-
         public async Task<ActionResult<IEnumerable<Patient>>> GetPatients()
         {
             // return await _context.psychoanalysts.ToListAsync();

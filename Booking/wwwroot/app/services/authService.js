@@ -459,8 +459,8 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         })
     };
 
-    var _getExistTime = function (phone) {
-        return $http.get(serviceBase + 'api/ExistTime/' + phone).then(function (response) {
+    var _getExistTime = function (pyschoanalystId) {
+        return $http.get(serviceBase + 'api/Patients/Calendar/' + pyschoanalystId).then(function (response) {
             return response;
         })
     };

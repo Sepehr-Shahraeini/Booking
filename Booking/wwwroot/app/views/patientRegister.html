@@ -88,7 +88,7 @@
     <div id="choosePsychoanalyst" class="w3-modal" style="display:none">
         <div class="w3-modal-content w3-animate-zoom" style="width:45%;height:auto;border-radius:5px;background-color:#fff">
             <div class="field w3-modal-content w3-animate-zoom">
-                <button class="selectPsychoanalyst" ng-repeat="x in Psychoanalysts" ng-click="showPsychoanalysts(x.Name, x.LastName, x.WeekDays, x.Phone)">{{x.Name}} {{x.LastName}}</button>
+                <button class="selectPsychoanalyst" ng-repeat="x in Psychoanalysts" ng-click="showPsychoanalysts(x.Name, x.LastName, x.WeekDays, x.PsychoanalystId)">{{x.Name}} {{x.LastName}}</button>
                 <div style="margin:0px auto 0px auto">
                     <button id="sun" class="dateBox" style="display:none" ng-click="sunBtn()">
                         <p>یکشنبه</p>
