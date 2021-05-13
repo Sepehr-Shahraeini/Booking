@@ -2,11 +2,11 @@
 
     <div style="width:30%; margin:auto">
 
-        <p class="inputTitle">شماره تلفن همراه</p>
-        <div dx-text-box="txt_UserName" class="input loginInput" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
+        <p class="inputTitle">نام کاربری</p>
+        <input ng-model="UserName" />
         <p class="inputTitle">رمز</p>
-        <div dx-text-box="txt_Password" class="input loginInput" dx-validator="{validationGroup:'form',  validationRules: [{ type: 'required',message:'این فیلد ضروری است'}]}"></div>
-        <div dx-button="btn_save" style="margin-top:20px"></div>
+        <input ng-model="Password" />
+        <button ng-click="btn_save"></button>
 
     </div>
 </body>

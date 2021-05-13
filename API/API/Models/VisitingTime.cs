@@ -11,6 +11,6 @@ namespace API.Models
         public string StartTime { get; set; }
         public string EndTime { get; set; }
         public string WeekDays { get; set; }
-        public string Mobile { get; set; }
+        public int PsychoanalystId { get; set; }
     }
 }

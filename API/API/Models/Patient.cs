@@ -24,6 +24,7 @@ namespace API.Models
         public string Education { get; set; }
         public string Job { get; set; }
         public string FieldOfStudy { get; set; }
+        public string Password { get; set; }
         public List<Calendar> calendars { get; set; }
 
     }
@@ -36,8 +37,9 @@ namespace API.Models
         public bool IsEmergency { get; set; }
         public int PatientId { get; set; }
         public int PsychoanalystId { get; set; }
-        public int DatePersian { get; set; }
-        public int DateAmount { get; set; }
-      
+        public string DatePersian { get; set; }
+        public string DateAmount { get; set; }
+        public string Time { get; set; }
+
     }
 }

@@ -1,5 +1,4 @@
-﻿app.controller('loginController', ['$scope', '$rootScope', '$location', 'authService', '$route', '$routeParams', 'localStorageService', '$http', function ($scope, $rootScope, $location, authService, $route, $routeParams, $http, localStorageService) {
-
+﻿app.controller('patientLoginController', ['$scope', '$rootScope', '$location', 'authService', '$route', '$routeParams', 'localStorageService', '$http', function ($scope, $rootScope, $location, authService, $route, $routeParams, $http, localStorageService) {
 
     $scope.btn_save = function () {
 
@@ -24,8 +23,4 @@
 
 
     }
-
-   
-
-
 }]);

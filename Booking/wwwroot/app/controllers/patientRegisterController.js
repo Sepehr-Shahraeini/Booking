@@ -1,221 +1,75 @@
-﻿'use strict';
-app.controller('indexController', ['$scope', '$rootScope', '$location', 'authService', '$route', '$routeParams', '$http', function ($scope, $rootScope, $location, authService, $route, $routeParams, $http) {
-    $scope.refer = $routeParams.refer;
+﻿app.controller('patientRegisterController', ['$scope', '$rootScope', '$location', 'authService', '$route', '$routeParams', 'localStorageService', '$http', function ($scope, $rootScope, $location, authService, $route, $routeParams, $http, localStorageService) {
 
 
+    $scope.signedUp = function () {
+        $location.path('/patientLogin')
+    }
 
-    $scope.entity = {
-        Name: null,
-        LastName: null,
-        date: null,
-        Mobile: null,
-        Time: null,
-        ExistDate: null,
-        Email: null,
-        Age: null,
-        ChildrenNum: null,
-        Job: null,
-        FieldOfStudy: null,
-        Subject: null,
-        Reason: null,
-        Education: null,
-        MaritalStatus: null,
-        Doctor: null,
-        Introduced: null,
-        weekDays: null
-    };
+    $scope.btn_showPsychoanalyst = function () {
 
-    $scope.time_entity = {
-        Time: null,
-        Doctor: null,
-        Date: null
+        document.getElementById("choosePsychoanalyst").style.display = "block";
+
+        var dto_Patient = {
+            Name: $scope.Name,
+            LastName: $scope.LastName,
+            Mobile: $scope.Mobile,
+            Subject: $scope.Subject,
+            Reason: $scope.Reason,
+            Email: $scope.Email,
+            MaritalStatus: $scope.MaritalStatus,
+            Age: $scope.Age,
+            ChildrenNum: $scope.ChildrenNum,
+            Introduced: $scope.Introduced,
+            Education: $scope.Education,
+            Job: $scope.Job,
+            FieldOfStudy: $scope.FieldOfStudy,
+            Password: $scope.Password
+        }
+
+        authService.patientRegistration(dto_Patient).then(function (response) {
+            $scope.patientId = response.data
+
+            $scope.timeRegistration = function (starttime, endtime) {
+                $scope.registeredTime = starttime + "-" + endtime;
+                $scope.selectedTime = starttime;
+                $scope.registeredDate = $scope.selectedDate + $scope.selectedTime
+
+                console.log($scope.registeredDate)
+
+
+                var dto_calendar = {
+                    Amount: "20000",
+                    TrackingNO: 223,
+                    IsEmergency: true,
+                    PatientId: $scope.patientId,
+                    PsychoanalystId: 2,
+                    DatePersian: $scope.registeredDate,
+                    DateAmount: $scope.registeredDate,
+                    time: $scope.registeredTime
+
+                }
+
+                authService.saveCalendar(dto_calendar).then(function (response) {
+                    console.log(response)
+                })
+
+            }
+        })
     }
 
 
-    $scope.txt_FirstName = {
-        hoverStateEnabled: false,
-        width: '100%',
-        height: 45,
-        rtlEnabled: true,
-        bindingOptions: {
-            value: 'entity.Name',
-
-        }
-    };
-
-    $scope.txt_LastName = {
-        hoverStateEnabled: false,
-        width: '100%',
-        height: 45,
-        rtlEnabled: true,
-        bindingOptions: {
-            value: 'entity.LastName',
-
-        }
-    };
-
-    $scope.txt_Mobile = {
-        hoverStateEnabled: false,
-        width: '100%',
-        height: 45,
-        rtlEnabled: true,
-        bindingOptions: {
-            value: 'entity.Mobile',
-
-        }
-    };
-
-    $scope.txt_Email = {
-        hoverStateEnabled: false,
-        width: '100%',
-        height: 45,
-        rtlEnabled: true,
-        bindingOptions: {
-            value: 'entity.Email',
-
-        }
-    };
-
-    $scope.txt_Introduced = {
-        hoverStateEnabled: false,
-        width: '100%',
-        height: 45,
-        rtlEnabled: true,
-        bindingOptions: {
-            value: 'entity.Introduced',
-
-        }
-    };
-
-    $scope.txt_Age = {
-        hoverStateEnabled: false,
-        width: '100%',
-        height: 45,
-        rtlEnabled: true,
-        bindingOptions: {
-            value: 'entity.Age',
-
-        }
-    };
-
-    $scope.txt_ChildrenNum = {
-        hoverStateEnabled: false,
-        width: '100%',
-        height: 45,
-        rtlEnabled: true,
-        bindingOptions: {
-            value: 'entity.ChildrenNum',
-
-        }
-    };
-
-    $scope.txt_Job = {
-        hoverStateEnabled: false,
-        width: '100%',
-        height: 45,
-        rtlEnabled: true,
-        bindingOptions: {
-            value: 'entity.Job',
-
-        }
-    };
-
-    $scope.txt_FieldOfStudy = {
-        hoverStateEnabled: false,
-        width: '100%',
-        height: 45,
-        rtlEnabled: true,
-        bindingOptions: {
-            value: 'entity.FieldOfStudy',
-
-        }
-    };
-
-    $scope.txt_Subject = {
-        hoverStateEnabled: false,
-        width: '100%',
-        height: 45,
-        rtlEnabled: true,
-        bindingOptions: {
-            value: 'entity.Subject',
-
-        }
-    };
-
-    var EducationData =
-        [
-            "زیر دیپلم ",
-            "دیپلم و زیر دیپلم",
-            "لیسانس",
-            "فوق لیسانس",
-            "دکتر"
-        ]
-    $scope.drop_Education = {
-        items: EducationData,
-        placeholder: "",
-        bindingOptions: {
-            value: 'entity.Education',
-        }
-    };
-
-    $scope.drop_MaritalStatus = {
-        items: ["مجرد", "متاهل"],
-        placeholder: "",
-        bindingOptions: {
-            value: 'entity.MaritalStatus',
-        }
-
-    };
-
-    $scope.txt_Reason = {
-        bindingOptions: {
-            value: "entity.Reason"
-        }
-    };
-
-    $scope.btn_save = {
-        text: 'تایید',
-        type: 'default',
-        width: '100%',
-        height: 45,
-        rtlEnabled: true,
-        onClick: function (e) {
-            authService.patientRegistration($scope.entity, function () { })
-            authService.newTime($scope.time_entity, function () { })
-        }
-    };
-
-    $scope.btn_reserve = {
-        text: 'دریافت وقت ویزیت',
-        type: 'default',
-        width: '50%',
-        height: 45,
-        rtlEnabled: true,
-        onClick: function (e) {
-            document.getElementById("selectDoctor").style.display = "block"
-        }
-    };
-
-
-
-
-
     function getWeekdays(phone, weekdays) {
-        $http.get("http://localhost:63136/api/ExistTime/" + phone).then(function (response) {
+        authService.getExistTime(phone).then(function (response) {
             $scope.Patients = response.data;
             $scope.Patients.forEach(function (x) {
                 $scope.PatientsTime = x.Time
             })
-        });
+        })
 
-
-        $http.get("http://localhost:63136/api/ExistTime/" + phone).then(function (response) {
+        authService.getExistTime(phone).then(function (response) {
             $scope.Patient = JSON.stringify(response)
-            if ($scope.Patient.indexOf(calDate(0) + "/" + $scope.MonthNum + "/" + $scope.Year + "/0/" + $scope.time) == -1) {
-                console.log("nothing")
-            }
-        
-            $http.get("http://localhost:63136/api/VisitingTimes/" + phone + "/0").then(function (response) {
+
+            authService.getVisitingTime(1, 0).then(function (response) {
                 var data = response.data;
                 $scope.sunDay = [];
                 data.forEach(function (y) {
@@ -223,7 +77,7 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
 
                     if ($scope.time !== $scope.PatientsTime) {
                         if ($scope.Patient.indexOf(calDate(0) + "/" + $scope.MonthNum + "/" + $scope.Year + "/0/" + $scope.time) == -1) {
-                            $http.get("http://localhost:63136/api/VisitingTimes/" + phone + "/0/" + $scope.time).then(function (response) {
+                            authService.getUnselectedTime(1, 0, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.sunDay.length; i++) { }
                                 $scope.sunDay[i] = $scope.records
@@ -235,7 +89,7 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
 
             });
 
-            $http.get("http://localhost:63136/api/VisitingTimes/" + phone + "/1").then(function (response) {
+            authService.getVisitingTime(1, 1).then(function (response) {
                 var data = response.data;
                 $scope.monDay = [];
                 data.forEach(function (y) {
@@ -243,7 +97,7 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
 
                     if ($scope.time !== $scope.PatientsTime) {
                         if ($scope.Patient.indexOf(calDate(1) + "/" + $scope.MonthNum + "/" + $scope.Year + "/1/" + $scope.time) == -1) {
-                            $http.get("http://localhost:63136/api/VisitingTimes/" + phone + "/1/" + $scope.time).then(function (response) {
+                            authService.getUnselectedTime(1, 1, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.monDay.length; i++) { }
                                 $scope.monDay[i] = $scope.records
@@ -253,7 +107,7 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
                 });
             });
 
-            $http.get("http://localhost:63136/api/VisitingTimes/" + phone + "/2").then(function (response) {
+            authService.getVisitingTime(1, 2).then(function (response) {
                 var data = response.data;
                 $scope.tuesDay = [];
                 data.forEach(function (y) {
@@ -261,7 +115,7 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
 
                     if ($scope.time !== $scope.PatientsTime) {
                         if ($scope.Patient.indexOf(calDate(2) + "/" + $scope.MonthNum + "/" + $scope.Year + "/2/" + $scope.time) == -1) {
-                            $http.get("http://localhost:63136/api/VisitingTimes/" + phone + "/2/" + $scope.time).then(function (response) {
+                            authService.getUnselectedTime(1, 2, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.tuesDay.length; i++) { }
                                 $scope.tuesDay[i] = $scope.records
@@ -272,7 +126,7 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
 
             });
 
-            $http.get("http://localhost:63136/api/VisitingTimes/" + phone + "/3").then(function (response) {
+            authService.getVisitingTime(1, 3).then(function (response) {
                 var data = response.data;
                 $scope.wednesDay = [];
                 data.forEach(function (y) {
@@ -280,7 +134,7 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
 
                     if ($scope.time !== $scope.PatientsTime) {
                         if ($scope.Patient.indexOf(calDate(3) + "/" + $scope.MonthNum + "/" + $scope.Year + "/3/" + $scope.time) == -1) {
-                            $http.get("http://localhost:63136/api/VisitingTimes/" + phone + "/3/" + $scope.time).then(function (response) {
+                            authService.getUnselectedTime(1, 3, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.wednesDay.length; i++) { }
                                 $scope.wednesDay[i] = $scope.records
@@ -291,7 +145,7 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
 
             });
 
-            $http.get("http://localhost:63136/api/VisitingTimes/" + phone + "/4").then(function (response) {
+            authService.getVisitingTime(1, 4).then(function (response) {
                 var data = response.data;
                 $scope.thursDay = [];
                 data.forEach(function (y) {
@@ -299,7 +153,7 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
 
                     if ($scope.time !== $scope.PatientsTime) {
                         if ($scope.Patient.indexOf(calDate(4) + "/" + $scope.MonthNum + "/" + $scope.Year + "/4/" + $scope.time) == -1) {
-                            $http.get("http://localhost:63136/api/VisitingTimes/" + phone + "/4/" + $scope.time).then(function (response) {
+                            authService.getUnselectedTime(1, 4, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.thursDay.length; i++) { }
                                 $scope.thursDay[i] = $scope.records
@@ -311,7 +165,7 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
 
             });
 
-            $http.get("http://localhost:63136/api/VisitingTimes/" + phone + "/5").then(function (response) {
+            authService.getVisitingTime(1, 5).then(function (response) {
                 var data = response.data;
                 $scope.friDay = [];
                 data.forEach(function (y) {
@@ -319,7 +173,7 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
 
                     if ($scope.time !== $scope.PatientsTime) {
                         if ($scope.Patient.indexOf(calDate(5) + "/" + $scope.MonthNum + "/" + $scope.Year + "/5/" + $scope.time) == -1) {
-                            $http.get("http://localhost:63136/api/VisitingTimes/" + phone + "/5/" + $scope.time).then(function (response) {
+                            authService.getUnselectedTime(1, 5, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.friDay.length; i++) { }
                                 $scope.friDay[i] = $scope.records
@@ -331,7 +185,7 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
 
             });
 
-            $http.get("http://localhost:63136/api/VisitingTimes/" + phone + "/6").then(function (response) {
+            authService.getVisitingTime(1, 6).then(function (response) {
                 var data = response.data;
                 $scope.saturDay = [];
                 data.forEach(function (y) {
@@ -339,7 +193,7 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
 
                     if ($scope.time !== $scope.PatientsTime) {
                         if ($scope.Patient.indexOf(calDate(6) + "/" + $scope.MonthNum + "/" + $scope.Year + "/6/" + $scope.time) == -1) {
-                            $http.get("http://localhost:63136/api/VisitingTimes/" + phone + "/6/" + $scope.time).then(function (response) {
+                            authService.getUnselectedTime(1, 6, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.saturDay.length; i++) { }
                                 $scope.saturDay[i] = $scope.records
@@ -350,7 +204,6 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
             });
         });
 
-        document.getElementById("form").style.display = "block";
         $scope.weekDay = weekdays;
 
         if ($scope.weekDay[6] == "1") {
@@ -380,114 +233,28 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
         if ($scope.weekDay[5] == "1") {
             document.getElementById("fri").style.display = "inline-block";
         }
-
-
-
     }
 
+    authService.getPsychoanalysts().then(function (response) {
+        $scope.Psychoanalysts = response.data
+    })
 
 
 
-    $scope.btn_MRKH = {
-        text: 'ميخواهم توسط دكتر محمدرضا خدابخش پذيرش و درمان شوم',
-        type: 'default',
-        width: '100%',
-        height: 45,
-        rtlEnabled: true,
-        onClick: function (e) {
-            document.getElementById("form").style.display = "block";
-            $scope.entity.Doctor = "محمدرضا خدابخش"
-            getWeekdays("09152283268", "0011001");
+    $scope.showPsychoanalysts = function (name, lastname, weekdays, phone) {
+        authService.getPsychoanalysts().then(function (response) {
+            $scope.Psychoanalysts = response.data
+        })
+
+        var dateBoxs = document.getElementsByClassName("dateBox");
+        for (var i = 0; i < dateBoxs.length; i++) {
+            dateBoxs[i].style.display = "none";
         }
-    };
-
-    $scope.btn_other = {
-        text: 'ميخواهم توسط روانشناسان ديگر زير نظر ايشان پذيرش شوم',
-        type: 'default',
-        width: '100%',
-        height: 45,
-        rtlEnabled: true,
-        onClick: function (e) {
-            document.getElementById("chooseDoctor").style.display = "block"
-        }
-    };
-
-    $scope.selectDoctor = {
-        showTitle: false,
-        dragEnabled: false,
-        closeOnOutsideClick: true,
-        bindingOptions: {
-            visible: "selectDr_visible",
-        }
-    };
-
-    $scope.form = {
-        shading: false,
-        showTitle: true,
-        dragEnabled: true,
-        visible: false,
-        fullScreen: true,
-        closeOnOutsideClick: true,
-        bindingOptions: {
-            visible: 'form_visible',
 
 
-        }
-    };
-
-    $scope.chooseDoctor = {
-        shading: false,
-        showTitle: true,
-        dragEnabled: true,
-        visible: false,
-        fullScreen: true,
-        closeOnOutsideClick: true,
-        bindingOptions: {
-            visible: 'chooseDoctor_visible',
-        }
-    };
-
-    $scope.scrollViewOptions = {
-        width: '100%',
-        height: '100%'
-    };
-
-
-
-    $http.get("http://localhost:63136/api/Psychoanalysts").then(function (response) {
-        $scope.Psychoanalysts = response.data;
-    });
-
-
-    $scope.timeRegistration = function (starttime, endtime) {
-        $scope.entity.Time = starttime + "-" + endtime;
-        $scope.time_entity.Time = starttime + "-" + endtime;
-        $scope.registeredTime = starttime;
-        $scope.entity.Date = $scope.entity.Date 
-        $scope.time_entity.Date = $scope.time_entity.Date + $scope.registeredTime
-    }
-
-
-
-
-    $scope.show = function (name, lastname, weekdays, phone) {
-        $http.get("http://localhost:63136/api/Psychoanalysts").then(function (response) {
-            $scope.Psychoanalysts = response.data;
-        });
-
-        $scope.entity.Doctor = phone;
-        $scope.time_entity.Doctor = phone;
         getWeekdays(phone, weekdays);
 
-
-
-
-
     }
-
-
-
-
 
     function calDate(x) {
 
@@ -510,7 +277,7 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
     }
 
 
-    document.getElementById("dateSun").innerHTML = calDate();
+    document.getElementById("dateSun").innerHTML = calDate(0);
     document.getElementById("dateMon").innerHTML = calDate(1);
     document.getElementById("dateTues").innerHTML = calDate(2);
     document.getElementById("dateWed").innerHTML = calDate(3);
@@ -541,8 +308,8 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
         }
 
         document.getElementById("popSat").style.display = "block";
-        $scope.entity.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(6) 
-        $scope.time_entity.Date = calDate(6) + "/" + $scope.MonthNum + "/" + $scope.Year + "/6/"
+        $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(6)
+        $scope.selectedDate = calDate(6) + "/" + $scope.MonthNum + "/" + $scope.Year + "/6/"
         document.getElementById("sat").style.backgroundColor = "#ff9900"
     };
 
@@ -557,10 +324,11 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
         for (var i = 0; i < dateBoxs.length; i++) {
             dateBoxs[i].style.backgroundColor = "#ffffff";
         }
-        document.getElementById("popSun").style.display = "block";
-        $scope.entity.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(0)
-        $scope.time_entity.Date = calDate() + "/" + $scope.MonthNum + "/" + $scope.Year + "/0/"
-        document.getElementById("sun").style.backgroundColor = "#ff9900"
+
+        document.getElementById("popSat").style.display = "block";
+        $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(0)
+        $scope.selectedDate = calDate(6) + "/" + $scope.MonthNum + "/" + $scope.Year + "/0/"
+        document.getElementById("sat").style.backgroundColor = "#ff9900"
     };
 
 
@@ -576,8 +344,8 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
         }
 
         document.getElementById("popMon").style.display = "block";
-        $scope.entity.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(1)
-        $scope.time_entity.Date = calDate(1) + "/" + $scope.MonthNum + "/" + $scope.Year + "/1/"
+        $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(1)
+        $scope.selectedDate = calDate(1) + "/" + $scope.MonthNum + "/" + $scope.Year + "/1/"
         document.getElementById("mon").style.backgroundColor = "#ff9900"
     };
 
@@ -594,8 +362,8 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
         }
 
         document.getElementById("popTues").style.display = "block";
-        $scope.entity.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(2)
-        $scope.time_entity.Date = calDate(2) + "/" + $scope.MonthNum + "/" + $scope.Year + "/2/"
+        $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(2)
+        $scope.selectedDate = calDate(2) + "/" + $scope.MonthNum + "/" + $scope.Year + "/2/"
         document.getElementById("tues").style.backgroundColor = "#ff9900"
     };
 
@@ -612,8 +380,8 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
         }
 
         document.getElementById("popWed").style.display = "block";
-        $scope.entity.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(3)
-        $scope.time_entity.Date = calDate(3) + "/" + $scope.MonthNum + "/" + $scope.Year + "/3/"
+        $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(3)
+        $scope.selectedDate = calDate(3) + "/" + $scope.MonthNum + "/" + $scope.Year + "/3/"
         document.getElementById("wed").style.backgroundColor = "#ff9900"
     };
 
@@ -629,8 +397,8 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
         }
 
         document.getElementById("popThur").style.display = "block";
-        $scope.entity.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(4)
-        $scope.time_entity.Date = calDate(4) + "/" + $scope.MonthNum + "/" + $scope.Year + "/4/"
+        $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(4)
+        $scope.selectedDate = calDate(4) + "/" + $scope.MonthNum + "/" + $scope.Year + "/4/"
         document.getElementById("thur").style.backgroundColor = "#ff9900"
     };
 
@@ -648,18 +416,11 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
 
 
         document.getElementById("popFri").style.display = "block";
-        $scope.entity.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(5)
-        $scope.time_entity.Date = calDate(5) + "/" + $scope.MonthNum + "/" + $scope.Year + "/5/"
+        $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(5)
+        $scope.selectedDate = calDate(5) + "/" + $scope.MonthNum + "/" + $scope.Year + "/5/"
         document.getElementById("fri").style.backgroundColor = "#ff9900"
     };
 
-
-
-
-
-    ////////////////////////////////////////////
-
+    ////////////////////////////////////
 
 }]);
-
-

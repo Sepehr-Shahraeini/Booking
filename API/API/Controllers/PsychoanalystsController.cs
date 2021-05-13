@@ -22,19 +22,19 @@ namespace API.Controllers
         }
 
         // GET: api/Psychoanalysts
-        [HttpGet("{Patients}")]
-        public async Task<ActionResult<IEnumerable<Calendar>>> Getpsychoanalysts()
-        {
-            return await _context.calendars.ToListAsync();
-           
-        }
-
-        //[HttpGet]
-
-        //public async Task<ActionResult<IEnumerable<Psychoanalyst>>> Getpsychoanalysts()
+        //[HttpGet("{Patients}")]
+        //public async Task<ActionResult<IEnumerable<Calendar>>> Getpsychoanalysts()
         //{
-        //    return await _context.psychoanalysts.ToListAsync();
+        //    return await _context.calendars.ToListAsync();
+           
         //}
+
+        [HttpGet]
+
+        public async Task<ActionResult<IEnumerable<Psychoanalyst>>> Getpsychoanalysts()
+        {
+            return await _context.psychoanalysts.ToListAsync();
+        }
 
         //// GET: api/Psychoanalysts/5
         //[HttpGet("{id}")]

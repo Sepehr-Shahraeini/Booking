@@ -29,11 +29,11 @@ namespace API.Controllers
             return await _context.visitingTimes.ToListAsync();
         }
 
-        [HttpGet("{mobile}/{weekday}")]
-        public async Task<ActionResult<IEnumerable<VisitingTime>>> GetVisitingTimeByNum(string mobile, string weekday)
+        [HttpGet("{psychoanalustId}/{weekday}")]
+        public async Task<ActionResult<IEnumerable<VisitingTime>>> GetVisitingTimeByNum(int psychoanalustId, string weekday)
         {
-            var phone = await _context.visitingTimes.Where(x => x.Mobile == mobile).ToListAsync();
-            var week = phone.Where(x => x.WeekDays == weekday).ToList();
+            var psychoanalyst = await _context.visitingTimes.Where(x => x.PsychoanalystId == psychoanalustId).ToListAsync();
+            var week = psychoanalyst.Where(x => x.WeekDays == weekday).ToList();
 
 
             return Ok(week);
@@ -86,11 +86,11 @@ namespace API.Controllers
             return CreatedAtAction("GetVisitingTime", new { id = visitingTime.ID }, visitingTime);
         }
 
-        [HttpGet("{mobile}/{weekday}/{starttime}")]
-        public async Task<ActionResult<IEnumerable<VisitingTime>>> DeleteVisitingTimeByNum(string mobile, string starttime, string weekday)
+        [HttpGet("{psychoanalustId}/{weekday}/{starttime}")]
+        public async Task<ActionResult<IEnumerable<VisitingTime>>> DeleteVisitingTimeByNum(int psychoanalustId, string starttime, string weekday)
         {
-            var phone = await _context.visitingTimes.Where(x => x.Mobile == mobile).ToListAsync();
-            var week = phone.Where(x => x.WeekDays == weekday).ToList();
+            var psychoanalyst = await _context.visitingTimes.Where(x => x.PsychoanalystId == psychoanalustId).ToListAsync();
+            var week = psychoanalyst.Where(x => x.WeekDays == weekday).ToList();
             var time = week.Where(x => x.StartTime == starttime).FirstOrDefault();
 
             return Ok(time);

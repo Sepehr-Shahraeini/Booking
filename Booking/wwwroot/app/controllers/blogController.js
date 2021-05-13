@@ -2,30 +2,8 @@
 
 
     $scope.btn_reserve = function () {
-        document.getElementById("form").style.display = "block";
+        $location.path('/patientRegister')
     }
 
-    $scope.btn_save = function () {
-
-        var dto = {
-            FirstName: $scope.FirstName,
-            LastName: $scope.LastName,
-            Mobile: $scope.Mobile,
-            Subject: $scope.Subject,
-            Reason: $scope.Reason,
-            Email: $scope.Email,
-            MaritalStatus: $scope.MaritalStatus,
-            Age: $scope.Age,
-            ChildrenNum: $scope.ChildrenNum,
-            Introduced: $scope.Introduced,
-            Education: $scope.Education,
-            Job: $scope.Job,
-            FieldOfStudy: $scope.FieldOfStudy
-        }
-
-        authService.patientRegistration(dto).then( function (response) {
-            console.log(response.data)
-        })
-    }
-
+   
 }]);

@@ -428,6 +428,17 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     };
 
+    var _savePatient = function (data) {
+        return $http.post(serviceBase + 'api/Patients/savePatient', data).then(function (response) {
+            return responsel
+        })
+    }
+
+     var _saveCalendar = function (data) {
+         return $http.post(serviceBase + 'api/Patients/saveCalendar ', data).then(function (response) {
+            return response
+        })
+    }
 
     var _newTime = function (data) {
         return $http.post(serviceBase + 'api/ExistTime', data).then(function (response) {
@@ -438,6 +449,30 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     var _getUserByUsername = function (phone) {
         return $http.get(serviceBase + 'api/auth/user/' + phone).then(function (response) {
+            return response;
+        })
+    };
+
+    var _getPsychoanalysts = function () {
+        return $http.get(serviceBase + 'api/Psychoanalysts').then(function (response) {
+            return response;
+        })
+    };
+
+    var _getExistTime = function (phone) {
+        return $http.get(serviceBase + 'api/ExistTime/' + phone).then(function (response) {
+            return response;
+        })
+    };
+
+    var _getVisitingTime = function (pyschoanalystId, day) {
+        return $http.get(serviceBase + 'api/VisitingTimes/' + pyschoanalystId + '/' + day).then(function (response) {
+            return response;
+        })
+    };
+
+    var _getUnselectedTime = function (pyschoanalystId, day, startTime) {
+        return $http.get(serviceBase + 'api/VisitingTimes/' + pyschoanalystId + '/' + day + '/' + startTime).then(function (response) {
             return response;
         })
     };
@@ -454,6 +489,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
 
     authServiceFactory.newTime = _newTime;
+    authServiceFactory.getUnselectedTime = _getUnselectedTime;
     authServiceFactory.deleteUser = _deleteUser;
     authServiceFactory.deletePsychoanalyst = _deletePsychoanalyst;
     authServiceFactory.deleteVisitingTime = _deleteVisitingTime;
@@ -467,17 +503,20 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     authServiceFactory.isAuthorized = _isAuthorized;
     authServiceFactory.redirectToLogin = _redirectToLogin;
     authServiceFactory.patientRegistration = _patientRegistration;
+    authServiceFactory.savePatient = _savePatient;
+    authServiceFactory.saveCalendar = _saveCalendar;
     authServiceFactory.login = _login;
     authServiceFactory.logOut = _logOut;
     authServiceFactory.fillAuthData = _fillAuthData;
     authServiceFactory.authentication = _authentication;
     authServiceFactory.refreshToken = _refreshToken;
     authServiceFactory.getPatients = _getPatients;
+    authServiceFactory.getVisitingTime = _getVisitingTime;
 
-    authServiceFactory.obtainAccessToken = _obtainAccessToken;
+    authServiceFactory.getExistTime = _getExistTime;
     authServiceFactory.externalAuthData = _externalAuthData;
     authServiceFactory.registerExternal = _registerExternal;
-    authServiceFactory.register2 = _register2;
+    authServiceFactory.getPsychoanalysts = _getPsychoanalysts;
     authServiceFactory.changePassword = _changePassword;
     authServiceFactory.registerCompany = _registerCompany;
     authServiceFactory.registerUser = _registerUser;

@@ -43,14 +43,24 @@ namespace API.Controllers
             return Ok(query);
         }
 
-        //[HttpPost]
-        //public async Task<ActionResult<IEnumerable<Models.Calendar>>> SaveCalendar(int PatientId)
-        //{
-        //    var patient = _context.patients.FirstOrDefault(q => q.Id == PatientId);
-        //    patient.calendars.Add(new Models.Calendar() { });
-        //    await _context.SaveChangesAsync();
-        //    return Ok();
-        //}
+        [HttpPost("saveCalendar")]
+        public async Task<ActionResult<IEnumerable<Models.Calendar>>> SaveCalendar(Models.Calendar calendar)
+        {
+            _context.calendars.Add(calendar);
+            await _context.SaveChangesAsync();
+            CreatedAtAction("GetCalendar", new { id = calendar.Id }, calendar);
+            return Ok();
+        }
+
+        [HttpPost("savePatient")]
+        public async Task<ActionResult<Patient>> SavePatient()
+        {
+            var patient = new Patient();
+            _context.patients.Add(patient);
+            _context.SaveChanges();
+            return Ok(patient);
+            
+        }
 
 
         //[HttpGet("{mobile}"), Authorize]
