@@ -78,6 +78,58 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     };
 
+    var _patientLogin = function (loginData) {
+
+        var data = loginData
+        $rootScope.drPhone = loginData.UserName;
+
+        if (loginData.useRefreshTokens) {
+            // data = data + "&client_id=" + ngAuthSettings.clientId;
+        }
+        var deferred = $q.defer();
+
+
+        $http.post(serviceBase + 'api/auth/login/patient', data, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
+            var responseData = response.data;
+            angular.forEach(responseData, function (x) {
+                var token = x
+                if (loginData.useRefreshTokens) {
+                    localStorageService.set('authorizationData', {
+                        token: token, userName: loginData.UserName, refreshToken: responseData.refresh_token, expires: responseData['.expires'], useRefreshTokens: true
+                    });
+                }
+                else {
+                    localStorageService.set('authorizationData', { token: token, userName: loginData.UserName, refreshToken: "", expires: responseData['.expires'], useRefreshTokens: false });
+                }
+            })
+
+
+
+          
+            localStorageService.set('userData', { Name: responseData.Name, UserId: responseData.UserId, Image: responseData.Image, Role: responseData.Role, UserName: loginData.userName, AuthId: responseData.AuthId });
+            _authentication.isAuth = true;
+            _authentication.userName = loginData.UserName;
+            _authentication.useRefreshTokens = loginData.useRefreshTokens;
+            $rootScope.userName = loginData.UserName;
+            $rootScope.userTitle = responseData.Name;
+            $rootScope.userId = responseData.UserId;
+            $rootScope.authId = responseData.AuthId;
+            $rootScope.image = $rootScope.imagesUrl + responseData.Image;
+            $rootScope.role = responseData.Role;
+            $rootScope.isSignedIn = true;
+            deferred.resolve(response);
+
+        }, function (err, status) {
+            //alert('ex');
+            //console.log(err);
+            // _logOut();
+            deferred.reject(err);
+        });
+
+        return deferred.promise;
+
+    };
+
     var _logOut = function () {
 
         localStorageService.remove('authorizationData');
@@ -506,6 +558,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     authServiceFactory.savePatient = _savePatient;
     authServiceFactory.saveCalendar = _saveCalendar;
     authServiceFactory.login = _login;
+    authServiceFactory.patientLogin = _patientLogin;
     authServiceFactory.logOut = _logOut;
     authServiceFactory.fillAuthData = _fillAuthData;
     authServiceFactory.authentication = _authentication;

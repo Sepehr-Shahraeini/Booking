@@ -202,7 +202,8 @@ app.controller('indexController', ['$scope', '$rootScope', '$location', 'authSer
 
     function getWeekdays(phone, weekdays) {
         $http.get("http://localhost:63136/api/ExistTime/" + phone).then(function (response) {
-            $scope.Patients = response.data;
+            $scope.Patients = JSON.stringify(response.data);
+            console.log($scope.Patient)
             $scope.Patients.forEach(function (x) {
                 $scope.PatientsTime = x.Time
             })

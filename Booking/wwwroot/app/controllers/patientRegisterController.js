@@ -1,4 +1,4 @@
-﻿app.controller('patientRegisterController', ['$scope', '$rootScope', '$location', 'authService', '$route', '$routeParams', 'localStorageService', '$http', function ($scope, $rootScope, $location, authService, $route, $routeParams, $http, localStorageService) {
+﻿app.controller('patientRegisterController', ['$scope', '$rootScope', '$location', 'authService', '$route', '$routeParams', 'localStorageService', '$http', 'Psychoanalyst', function ($scope, $rootScope, $location, authService, $route, $routeParams, $http, localStorageService, Psychoanalyst) {
 
 
     $scope.signedUp = function () {
@@ -23,12 +23,21 @@
             Education: $scope.Education,
             Job: $scope.Job,
             FieldOfStudy: $scope.FieldOfStudy,
+        }
+
+        var dto_patientAccount = {
+            UserName: $scope.Mobile,
             Password: $scope.Password
         }
+
+
 
         authService.patientRegistration(dto_Patient).then(function (response) {
             $scope.patientId = response.data
 
+
+            Psychoanalyst.newUser(dto_patientAccount).then( function () { })
+        
             $scope.timeRegistration = function (starttime, endtime) {
                 $scope.registeredTime = starttime + "-" + endtime;
                 $scope.selectedTime = starttime;

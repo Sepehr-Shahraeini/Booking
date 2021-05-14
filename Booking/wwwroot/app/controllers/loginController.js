@@ -10,22 +10,14 @@
 
         authService.login(dto).then(function (response) {
 
-
             $scope.loadingVisible = false;
 
-
             $rootScope.userName = authService.authentication.UserName;
-            if ($scope.entity.UserName == '09352166437') {
+            if ($scope.UserName == '09352166437') {
                 $location.path('/AdminCustomers');
             }
             else
                 $location.path('/user');
         })
-
-
     }
-
-   
-
-
 }]);

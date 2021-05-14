@@ -68,6 +68,49 @@ namespace API.Controllers
 
         }
 
+        [HttpPost, Route("{login}/{patients}")]
+        public IActionResult LoginPatient([FromBody]  User user)
+        {
+
+            if (string.IsNullOrEmpty(user.UserName) || string.IsNullOrEmpty(user.Password))
+                return null;
+
+            var resault = _context.users.SingleOrDefault(q => q.UserName == user.UserName);
+            var patientData = _context.patients.SingleOrDefault(q => q.Mobile == user.UserName);
+
+
+            // check if username exists
+            if (user == null)
+                return null;
+
+
+            var pass = _context.users.SingleOrDefault(x => x.Password == user.Password);
+
+            //check if username exists
+            if (pass == null)
+                return null;
+
+
+            if (user == null)
+            {
+                return BadRequest("Invalid client request");
+            }
+
+            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
+            var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+            var tokeOptions = new JwtSecurityToken(
+                issuer: "http://localhost:55497",
+                audience: "http://localhost:55497",
+                claims: new List<Claim>(),
+                expires: DateTime.Now.AddMinutes(5),
+                signingCredentials: signinCredentials
+            );
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+            return Ok(new { Token = tokenString , patientData} );
+
+        }
+
+
 
         // GET: api/Users
         [HttpGet, Route("user"), Authorize]
@@ -83,13 +126,7 @@ namespace API.Controllers
             var result = _context.users.Where(x => x.UserName == username).FirstOrDefault();
             return Ok(result);
         }
-        //public async Task<ActionResult<User>> GetUser(string username)
-        //{
-        //    var result = await _context.users.Where(x => x.UserName == username).ToListAsync();
-        //    return Ok(result);
-
-        //}
-
+      
         // PUT: api/Users/5
         [HttpPut("{id}"), Authorize]
         public async Task<IActionResult> PutUser(int id, User user)

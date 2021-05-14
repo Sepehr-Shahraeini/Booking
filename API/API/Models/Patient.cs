@@ -24,7 +24,6 @@ namespace API.Models
         public string Education { get; set; }
         public string Job { get; set; }
         public string FieldOfStudy { get; set; }
-        public string Password { get; set; }
         public List<Calendar> calendars { get; set; }
 
     }

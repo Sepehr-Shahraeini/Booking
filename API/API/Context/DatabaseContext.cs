@@ -17,8 +17,7 @@ namespace API.Context
         }
 
 
-        public DbSet<ExistTime> existTimes { get; set; }
-            public DbSet<Patient> patients { get; set; }
+           public DbSet<Patient> patients { get; set; }
             public DbSet<Psychoanalyst> psychoanalysts { get; set; }
             public DbSet<VisitingTime> visitingTimes { get; set; }
             public DbSet<User> users { get; set; }
