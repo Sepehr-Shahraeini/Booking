@@ -1,13 +1,6 @@
 ﻿app.controller('blogAdminController', ['$scope', '$rootScope', '$location', 'authService', '$route', '$routeParams', '$http', '$q', function ($scope, $rootScope, $location, authService, $route, $routeParams, $http, $q, fileReader, $timeout) {
 
-    var dto = {
-        Title: $scope.Title,
-        Body: $scope.Body,
-        DateCreate: null,
-        DatePublish: null,
-        AuthorId: 2,
-        CategoryId: 1
-    }
+    
 
     $scope.uploadFile = function () {
 
@@ -19,16 +12,29 @@
             var fd = new FormData();
             fd.append('file', file);
 
-            return $http.post(uploadUrl + 'Upload ', fd, { transformRequest: angular.identity, headers: { 'Content-Type': undefined } }).then(function (response) {
-                console.log(response.data.dbPath)
-                //return response
-            })
+            
+            authService.uploadImage(fd).then(function (response) {
 
+                
+                var dto = {
+                    Title: $scope.Title,
+                    Body: $scope.Body,
+                    DateCreate: null,
+                    DatePublish: null,
+                    AuthorId: 2,
+                    CategoryId: 1,
+                    Image: response.data.dbPath
+                }
+
+                authService.uploadPost(dto).then(function (response) {
+                    console.log(response)
+                });
+            });
         }
-
     };
-
 }]);
+
+
 
 app.directive('fileModel', ['$parse', function ($parse) {
     return {

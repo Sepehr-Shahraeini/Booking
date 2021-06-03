@@ -53,7 +53,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
 
 
-          
+
             localStorageService.set('userData', { Name: responseData.Name, UserId: responseData.UserId, Image: responseData.Image, Role: responseData.Role, UserName: loginData.userName, AuthId: responseData.AuthId });
             _authentication.isAuth = true;
             _authentication.userName = loginData.UserName;
@@ -105,7 +105,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
 
 
-          
+
             localStorageService.set('userData', { Name: responseData.Name, UserId: responseData.UserId, Image: responseData.Image, Role: responseData.Role, UserName: loginData.userName, AuthId: responseData.AuthId });
             _authentication.isAuth = true;
             _authentication.userName = loginData.UserName;
@@ -459,7 +459,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     var _deleteVisitingTime = function (id) {
         return $http.delete(serviceBase + 'api/VisitingTimes/' + id).then(function (response) {
             return response;
-          
+
         })
     }
 
@@ -467,14 +467,14 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     var _editVisitingTime = function (id, data) {
         return $http.put(serviceBase + 'api/VisitingTimes/' + id, data).then(function (response) {
             return response;
-          
+
         })
     }
 
 
     var _patientRegistration = function (data) {
         return $http.post(serviceBase + 'api/Patients', data).then(function (response) {
-           
+
             return response;
         });
 
@@ -486,8 +486,8 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         })
     }
 
-     var _saveCalendar = function (data) {
-         return $http.post(serviceBase + 'api/Patients/saveCalendar ', data).then(function (response) {
+    var _saveCalendar = function (data) {
+        return $http.post(serviceBase + 'api/Patients/saveCalendar ', data).then(function (response) {
             return response
         })
     }
@@ -532,7 +532,19 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     var _VisitingTimeByDrPhone = function (weekday) {
         return $http.get(serviceBase + 'api/VisitingTimes/' + $rootScope.drPhone + "/" + weekday).then(function (response) {
             return response;
-          
+
+        })
+    }
+
+    var _uploadImage = function (fd) {
+        return $http.post(serviceBase + 'api/Post/upload', fd, { transformRequest: angular.identity, headers: { 'Content-Type': undefined } }).then(function (response) {
+            return response
+        })
+    }
+
+    var _uploadPost = function (fd) {
+        return $http.post(serviceBase + 'api/Post', fd).then(function (response) {
+            return response
         })
     }
 
@@ -541,6 +553,8 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
 
     authServiceFactory.newTime = _newTime;
+    authServiceFactory.uploadPost = _uploadPost;
+    authServiceFactory.uploadImage = _uploadImage;
     authServiceFactory.getUnselectedTime = _getUnselectedTime;
     authServiceFactory.deleteUser = _deleteUser;
     authServiceFactory.deletePsychoanalyst = _deletePsychoanalyst;

@@ -64,12 +64,12 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Post>> Post()
+        public async Task<ActionResult<Post>> Post(Post post)
         {
-            var post = new Post();
             _context.posts.Add(post);
-            _context.SaveChanges();
-            return Ok(post);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetPsychoanalyst", new { id = post.Id }, post);
         }
 
 
