@@ -8,6 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace API
 {
@@ -26,8 +30,7 @@ namespace API
             {
                 options.AddDefaultPolicy(builder =>
                 {
-                    //   builder.WithOrigins("http://localhost:63136")
-                    builder.WithOrigins("http://localhost:55497")
+                    builder.WithOrigins("http://localhost:8080")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowAnyOrigin();
@@ -49,8 +52,8 @@ namespace API
                        ValidateIssuerSigningKey = true,
                        //ValidIssuer = "http://api.shgriffin.ir",
                        //ValidAudience = "http://api.shgriffin.ir",
-                       ValidIssuer = "http://localhost:55497",
-                       ValidAudience = "http://localhost:55497",
+                       ValidIssuer = "http://localhost:8080",
+                       ValidAudience = "http://localhost:8080",
                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
                    };
                });
@@ -59,7 +62,13 @@ namespace API
             services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
             services.AddDbContext<DatabaseContext>(options =>
                  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-           
+
+            services.Configure<FormOptions>(o => {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = int.MaxValue;
+                o.MemoryBufferThreshold = int.MaxValue;
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,8 +80,12 @@ namespace API
             app.UseRouting();
 
             app.UseCors();
-
-
+            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+                RequestPath = new PathString("/Resources")
+            });
 
             app.UseAuthentication();
             app.UseAuthorization();

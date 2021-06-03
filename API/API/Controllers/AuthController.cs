@@ -57,8 +57,8 @@ namespace API.Controllers
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
             var tokeOptions = new JwtSecurityToken(
-                issuer: "http://localhost:55497",
-                audience: "http://localhost:55497",
+                issuer: "http://localhost:8080",
+                audience: "http://localhost:8080",
                 claims: new List<Claim>(),
                 expires: DateTime.Now.AddMinutes(5),
                 signingCredentials: signinCredentials
@@ -69,14 +69,14 @@ namespace API.Controllers
         }
 
         [HttpPost, Route("{login}/{patients}")]
-        public IActionResult LoginPatient([FromBody]  User user)
+        public async Task<IActionResult> LoginPatient([FromBody]  User user)
         {
 
             if (string.IsNullOrEmpty(user.UserName) || string.IsNullOrEmpty(user.Password))
                 return null;
 
             var resault = _context.users.SingleOrDefault(q => q.UserName == user.UserName);
-            var patientData = _context.patients.SingleOrDefault(q => q.Mobile == user.UserName);
+            var patientData = await _context.patients.Where(q => q.Mobile == user.UserName).ToListAsync();
 
 
             // check if username exists

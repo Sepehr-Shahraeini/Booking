@@ -44,6 +44,11 @@ app.config(function ($routeProvider) {
          templateUrl: "/app/views/patientLogin.html"
     });
 
+    $routeProvider.when("/blogAdmin", {
+         controller: "blogAdminController",
+         templateUrl: "/app/views/blogAdmin.html"
+    });
+
 
     $routeProvider.otherwise({ redirectTo: "/main" });
 

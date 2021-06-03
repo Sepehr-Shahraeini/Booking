@@ -13,7 +13,8 @@
             document.getElementById("choosePsychoanalyst").style.display = "block";
 
 
-            var data = response.data;
+            var data = response.data.patientData;
+            console.log(data)
             angular.forEach(data, function (x) {
                   $scope.dto_Patient = {
                     Name: x.Name,
@@ -30,6 +31,8 @@
                     Job: x.Job,
                     FieldOfStudy: x.FieldOfStudy,
                 }
+
+                console.log($scope.dto_Patient)
 
             })
 
