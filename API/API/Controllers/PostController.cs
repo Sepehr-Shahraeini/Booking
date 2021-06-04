@@ -26,10 +26,10 @@ namespace API.Controllers
         }
 
 
-       
+
 
         [HttpPost("upload"), DisableRequestSizeLimit]
-       
+
         public async Task<IActionResult> UploadIamge()
         {
             try
@@ -70,6 +70,37 @@ namespace API.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetPsychoanalyst", new { id = post.Id }, post);
+        }
+
+
+
+
+        [HttpGet, DisableRequestSizeLimit]
+        [Route("getImage")]
+        public IActionResult GetImage()
+        {
+            try
+            {
+                var folderName = Path.Combine("Resources", "Images");
+                var pathToRead = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                var photo = Directory.EnumerateFiles(pathToRead)
+                    .Where(IsAPhotoFile)
+                    .Select(fullPath => Path.Combine(Path.GetFileName(fullPath)));
+
+
+                return Ok(new { photo });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
+        }
+
+        private bool IsAPhotoFile(string fileName)
+        {
+            return fileName.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase)
+                || fileName.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase)
+                || fileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase);
         }
 
 

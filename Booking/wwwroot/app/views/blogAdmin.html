@@ -1,7 +1,26 @@
-﻿
-<div style="width:30%; margin:auto">
-    <input ng-model="Title"/>
-   <textarea ng-model="Body"></textarea>
-    <input type="file" file-model="myFile" />
-    <button ng-click="uploadFile()">upload me</button>
+﻿<style>
+    @media (min-width:770px) {
+        .main {
+            display: block;
+            width: 80%;
+            margin: auto
+        }
+    }
+
+
+    @media only screen and (max-device-width: 770px) {
+    }
+
+
+    @media only screen and (max-device-height :1400px) {
+    }
+</style>
+
+
+
+<div style="width:40% ;margin:auto">
+    <input ng-model="Title" class="main" />
+    <textarea ng-model="Body" class="main"></textarea>
+    <input type="file" file-model="myFile" class="main" />
+    <button ng-click="uploadFile()" class="main">upload me</button>
 </div>
