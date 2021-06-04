@@ -1,6 +1,6 @@
 ﻿app.controller('blogAdminController', ['$scope', '$rootScope', '$location', 'authService', '$route', '$routeParams', '$http', '$q', function ($scope, $rootScope, $location, authService, $route, $routeParams, $http, $q, fileReader, $timeout) {
 
-    
+    var serviceBase = "http://localhost:63136/";
 
     $scope.uploadFile = function () {
 
@@ -23,7 +23,7 @@
                     DatePublish: null,
                     AuthorId: 2,
                     CategoryId: 1,
-                    Image: response.data.dbPath
+                    Image: serviceBase + response.data.dbPath
                 }
 
                 authService.uploadPost(dto).then(function (response) {

@@ -1,34 +1,36 @@
 ﻿<style>
     body {
         background-color: #fafafa;
-        color:black
+        color: black
     }
 
     @media (min-width:770px) {
         .postImage {
             width: 100%;
             height: 50%;
-            padding: 3%
         }
 
         .infoImage {
             width: 100%;
             height: 50%;
-            padding:3%
+            padding: 3%
         }
 
         .info {
             background-color: white;
             margin-right: 5%;
             border-top: 12px solid black !important;
-            border:2px solid lightgray
+            border: 2px solid lightgray;
+            position: fixed;
+            display: inline-block
         }
 
         .post {
             background-color: white;
             margin-right: 14%;
             border-top: 5px solid black !important;
-            border: 2px solid lightgray
+            border: 2px solid lightgray;
+            margin-bottom: 3%
         }
 
         .main {
@@ -37,6 +39,18 @@
 
         .infoText {
             padding: 3%
+        }
+
+        .btn_reserve {
+            width: 50%;
+            margin: auto;
+            margin-top: 5%
+        }
+
+        .about {
+            border-bottom: 1px solid lightgray;
+            padding: 3%;
+            margin: 0 3% 0 3%
         }
     }
 
@@ -54,19 +68,21 @@
 
 
     <div class="main">
-        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 post">
-            <h5>سر تیتر</h5>
-            <img ng-src="{{imagePath}}" class="postImage" />
-            <p class="infoText">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
+        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 post" ng-repeat="x in posts">
+
+
+                <img ng-src="{{x.Image}}" class="postImage" />
+            <h5>{{x.Title}}</h5>
+            <p>{{x.Body}}</p>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 info">
             <div class="about">
-                <p>دکتر محمد رضا خدابخش</p>
                 <img src="img/adrian-FrSEEdYr418-unsplash.jpg" class="infoImage" />
+                <p style="margin:auto; font-size:19px; width:50%"><b>دکتر محمد رضا خدابخش</b></p>
             </div>
 
-            <div>
-                <button ng-click="btn_reserve()">تایید</button>
+            <div class="btn_reserve">
+                <button ng-click="btn_reserve()" style="width:100%">دریافت وقت ویزیت</button>
             </div>
         </div>
     </div>

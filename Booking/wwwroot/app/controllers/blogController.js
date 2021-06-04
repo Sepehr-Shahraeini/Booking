@@ -6,13 +6,20 @@
         $location.path('/patientRegister')
     };
 
-    $rootScope.uploadPath = "http://localhost:63136/Resources/Images/"
-    $scope.imagePath = $rootScope.uploadPath + "1.jpg";
+    authService.getPost().then(function (response) {
+        var data = response.data;
+        $scope.posts = response.data
+        $scope.posts.forEach(function (x) {
+          
+            $scope.Image = x.Image
+            $rootScope.uploadPath = "http://localhost:63136/"
+            $scope.imagePath = $rootScope.uploadPath + $scope.Image;
+            console.log($scope.imagePath)
 
+        });
+       
+     
 
-
-      
-
-
+    });
 
 }]);

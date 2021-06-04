@@ -523,6 +523,12 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         })
     };
 
+    var _getPost = function () {
+        return $http.get(serviceBase + 'api/Post' ).then(function (response) {
+            return response;
+        })
+    };
+
     var _getUnselectedTime = function (pyschoanalystId, day, startTime) {
         return $http.get(serviceBase + 'api/VisitingTimes/' + pyschoanalystId + '/' + day + '/' + startTime).then(function (response) {
             return response;
@@ -554,6 +560,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     authServiceFactory.newTime = _newTime;
     authServiceFactory.uploadPost = _uploadPost;
+    authServiceFactory.getPost = _getPost;
     authServiceFactory.uploadImage = _uploadImage;
     authServiceFactory.getUnselectedTime = _getUnselectedTime;
     authServiceFactory.deleteUser = _deleteUser;

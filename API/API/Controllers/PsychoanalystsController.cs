@@ -31,9 +31,9 @@ namespace API.Controllers
 
         [HttpGet]
 
-        public async Task<ActionResult<IEnumerable<Post>>> Getpsychoanalysts()
+        public async Task<ActionResult<IEnumerable<Psychoanalyst>>> Getpsychoanalysts()
         {
-            return await _context.posts.ToListAsync();
+            return await _context.psychoanalysts.ToListAsync();
         }
 
         //// GET: api/Psychoanalysts/5

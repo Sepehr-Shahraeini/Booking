@@ -103,6 +103,11 @@ namespace API.Controllers
                 || fileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase);
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Post>>> Getpsychoanalysts()
+        {
+            return await _context.posts.ToListAsync();
+        }
 
     }
 }
