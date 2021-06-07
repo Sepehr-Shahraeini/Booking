@@ -19,6 +19,7 @@ namespace API.Models
         public string DatePublish { get; set; }
         public int AuthorId { get; set; }
         public int CategoryId { get; set; }
+        public string Summery { get; set; }
         public string Image { get; set; }
     }
 

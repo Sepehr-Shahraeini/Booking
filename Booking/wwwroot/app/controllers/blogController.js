@@ -6,20 +6,26 @@
         $location.path('/patientRegister')
     };
 
-    authService.getPost().then(function (response) {
-        var data = response.data;
+    authService.getPosts().then(function (response) {
         $scope.posts = response.data
         $scope.posts.forEach(function (x) {
-          
             $scope.Image = x.Image
             $rootScope.uploadPath = "http://localhost:63136/"
-            $scope.imagePath = $rootScope.uploadPath + $scope.Image;
-            console.log($scope.imagePath)
-
+            $scope.imagePath = $rootScope.uploadPath + $scope.Image;   
         });
-       
-     
 
+        $scope.navPost = function (title) {
+            authService.getPost(title).then(function (response) {
+                $rootScope.post = response.data
+                $location.path("/post")
+            });
+   
+        }
     });
+
+   
+
+    
+
 
 }]);

@@ -103,10 +103,18 @@ namespace API.Controllers
                 || fileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Post>>> Getpsychoanalysts()
+        [HttpGet("GetPosts")]
+        public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
         {
             return await _context.posts.ToListAsync();
+        }
+
+
+        [HttpGet("{GetPost}/{title}")]
+        public async Task<ActionResult<IEnumerable<Post>>> GetPost(string title)
+        {
+            var resault = await _context.posts.Where(q => q.Title == title).ToListAsync();
+            return resault;
         }
 
     }

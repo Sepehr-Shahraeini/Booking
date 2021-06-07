@@ -50,7 +50,13 @@ app.config(function ($routeProvider) {
     });
 
 
-    $routeProvider.otherwise({ redirectTo: "/main" });
+    $routeProvider.when("/post", {
+        controller: "postController",
+         templateUrl: "/app/views/post.html"
+    });
+
+
+    $routeProvider.otherwise({ redirectTo: "/blog" });
 
 });
 

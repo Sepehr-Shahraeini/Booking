@@ -523,8 +523,14 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         })
     };
 
-    var _getPost = function () {
-        return $http.get(serviceBase + 'api/Post' ).then(function (response) {
+    var _getPosts = function () {
+        return $http.get(serviceBase + 'api/Post/GetPosts' ).then(function (response) {
+            return response;
+        })
+    };
+
+    var _getPost = function (title) {
+        return $http.get(serviceBase + 'api/Post/GetPost/' + title).then(function (response) {
             return response;
         })
     };
@@ -561,6 +567,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     authServiceFactory.newTime = _newTime;
     authServiceFactory.uploadPost = _uploadPost;
     authServiceFactory.getPost = _getPost;
+    authServiceFactory.getPosts = _getPosts;
     authServiceFactory.uploadImage = _uploadImage;
     authServiceFactory.getUnselectedTime = _getUnselectedTime;
     authServiceFactory.deleteUser = _deleteUser;

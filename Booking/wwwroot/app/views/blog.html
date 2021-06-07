@@ -4,10 +4,11 @@
         color: black
     }
 
-    @media (min-width:770px) {
+    @media (min-width:900px) {
         .postImage {
             width: 100%;
             height: 50%;
+            padding: 0 3% 0 0 
         }
 
         .infoImage {
@@ -18,11 +19,19 @@
 
         .info {
             background-color: white;
-            margin-right: 5%;
+            margin-right: 1%;
             border-top: 12px solid black !important;
             border: 2px solid lightgray;
             position: fixed;
             display: inline-block
+        }
+
+        .reserve {
+            background-color: white;
+            border: 2px solid lightgray;
+            position: fixed;
+            display: inline-block;
+            margin: 20% 1% 0 0 
         }
 
         .post {
@@ -52,10 +61,22 @@
             padding: 3%;
             margin: 0 3% 0 3%
         }
+
+        .mainText {
+            padding:  0 3% 0 0;
+            word-break: break-all
+        }
+
+        .title{
+            background-color:white;
+            border:none;
+            padding-right:3%;
+            font-size:30px
+        }
     }
 
 
-    @media only screen and (max-device-width: 770px) {
+    @media only screen and (max-device-width: 900px) {
     }
 
 
@@ -69,22 +90,24 @@
 
     <div class="main">
         <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 post" ng-repeat="x in posts">
-
-
-                <img ng-src="{{x.Image}}" class="postImage" />
-            <h5>{{x.Title}}</h5>
-            <p>{{x.Body}}</p>
+            <img ng-src="{{x.Image}}" class="postImage" />
+            <!--<h5 ng-click="navPost(x.Title)" style="padding-right:3%">{{x.Title}}</h5>-->
+            <button ng-click="navPost(x.Title)" class="title"><b>{{x.Title}}</b></button>
+            <p class="mainText">{{x.Summery}}</p>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 info">
             <div class="about">
                 <img src="img/adrian-FrSEEdYr418-unsplash.jpg" class="infoImage" />
                 <p style="margin:auto; font-size:19px; width:50%"><b>دکتر محمد رضا خدابخش</b></p>
             </div>
+        </div>
 
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 reserve">
             <div class="btn_reserve">
                 <button ng-click="btn_reserve()" style="width:100%">دریافت وقت ویزیت</button>
             </div>
         </div>
+
     </div>
 
 
