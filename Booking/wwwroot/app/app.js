@@ -1,6 +1,6 @@
 ﻿
 
-var app = angular.module('AngularJSApp', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', 'dx', 'ngSanitize', 'ngAnimate']).config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
+var app = angular.module('AngularJSApp', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', , 'ngSanitize', 'ngAnimate']).config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false;
 }]);
 
@@ -87,7 +87,6 @@ app.run(['$rootScope', '$location', '$window', 'authService', function ($rootSco
 
     });
 
-    DevExpress.ui.themes.current('material.gray-light');
     
 
 

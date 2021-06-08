@@ -1,8 +1,17 @@
 ﻿<style>
-    body {
-        color: black
+
+    @font-face {
+        font-family: 'IRANSansWeb';
+        src: url('content/fonts/eot/IRANSansWeb.eot') format(‘eot’), url('content/fonts/woff/IRANSansWeb.woff') format('woff'), url('content/fonts/ttf/IRANSansWeb.ttf') format(‘truetype’);
     }
 
+    body {
+        color: black;
+        font-family:IRANSansWeb
+    }
+
+
+    
     @media (min-width:900px) {
         .postImage {
             width: 80%;
@@ -50,7 +59,7 @@
         .mainText {
             width: 80%;
             font-size: 18px;
-            margin: 5% auto 0 auto;
+            margin: 2% auto 0 auto;
         }
 
         .title {
@@ -66,7 +75,13 @@
 
         .topInfo {
             width: 80%;
-            margin: auto
+            margin: auto;
+            border-bottom: 1px solid lightgray
+        }
+
+        .socialBar{
+            width:80%;
+            margin:auto
         }
     }
 
@@ -82,6 +97,10 @@
     <div class="topInfo">
         <h4 ng-click="navPost(x.Title)" class="title"><b>{{x.Title}}</b></h4>
         <p class="summery">{{x.Summery}}</p>
+    </div>
+    <div class="w3-xlarge w3-section socialBar">
+        <a href="https://t.me/Dr_answer"><i class="fa fa-telegram w3-hover-opacity"></i></a>
+        <a href="https://www.instagram.com/dr_mrkhodabakhsh/"><i class="fa fa-instagram w3-hover-opacity"></i></a>
     </div>
     <img ng-src="{{x.Image}}" class="postImage" />
     <p class="mainText">{{x.Body}}</p>

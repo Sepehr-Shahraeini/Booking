@@ -15,12 +15,6 @@
       <ProjectReference Include="..\API\API\API.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="wwwroot\content\images\" />
-      <Folder Include="wwwroot\content\styles\" />
-      <Folder Include="wwwroot\content\scripts\" />
-    </ItemGroup>
-
     <ProjectExtensions><VisualStudio><UserProperties TemplateFeatures="NETCORE" /></VisualStudio></ProjectExtensions>
 
 </Project>

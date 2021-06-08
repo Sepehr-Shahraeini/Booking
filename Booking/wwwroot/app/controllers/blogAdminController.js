@@ -18,6 +18,7 @@
                 
                 var dto = {
                     Title: $scope.Title,
+                    Summery: $scope.Summery,
                     Body: $scope.Body,
                     DateCreate: null,
                     DatePublish: null,
