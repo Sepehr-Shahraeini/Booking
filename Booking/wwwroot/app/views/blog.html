@@ -1,14 +1,18 @@
 ﻿<style>
     body {
-        background-color: #fafafa;
         color: black
+    }
+
+    @font-face {
+        font-family: 'IRANSansWeb';
+        src: url('content/fonts/eot/IRANSansWeb.eot') format(‘eot’), url('content/fonts/woff/IRANSansWeb.woff') format('woff'), url('content/fonts/ttf/IRANSansWeb.ttf') format(‘truetype’);
     }
 
     @media (min-width:900px) {
         .postImage {
             width: 100%;
             height: 50%;
-            padding: 0 3% 0 0 
+            padding: 0
         }
 
         .infoImage {
@@ -19,11 +23,11 @@
 
         .info {
             background-color: white;
-            margin-right: 1%;
-            border-top: 12px solid black !important;
+            margin-right: 2%;
             border: 2px solid lightgray;
             position: fixed;
-            display: inline-block
+            display: inline-block;
+            border-radius: 5px
         }
 
         .reserve {
@@ -31,15 +35,17 @@
             border: 2px solid lightgray;
             position: fixed;
             display: inline-block;
-            margin: 20% 1% 0 0 
+            margin: 23% 2% 0 0;
+            border-radius:5px;
         }
 
         .post {
             background-color: white;
             margin-right: 14%;
-            border-top: 5px solid black !important;
             border: 2px solid lightgray;
-            margin-bottom: 3%
+            margin-bottom: 2%;
+            border-radius:5px;
+            font-family:IRANSansWeb
         }
 
         .main {
@@ -50,28 +56,65 @@
             padding: 3%
         }
 
-        .btn_reserve {
+        .reserveInfo {
             width: 50%;
             margin: auto;
             margin-top: 5%
         }
 
+            .reserveInfo p {
+                text-align: center;
+                font-size: x-large;
+                font-family: system-ui
+            }
+
         .about {
-            border-bottom: 1px solid lightgray;
             padding: 3%;
             margin: 0 3% 0 3%
         }
 
         .mainText {
-            padding:  0 3% 0 0;
+            padding: 0 3% 0 0;
             word-break: break-all
         }
 
-        .title{
-            background-color:white;
-            border:none;
-            padding-right:3%;
-            font-size:30px
+        .title {
+            background-color: white;
+            border: none;
+            padding-right: 3%;
+            font-size: 30px
+        }
+
+        .btn_reserve {
+            background-color: black;
+            border: none;
+            color: white;
+            width: 100%;
+            padding: 3%;
+            margin: 4% 0 4% 0;
+            border-radius: 6px
+        }
+
+        .btn_reserve {
+            background-color: black;
+            border: none;
+            color: white;
+            width: 100%;
+            padding: 3%;
+            margin: 4% 0 4% 0;
+            border-radius: 6px;
+            font-family:IRANSansWeb
+        }
+
+        .btn_about {
+            background-color: black;
+            border: none;
+            color: white;
+            width: 100%;
+            padding: 3%;
+            margin: 4% 0 4% 0;
+            border-radius: 6px;
+            font-family:IRANSansWeb
         }
     }
 
@@ -98,13 +141,15 @@
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 info">
             <div class="about">
                 <img src="img/adrian-FrSEEdYr418-unsplash.jpg" class="infoImage" />
-                <p style="margin:auto; font-size:19px; width:50%"><b>دکتر محمد رضا خدابخش</b></p>
+                <button ng-click="btn_about()" class="btn_about">درباره دکتر محمد رضا خدا بخش</button>
             </div>
         </div>
 
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 reserve">
-            <div class="btn_reserve">
-                <button ng-click="btn_reserve()" style="width:100%">دریافت وقت ویزیت</button>
+            <div class="reserveInfo">
+                <p><b>رزرو وقت ویزیت</b></p>
+                <img src="img/psychoanalyst.jpg" style="width:100%" />
+                <button ng-click="btn_reserve()" class="btn_reserve">دریافت وقت ویزیت</button>
             </div>
         </div>
 
