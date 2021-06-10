@@ -7,11 +7,11 @@
 
     body {
         color: black;
-        font-family:IRANSansWeb
+        font-family: IRANSansWeb
     }
 
 
-    
+
     @media (min-width:900px) {
         .postImage {
             width: 80%;
@@ -79,20 +79,103 @@
             border-bottom: 1px solid lightgray
         }
 
-        .socialBar{
-            width:80%;
-            margin:auto
+        .socialBar {
+            width: 80%;
+            margin: auto
         }
     }
 
 
     @media only screen and (max-device-width: 900px) {
+        
+        .postImage {
+            width: 100%;
+            height: 50%;
+            display: block;
+            margin: 5% auto 0 auto
+        }
+
+        .infoImage {
+            width: 100%;
+            height: 50%;
+            padding: 3%
+        }
+
+        .info {
+            background-color: white;
+            margin-right: 1%;
+            border-top: 12px solid black !important;
+            border: 2px solid lightgray;
+            position: fixed;
+            display: inline-block
+        }
+
+        .post {
+            background-color: white;
+            width: 100%
+        }
+
+        .main {
+            margin-top: 3%
+        }
+
+        .infoText {
+            padding: 3%
+        }
+
+        .btn_reserve {
+            width: 50%;
+            margin: auto;
+            margin-top: 5%
+        }
+
+
+        .mainText {
+            width: 80%;
+            font-size: 18px;
+            margin: 2% auto 0 auto;
+            
+        }
+
+        .title {
+            font-size: 30px;
+            text-align: right;
+            padding-top: 3%
+        }
+
+        .summery {
+            font-size: 18px;
+            text-align: right;
+        }
+
+        .topInfo {
+            width: 80%;
+            margin: auto;
+            border-bottom: 1px solid lightgray
+        }
+
+        .socialBar {
+            width: 80%;
+            margin: auto
+        }
     }
 
 
     @media only screen and (max-device-height :1400px) {
     }
 </style>
+
+<div class="topnav">
+    <a href="#home" class="navbar">مرکز دکتر محمد رضا خدابخش</a>
+    <div id="menu">
+        <a ng-click="btn_reserve()">رزرو وقت ویزیت</a>
+        <a ng-click="btn_about()">درباره دکتر محمد رضا خدا بخش</a>
+    </div>
+    <a ng-click="openMenu()" class="icon">
+        <i class="fa fa-bars"></i>
+    </a>
+</div>
+
 <div class=" post" ng-repeat="x in post">
     <div class="topInfo">
         <h4 ng-click="navPost(x.Title)" class="title"><b>{{x.Title}}</b></h4>

@@ -1,5 +1,13 @@
 ﻿app.controller('patientRegisterController', ['$scope', '$rootScope', '$location', 'authService', '$route', '$routeParams', 'localStorageService', '$http', 'Psychoanalyst', function ($scope, $rootScope, $location, authService, $route, $routeParams, $http, localStorageService, Psychoanalyst) {
 
+    $scope.openMenu = function () {
+        var x = document.getElementById("menu");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }
 
     $scope.signedUp = function () {
         $location.path('/patientLogin')

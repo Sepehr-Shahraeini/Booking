@@ -1,5 +1,15 @@
 ﻿app.controller('patientLoginController', ['$scope', '$rootScope', '$location', 'authService', '$route', '$routeParams', 'localStorageService', '$http', function ($scope, $rootScope, $location, authService, $route, $routeParams, $http, localStorageService) {
 
+    $scope.openMenu = function () {
+        var x = document.getElementById("menu");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }
+
+
     $scope.btn_save = function () {
 
         var dto = {

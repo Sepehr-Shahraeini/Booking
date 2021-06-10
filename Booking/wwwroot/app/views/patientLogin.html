@@ -1,12 +1,25 @@
 ﻿
 
 <body>
-    <div style="width:30%; margin:auto">
+
+    <div class="topnav">
+        <a href="#home" class="navbar">مرکز دکتر محمد رضا خدابخش</a>
+        <div id="menu">
+            <a ng-click="btn_reserve()">رزرو وقت ویزیت</a>
+            <a ng-click="btn_about()">درباره دکتر محمد رضا خدا بخش</a>
+        </div>
+        <a ng-click="openMenu()" class="icon">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+
+
+    <div class="field">
         <p class="inputTitle">نام کاربری</p>
-        <input ng-model="UserName" />
+        <input ng-model="UserName" class="input" />
         <p class="inputTitle">رمز</p>
-        <input ng-model="Password" />
-        <button ng-click="btn_save()">ورود</button>
+        <input ng-model="Password" class="input" />
+        <button ng-click="btn_save()" class="confirmBtn">ورود</button>
     </div>
 
 
