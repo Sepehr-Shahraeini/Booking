@@ -1,9 +1,98 @@
-﻿
+﻿﻿
+<style>
+
+
+    @media (min-width:900px) {
+        .dateBox {
+            background-color: white;
+            width: 20%;
+            height: 10%;
+            text-align: center;
+            margin: 10px;
+            border-radius: 5px;
+            display: none;
+            border: 2px solid #d9d9d9;
+        }
+
+        .signedUp {
+            cursor: pointer;
+        }
+
+            .signedUp:hover {
+                color: lightgray
+            }
+
+        .selectPsychoanalyst {
+            background-color: white !important;
+            color: black !important;
+            border: 1px solid black;
+            display: inline-block;
+            border-radius: 5px;
+            width: 38%;
+            margin: 5%
+        }
+
+        .topnav {
+            display: none
+        }
+    }
+
+
+    @media only screen and (max-device-width: 900px) {
+        .dateBox {
+            background-color: white;
+            width: 40%;
+            height: 10%;
+            text-align: center;
+            margin: 10px;
+            border-radius: 5px;
+            display: none;
+            border: 2px solid #d9d9d9
+        }
+
+        .selectPsychoanalyst {
+            background-color: white !important;
+            color: black !important;
+            border: 1px solid black;
+            margin: 2% auto 2% auto !important;
+            display: inline-block;
+            border-radius: 5px;
+            width: 100%
+        }
+    }
+
+
+    @media only screen and (max-device-height :1400px) {
+        .button {
+            background-color: white;
+            height: 30px;
+            width: 100px;
+            border: 1px solid black;
+            border-radius: 5px;
+            margin: 2px 8px;
+            position: center;
+            color: black;
+            width: 44%
+        }
+
+        .dateBox {
+            background-color: white;
+            width: 25%;
+            height: 10%;
+            text-align: center;
+            margin: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            border: 2px solid #d9d9d9
+        }
+    }
+</style>
+
 
 <body>
 
     <div class="topnav">
-        <a href="#home" class="navbar">مرکز دکتر محمد رضا خدابخش</a>
+        <a ng-click="backHome()" class="navbar">مرکز دکتر محمد رضا خدابخش</a>
         <div id="menu">
             <a ng-click="btn_reserve()">رزرو وقت ویزیت</a>
             <a ng-click="btn_about()">درباره دکتر محمد رضا خدا بخش</a>
@@ -26,7 +115,7 @@
     <div id="choosePsychoanalyst" class="w3-modal" style="display:none">
         <div class="w3-modal-content w3-animate-zoom" style="width:45%;height:auto;border-radius:5px;background-color:#fff">
             <div class="field w3-modal-content w3-animate-zoom">
-                <button class="selectPsychoanalyst" ng-repeat="x in Psychoanalysts" ng-click="showPsychoanalysts(x.Name, x.LastName, x.WeekDays, x.PsychoanalystId)">{{x.Name}} {{x.LastName}}</button>
+                <button class="selectPsychoanalyst" ng-repeat="x in Psychoanalysts" ng-click="showPsychoanalysts(x.ID, x.Name, x.LastName, x.WeekDays)">{{x.Name}} {{x.LastName}}</button>
                 <div style="margin:0px auto 0px auto">
                     <button id="sun" class="dateBox" style="display:none" ng-click="sunBtn()">
                         <p>یکشنبه</p>

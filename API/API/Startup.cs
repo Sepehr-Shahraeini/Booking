@@ -50,10 +50,8 @@ namespace API
                        ValidateAudience = true,
                        ValidateLifetime = true,
                        ValidateIssuerSigningKey = true,
-                       //ValidIssuer = "http://api.shgriffin.ir",
-                       //ValidAudience = "http://api.shgriffin.ir",
-                       ValidIssuer = "http://localhost:8080",
-                       ValidAudience = "http://localhost:8080",
+                       ValidIssuer = "http://localhost:63136",
+                       ValidAudience = "http://localhost:63136",
                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
                    };
                });

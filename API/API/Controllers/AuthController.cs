@@ -99,8 +99,8 @@ namespace API.Controllers
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
             var tokeOptions = new JwtSecurityToken(
-                issuer: "http://localhost:55497",
-                audience: "http://localhost:55497",
+                issuer: "http://localhost:8080",
+                audience: "http://localhost:8080",
                 claims: new List<Claim>(),
                 expires: DateTime.Now.AddMinutes(5),
                 signingCredentials: signinCredentials
@@ -120,7 +120,7 @@ namespace API.Controllers
         }
 
         // GET: api/Users/username
-        [HttpGet("user/{username}"), Authorize]
+        [HttpGet("user/{username}")]
         public ActionResult<User> Getuser(string username)
         {
             var result = _context.users.Where(x => x.UserName == username).FirstOrDefault();
@@ -128,7 +128,7 @@ namespace API.Controllers
         }
       
         // PUT: api/Users/5
-        [HttpPut("{id}"), Authorize]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
             if (id != user.ID)

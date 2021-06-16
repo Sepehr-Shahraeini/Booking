@@ -9,6 +9,23 @@
         }
     }
 
+    $scope.showPsychoanalysts = function (ID, name, lastname, weekdays) {
+
+
+        var dateBoxs = document.getElementsByClassName("dateBox");
+        for (var i = 0; i < dateBoxs.length; i++) {
+            dateBoxs[i].style.display = "none";
+        }
+
+
+        $scope.psychoanalystId = ID
+
+        console.log($scope.psychoanalystId)
+
+        getWeekdays(ID, weekdays);
+
+    }
+
     $scope.signedUp = function () {
         $location.path('/patientLogin')
     }
@@ -44,14 +61,13 @@
             $scope.patientId = response.data
 
 
-            Psychoanalyst.newUser(dto_patientAccount).then( function () { })
-        
+            Psychoanalyst.newUser(dto_patientAccount).then(function () { })
+
             $scope.timeRegistration = function (starttime, endtime) {
                 $scope.registeredTime = starttime + "-" + endtime;
                 $scope.selectedTime = starttime;
                 $scope.registeredDate = $scope.selectedDate + $scope.selectedTime
 
-                console.log($scope.registeredDate)
 
 
                 var dto_calendar = {
@@ -59,15 +75,15 @@
                     TrackingNO: 223,
                     IsEmergency: true,
                     PatientId: $scope.patientId,
-                    PsychoanalystId: 2,
+                    PsychoanalystId: $scope.psychoanalystId,
                     DatePersian: $scope.registeredDate,
                     DateAmount: $scope.registeredDate,
                     time: $scope.registeredTime
 
                 }
 
+                
                 authService.saveCalendar(dto_calendar).then(function (response) {
-                    console.log(response)
                 })
 
             }
@@ -75,26 +91,25 @@
     }
 
 
-    function getWeekdays(psychoanalystId = 2, weekdays) {
-        authService.getExistTime(psychoanalystId).then(function (response) {
+    function getWeekdays(ID, weekdays) {
+        authService.getExistTime(ID).then(function (response) {
             $scope.Patients = response.data;
             $scope.Patients.forEach(function (x) {
                 $scope.PatientsTime = x.Time
-                console.log(response)
             })
         })
 
-        authService.getExistTime(psychoanalystId).then(function (response) {
+        authService.getExistTime(ID).then(function (response) {
             $scope.Patient = JSON.stringify(response)
 
-            authService.getVisitingTime(1, 0).then(function (response) {
+            authService.getVisitingTime(ID, 0).then(function (response) {
                 var data = response.data;
                 $scope.sunDay = [];
                 data.forEach(function (y) {
                     $scope.time = y.StartTime
 
                     if ($scope.time !== $scope.PatientsTime) {
-                        if ($scope.Patient.indexOf(calDate(0) + "/" + $scope.MonthNum + "/" + $scope.Year + "/0/" + $scope.time) == -1) {
+                        if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(0) + "/0/" + $scope.time) == -1) {
                             authService.getUnselectedTime(1, 0, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.sunDay.length; i++) { }
@@ -107,14 +122,14 @@
 
             });
 
-            authService.getVisitingTime(1, 1).then(function (response) {
+            authService.getVisitingTime(ID, 1).then(function (response) {
                 var data = response.data;
                 $scope.monDay = [];
                 data.forEach(function (y) {
                     $scope.time = y.StartTime
 
                     if ($scope.time !== $scope.PatientsTime) {
-                        if ($scope.Patient.indexOf(calDate(1) + "/" + $scope.MonthNum + "/" + $scope.Year + "/1/" + $scope.time) == -1) {
+                        if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(1) + "/1/" + $scope.time) == -1) {
                             authService.getUnselectedTime(1, 1, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.monDay.length; i++) { }
@@ -125,14 +140,14 @@
                 });
             });
 
-            authService.getVisitingTime(1, 2).then(function (response) {
+            authService.getVisitingTime(ID, 2).then(function (response) {
                 var data = response.data;
                 $scope.tuesDay = [];
                 data.forEach(function (y) {
                     $scope.time = y.StartTime
 
                     if ($scope.time !== $scope.PatientsTime) {
-                        if ($scope.Patient.indexOf(calDate(2) + "/" + $scope.MonthNum + "/" + $scope.Year + "/2/" + $scope.time) == -1) {
+                        if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(2) + "/2/" + $scope.time) == -1) {
                             authService.getUnselectedTime(1, 2, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.tuesDay.length; i++) { }
@@ -144,14 +159,14 @@
 
             });
 
-            authService.getVisitingTime(1, 3).then(function (response) {
+            authService.getVisitingTime(ID, 3).then(function (response) {
                 var data = response.data;
                 $scope.wednesDay = [];
                 data.forEach(function (y) {
                     $scope.time = y.StartTime
 
                     if ($scope.time !== $scope.PatientsTime) {
-                        if ($scope.Patient.indexOf(calDate(3) + "/" + $scope.MonthNum + "/" + $scope.Year + "/3/" + $scope.time) == -1) {
+                        if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(3) + "/3/" + $scope.time) == -1) {
                             authService.getUnselectedTime(1, 3, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.wednesDay.length; i++) { }
@@ -163,14 +178,14 @@
 
             });
 
-            authService.getVisitingTime(1, 4).then(function (response) {
+            authService.getVisitingTime(ID, 4).then(function (response) {
                 var data = response.data;
                 $scope.thursDay = [];
                 data.forEach(function (y) {
                     $scope.time = y.StartTime
 
                     if ($scope.time !== $scope.PatientsTime) {
-                        if ($scope.Patient.indexOf(calDate(4) + "/" + $scope.MonthNum + "/" + $scope.Year + "/4/" + $scope.time) == -1) {
+                        if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(4) + "/4/" + $scope.time) == -1) {
                             authService.getUnselectedTime(1, 4, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.thursDay.length; i++) { }
@@ -183,14 +198,14 @@
 
             });
 
-            authService.getVisitingTime(1, 5).then(function (response) {
+            authService.getVisitingTime(ID, 5).then(function (response) {
                 var data = response.data;
                 $scope.friDay = [];
                 data.forEach(function (y) {
                     $scope.time = y.StartTime
 
                     if ($scope.time !== $scope.PatientsTime) {
-                        if ($scope.Patient.indexOf(calDate(5) + "/" + $scope.MonthNum + "/" + $scope.Year + "/5/" + $scope.time) == -1) {
+                        if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(5) + "/5/" + $scope.time) == -1) {
                             authService.getUnselectedTime(1, 5, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.friDay.length; i++) { }
@@ -203,14 +218,14 @@
 
             });
 
-            authService.getVisitingTime(1, 6).then(function (response) {
+            authService.getVisitingTime(ID, 6).then(function (response) {
                 var data = response.data;
                 $scope.saturDay = [];
                 data.forEach(function (y) {
                     $scope.time = y.StartTime
 
                     if ($scope.time !== $scope.PatientsTime) {
-                        if ($scope.Patient.indexOf(calDate(6) + "/" + $scope.MonthNum + "/" + $scope.Year + "/6/" + $scope.time) == -1) {
+                        if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(6) + "/6/" + $scope.time) == -1) {
                             authService.getUnselectedTime(1, 6, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.saturDay.length; i++) { }
@@ -259,20 +274,7 @@
 
 
 
-    $scope.showPsychoanalysts = function (name, lastname, weekdays, psychoanalystId) {
-        authService.getPsychoanalysts().then(function (response) {
-            $scope.Psychoanalysts = response.data
-        })
 
-        var dateBoxs = document.getElementsByClassName("dateBox");
-        for (var i = 0; i < dateBoxs.length; i++) {
-            dateBoxs[i].style.display = "none";
-        }
-
-
-        getWeekdays(psychoanalystId, weekdays);
-
-    }
 
     function calDate(x) {
 
@@ -294,151 +296,168 @@
         return (Day)
     }
 
+    $scope.showPsychoanalysts = function (ID, name, lastname, weekdays) {
 
-    document.getElementById("dateSun").innerHTML = calDate(0);
-    document.getElementById("dateMon").innerHTML = calDate(1);
-    document.getElementById("dateTues").innerHTML = calDate(2);
-    document.getElementById("dateWed").innerHTML = calDate(3);
-    document.getElementById("dateThur").innerHTML = calDate(4);
-    document.getElementById("dateFri").innerHTML = calDate(5);
-    document.getElementById("dateSat").innerHTML = calDate(6);
-
-
-    document.getElementById("monthSun").innerHTML = $scope.Month;
-    document.getElementById("monthMon").innerHTML = $scope.Month;
-    document.getElementById("monthTues").innerHTML = $scope.Month;
-    document.getElementById("monthWed").innerHTML = $scope.Month;
-    document.getElementById("monthThur").innerHTML = $scope.Month;
-    document.getElementById("monthFri").innerHTML = $scope.Month;
-    document.getElementById("monthSat").innerHTML = $scope.Month;
-
-
-
-    $scope.satBtn = function () {
-        var Times = document.getElementsByClassName("Time");
-        for (var i = 0; i < Times.length; i++) {
-            Times[i].style.display = "none";
-        }
 
         var dateBoxs = document.getElementsByClassName("dateBox");
         for (var i = 0; i < dateBoxs.length; i++) {
-            dateBoxs[i].style.backgroundColor = "#ffffff";
-        }
-
-        document.getElementById("popSat").style.display = "block";
-        $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(6)
-        $scope.selectedDate = calDate(6) + "/" + $scope.MonthNum + "/" + $scope.Year + "/6/"
-        document.getElementById("sat").style.backgroundColor = "#ff9900"
-    };
-
-
-    $scope.sunBtn = function () {
-        var Times = document.getElementsByClassName("Time");
-        for (var i = 0; i < Times.length; i++) {
-            Times[i].style.display = "none";
-        }
-
-        var dateBoxs = document.getElementsByClassName("dateBox");
-        for (var i = 0; i < dateBoxs.length; i++) {
-            dateBoxs[i].style.backgroundColor = "#ffffff";
-        }
-
-        document.getElementById("popSat").style.display = "block";
-        $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(0)
-        $scope.selectedDate = calDate(6) + "/" + $scope.MonthNum + "/" + $scope.Year + "/0/"
-        document.getElementById("sat").style.backgroundColor = "#ff9900"
-    };
-
-
-    $scope.monBtn = function () {
-        var Times = document.getElementsByClassName("Time");
-        for (var i = 0; i < Times.length; i++) {
-            Times[i].style.display = "none";
-        }
-
-        var dateBoxs = document.getElementsByClassName("dateBox");
-        for (var i = 0; i < dateBoxs.length; i++) {
-            dateBoxs[i].style.backgroundColor = "#ffffff";
-        }
-
-        document.getElementById("popMon").style.display = "block";
-        $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(1)
-        $scope.selectedDate = calDate(1) + "/" + $scope.MonthNum + "/" + $scope.Year + "/1/"
-        document.getElementById("mon").style.backgroundColor = "#ff9900"
-    };
-
-
-    $scope.tuesBtn = function () {
-        var Times = document.getElementsByClassName("Time");
-        for (var i = 0; i < Times.length; i++) {
-            Times[i].style.display = "none";
-        }
-
-        var dateBoxs = document.getElementsByClassName("dateBox");
-        for (var i = 0; i < dateBoxs.length; i++) {
-            dateBoxs[i].style.backgroundColor = "#ffffff";
-        }
-
-        document.getElementById("popTues").style.display = "block";
-        $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(2)
-        $scope.selectedDate = calDate(2) + "/" + $scope.MonthNum + "/" + $scope.Year + "/2/"
-        document.getElementById("tues").style.backgroundColor = "#ff9900"
-    };
-
-
-    $scope.wedBtn = function () {
-        var Times = document.getElementsByClassName("Time");
-        for (var i = 0; i < Times.length; i++) {
-            Times[i].style.display = "none";
-        }
-
-        var dateBoxs = document.getElementsByClassName("dateBox");
-        for (var i = 0; i < dateBoxs.length; i++) {
-            dateBoxs[i].style.backgroundColor = "#ffffff";
-        }
-
-        document.getElementById("popWed").style.display = "block";
-        $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(3)
-        $scope.selectedDate = calDate(3) + "/" + $scope.MonthNum + "/" + $scope.Year + "/3/"
-        document.getElementById("wed").style.backgroundColor = "#ff9900"
-    };
-
-    $scope.thurBtn = function () {
-        var Times = document.getElementsByClassName("Time");
-        for (var i = 0; i < Times.length; i++) {
-            Times[i].style.display = "none";
-        }
-
-        var dateBoxs = document.getElementsByClassName("dateBox");
-        for (var i = 0; i < dateBoxs.length; i++) {
-            dateBoxs[i].style.backgroundColor = "#ffffff";
-        }
-
-        document.getElementById("popThur").style.display = "block";
-        $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(4)
-        $scope.selectedDate = calDate(4) + "/" + $scope.MonthNum + "/" + $scope.Year + "/4/"
-        document.getElementById("thur").style.backgroundColor = "#ff9900"
-    };
-
-
-    $scope.friBtn = function () {
-        var Times = document.getElementsByClassName("Time");
-        for (var i = 0; i < Times.length; i++) {
-            Times[i].style.display = "none";
-        }
-
-        var dateBoxs = document.getElementsByClassName("dateBox");
-        for (var i = 0; i < dateBoxs.length; i++) {
-            dateBoxs[i].style.backgroundColor = "#ffffff";
+            dateBoxs[i].style.display = "none";
         }
 
 
-        document.getElementById("popFri").style.display = "block";
-        $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(5)
-        $scope.selectedDate = calDate(5) + "/" + $scope.MonthNum + "/" + $scope.Year + "/5/"
-        document.getElementById("fri").style.backgroundColor = "#ff9900"
-    };
+        $scope.psychoanalystId = ID
 
+        console.log($scope.psychoanalystId)
+
+        getWeekdays(ID, weekdays);
+
+
+
+
+        document.getElementById("dateSun").innerHTML = calDate(0);
+        document.getElementById("dateMon").innerHTML = calDate(1);
+        document.getElementById("dateTues").innerHTML = calDate(2);
+        document.getElementById("dateWed").innerHTML = calDate(3);
+        document.getElementById("dateThur").innerHTML = calDate(4);
+        document.getElementById("dateFri").innerHTML = calDate(5);
+        document.getElementById("dateSat").innerHTML = calDate(6);
+
+
+        document.getElementById("monthSun").innerHTML = $scope.Month;
+        document.getElementById("monthMon").innerHTML = $scope.Month;
+        document.getElementById("monthTues").innerHTML = $scope.Month;
+        document.getElementById("monthWed").innerHTML = $scope.Month;
+        document.getElementById("monthThur").innerHTML = $scope.Month;
+        document.getElementById("monthFri").innerHTML = $scope.Month;
+        document.getElementById("monthSat").innerHTML = $scope.Month;
+
+
+
+        $scope.satBtn = function () {
+            var Times = document.getElementsByClassName("Time");
+            for (var i = 0; i < Times.length; i++) {
+                Times[i].style.display = "none";
+            }
+
+            var dateBoxs = document.getElementsByClassName("dateBox");
+            for (var i = 0; i < dateBoxs.length; i++) {
+                dateBoxs[i].style.backgroundColor = "#ffffff";
+            }
+
+            document.getElementById("popSat").style.display = "block";
+            $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(6)
+            $scope.selectedDate = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(6) + "/6/"
+            document.getElementById("sat").style.backgroundColor = "#ff9900"
+        };
+
+
+        $scope.sunBtn = function () {
+            var Times = document.getElementsByClassName("Time");
+            for (var i = 0; i < Times.length; i++) {
+                Times[i].style.display = "none";
+            }
+
+            var dateBoxs = document.getElementsByClassName("dateBox");
+            for (var i = 0; i < dateBoxs.length; i++) {
+                dateBoxs[i].style.backgroundColor = "#ffffff";
+            }
+
+            document.getElementById("popSat").style.display = "block";
+            $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(0)
+            $scope.selectedDate = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(0) + "/0/"
+            document.getElementById("sat").style.backgroundColor = "#ff9900"
+        };
+
+
+        $scope.monBtn = function () {
+            var Times = document.getElementsByClassName("Time");
+            for (var i = 0; i < Times.length; i++) {
+                Times[i].style.display = "none";
+            }
+
+            var dateBoxs = document.getElementsByClassName("dateBox");
+            for (var i = 0; i < dateBoxs.length; i++) {
+                dateBoxs[i].style.backgroundColor = "#ffffff";
+            }
+
+            document.getElementById("popMon").style.display = "block";
+            $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(1)
+            $scope.selectedDate = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(1) + "/1/"
+            document.getElementById("mon").style.backgroundColor = "#ff9900"
+        };
+
+
+        $scope.tuesBtn = function () {
+            var Times = document.getElementsByClassName("Time");
+            for (var i = 0; i < Times.length; i++) {
+                Times[i].style.display = "none";
+            }
+
+            var dateBoxs = document.getElementsByClassName("dateBox");
+            for (var i = 0; i < dateBoxs.length; i++) {
+                dateBoxs[i].style.backgroundColor = "#ffffff";
+            }
+
+            document.getElementById("popTues").style.display = "block";
+            $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(2)
+            $scope.selectedDate = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(2) + "/2/"
+            document.getElementById("tues").style.backgroundColor = "#ff9900"
+        };
+
+
+        $scope.wedBtn = function () {
+            var Times = document.getElementsByClassName("Time");
+            for (var i = 0; i < Times.length; i++) {
+                Times[i].style.display = "none";
+            }
+
+            var dateBoxs = document.getElementsByClassName("dateBox");
+            for (var i = 0; i < dateBoxs.length; i++) {
+                dateBoxs[i].style.backgroundColor = "#ffffff";
+            }
+
+            document.getElementById("popWed").style.display = "block";
+            $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(3)
+            $scope.selectedDate = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(3) + "/3/"
+            document.getElementById("wed").style.backgroundColor = "#ff9900"
+        };
+
+        $scope.thurBtn = function () {
+            var Times = document.getElementsByClassName("Time");
+            for (var i = 0; i < Times.length; i++) {
+                Times[i].style.display = "none";
+            }
+
+            var dateBoxs = document.getElementsByClassName("dateBox");
+            for (var i = 0; i < dateBoxs.length; i++) {
+                dateBoxs[i].style.backgroundColor = "#ffffff";
+            }
+
+            document.getElementById("popThur").style.display = "block";
+            $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(4)
+            $scope.selectedDate = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(4) + "/4/"
+            document.getElementById("thur").style.backgroundColor = "#ff9900"
+        };
+
+
+        $scope.friBtn = function () {
+            var Times = document.getElementsByClassName("Time");
+            for (var i = 0; i < Times.length; i++) {
+                Times[i].style.display = "none";
+            }
+
+            var dateBoxs = document.getElementsByClassName("dateBox");
+            for (var i = 0; i < dateBoxs.length; i++) {
+                dateBoxs[i].style.backgroundColor = "#ffffff";
+            }
+
+
+            document.getElementById("popFri").style.display = "block";
+            $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(5)
+            $scope.selectedDate = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(5) + "/5/"
+            document.getElementById("fri").style.backgroundColor = "#ff9900"
+        };
+    }
     ////////////////////////////////////
 
 }]);

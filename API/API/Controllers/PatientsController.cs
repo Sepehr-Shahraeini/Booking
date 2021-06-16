@@ -27,23 +27,21 @@ namespace API.Controllers
         [HttpGet("{Calendar}/{pyschoanalystId}")]
         public async Task<ActionResult<IEnumerable<Models.Calendar>>> GetCalendar(int pyschoanalystId)
         {
-            var result = _context.calendars.Where(q => q.PsychoanalystId  == pyschoanalystId).ToList();
+            var result = _context.calendars.Where(q => q.PsychoanalystId == pyschoanalystId).ToList();
             return Ok(result);
         }
 
-        // GET: api/Patients
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Patient>>> GetPatients()
+        [HttpGet("{Id}")]
+        public async Task<ActionResult<IEnumerable<Patient>>> GetPatients(int Id)
         {
-            // return await _context.psychoanalysts.ToListAsync();
-            var Calendars = await _context.calendars.Where(q => q.PsychoanalystId == 2).ToListAsync();
+            var Calendars = await _context.calendars.Where(q => q.PsychoanalystId == Id).ToListAsync();
             var Patients = await _context.patients.ToListAsync();
             var Psychonalyst = await _context.patients.ToListAsync();
 
             var query = from Calendar in Calendars
                         join Patient in Patients on Calendar.PatientId equals Patient.Id into JoinResaults
                         from JoinResult in JoinResaults.DefaultIfEmpty()
-                        select new { Calendar, PatientName = JoinResult?.Name ?? String.Empty, PatientLastName = JoinResult?.LastName ?? String.Empty };
+                        select new { Calendar, Name = JoinResult?.Name ?? String.Empty, LastName = JoinResult?.LastName ?? String.Empty, Mobile = JoinResult?.Mobile ?? String.Empty, Subject = JoinResult?.Subject ?? String.Empty, Reason = JoinResult?.Reason ?? String.Empty, Email = JoinResult?.Email ?? String.Empty, MaritalStatus = JoinResult?.MaritalStatus ?? String.Empty, Age = JoinResult?.Age ?? String.Empty, ChildrenNum = JoinResult?.ChildrenNum ?? String.Empty, Introduced = JoinResult?.Introduced ?? String.Empty, Education = JoinResult?.Education ?? String.Empty, Job = JoinResult?.Job ?? String.Empty, FieldOfStudy = JoinResult?.FieldOfStudy ?? String.Empty};
 
             return Ok(query);
         }

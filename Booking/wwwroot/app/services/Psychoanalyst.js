@@ -4,6 +4,7 @@ app.factory('Psychoanalyst', ['$http', '$q', 'localStorageService', 'ngAuthSetti
     var serviceBase = ngAuthSettings.apiServiceBaseUri;
     var authServiceFactory = {};
 
+    var drPhone = $rootScope.drPhone
 
 
 
@@ -45,10 +46,18 @@ app.factory('Psychoanalyst', ['$http', '$q', 'localStorageService', 'ngAuthSetti
         })
     }
 
+    var _GetPsychoanalystId = function (drPhone) {
+        return $http.get(serviceBase + 'api/Psychoanalysts/' + drPhone ).then(function (response) {
+            return response;
+            console.log(response)
+        })
+    }
+
 
     authServiceFactory.newPsychoanalyst = _newPsychoanalyst;
     authServiceFactory.newVisitingTime = _newVisitingTime;
     authServiceFactory.VisitingTimeByPhone = _VisitingTimeByPhone;
+    authServiceFactory.GetPsychoanalystId = _GetPsychoanalystId;
     authServiceFactory.newUser = _newUser;
     authServiceFactory.VisitingTime = _VisitingTime;
     authServiceFactory.IsAuthurized = function () {

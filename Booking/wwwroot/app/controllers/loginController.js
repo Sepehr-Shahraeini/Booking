@@ -1,4 +1,4 @@
-﻿app.controller('loginController', ['$scope', '$rootScope', '$location', 'authService', '$route', '$routeParams', 'localStorageService', '$http', function ($scope, $rootScope, $location, authService, $route, $routeParams, $http, localStorageService) {
+﻿app.controller('loginController', ['$scope', '$rootScope', '$location', 'authService', '$route', '$routeParams', 'localStorageService', '$http', 'Psychoanalyst', function ($scope, $rootScope, $location, authService, $route, $routeParams, $http, localStorageService, Psychoanalyst) {
 
 
     $scope.btn_save = function () {

@@ -29,8 +29,11 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     var _login = function (loginData) {
 
         var data = loginData
+
+        
         $rootScope.drPhone = loginData.UserName;
 
+        
         if (loginData.useRefreshTokens) {
             // data = data + "&client_id=" + ngAuthSettings.clientId;
         }
@@ -421,8 +424,8 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     };
 
 
-    var _getPatients = function () {
-        return $http.get(serviceBase + 'api/Patients/' + $rootScope.drPhone).then(function (response) {
+    var _getPatients = function (psychoanalystId) {
+        return $http.get(serviceBase + 'api/Patients/' + psychoanalystId).then(function (response) {
             return response;
         })
     };
@@ -541,8 +544,8 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         })
     };
 
-    var _VisitingTimeByDrPhone = function (weekday) {
-        return $http.get(serviceBase + 'api/VisitingTimes/' + $rootScope.drPhone + "/" + weekday).then(function (response) {
+    var _VisitingTimeByDrPhone = function (psychoanalystId ,weekday) {
+        return $http.get(serviceBase + 'api/VisitingTimes/' + psychoanalystId + "/" + weekday).then(function (response) {
             return response;
 
         })
@@ -560,11 +563,18 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         })
     }
 
+    var _GetPsychoanalystId = function (drPhone) {
+        return $http.get(serviceBase + 'api/Psycoanalysts/' + drPhone).then(function (response) {
+            return response;
+            console.log(response)
+        })
+    }
 
 
 
 
     authServiceFactory.newTime = _newTime;
+    authServiceFactory.GetPsychoanalystId = _GetPsychoanalystId;
     authServiceFactory.uploadPost = _uploadPost;
     authServiceFactory.getPost = _getPost;
     authServiceFactory.getPosts = _getPosts;

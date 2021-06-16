@@ -6,6 +6,14 @@
         $location.path('/patientRegister')
     };
 
+    $scope.backHome = function () {
+        $location.path('/blog')
+    };
+
+    $scope.btn_about = function () {
+        $location.path('/about')
+    };
+
     authService.getPosts().then(function (response) {
         $scope.posts = response.data
         $scope.posts.forEach(function (x) {

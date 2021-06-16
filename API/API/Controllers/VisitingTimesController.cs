@@ -22,7 +22,6 @@ namespace API.Controllers
             _context = context;
         }
 
-        // GET: api/VisitingTimes
         [HttpGet]
         public async Task<ActionResult<IEnumerable<VisitingTime>>> GetvisitingTimes()
         {
@@ -42,9 +41,6 @@ namespace API.Controllers
 
         }
 
-        // PUT: api/VisitingTimes/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutVisitingTime(int id, VisitingTime visitingTime)
         {
@@ -74,9 +70,6 @@ namespace API.Controllers
             return NoContent();
         }
 
-        // POST: api/VisitingTimes
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<VisitingTime>> PostVisitingTime(VisitingTime visitingTime)
         {

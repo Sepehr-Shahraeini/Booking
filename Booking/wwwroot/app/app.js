@@ -56,6 +56,12 @@ app.config(function ($routeProvider) {
     });
 
 
+    $routeProvider.when("/about", {
+        controller: "aboutController",
+         templateUrl: "/app/views/about.html"
+    });
+
+
     $routeProvider.otherwise({ redirectTo: "/blog" });
 
 });

@@ -1,4 +1,5 @@
-﻿<style>
+﻿﻿
+<style>
 
 
     @media (min-width:900px) {
@@ -27,7 +28,12 @@
             border: 1px solid black;
             display: inline-block;
             border-radius: 5px;
-            width: 40%
+            width: 40%;
+            margin: 5%
+        }
+
+        .topnav {
+            display: none
         }
     }
 
@@ -66,12 +72,12 @@
             margin: 2px 8px;
             position: center;
             color: black;
-            width: 45%
+            width: 44%
         }
 
         .dateBox {
             background-color: white;
-            width: 26%;
+            width: 25%;
             height: 10%;
             text-align: center;
             margin: 10px;
@@ -87,7 +93,7 @@
 <body>
 
     <div class="topnav">
-        <a href="#home" class="navbar">مرکز دکتر محمد رضا خدابخش</a>
+        <a ng-click="backHome()" class="navbar">مرکز دکتر محمد رضا خدابخش</a>
         <div id="menu">
             <a ng-click="btn_reserve()">رزرو وقت ویزیت</a>
             <a ng-click="btn_about()">درباره دکتر محمد رضا خدا بخش</a>
@@ -101,7 +107,7 @@
     <div id="choosePsychoanalyst" class="w3-modal" style="display:none">
         <div class="w3-modal-content w3-animate-zoom" style="width:45%;height:auto;border-radius:5px;background-color:#fff">
             <div class="field w3-modal-content w3-animate-zoom">
-                <button class="selectPsychoanalyst" ng-repeat="x in Psychoanalysts" ng-click="showPsychoanalysts(x.Name, x.LastName, x.WeekDays, x.PsychoanalystId)">{{x.Name}} {{x.LastName}}</button>
+                <button class="selectPsychoanalyst" ng-repeat="x in Psychoanalysts" ng-click="showPsychoanalysts(x.ID, x.Name, x.LastName, x.WeekDays)">{{x.Name}} {{x.LastName}} {{x.Id}}</button>
                 <div style="margin:0px auto 0px auto">
                     <button id="sun" class="dateBox" style="display:none" ng-click="sunBtn()">
                         <p>یکشنبه</p>

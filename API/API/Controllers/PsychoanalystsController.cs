@@ -21,13 +21,7 @@ namespace API.Controllers
             _context = context;
         }
 
-        // GET: api/Psychoanalysts
-        //[HttpGet("{Patients}")]
-        //public async Task<ActionResult<IEnumerable<Calendar>>> Getpsychoanalysts()
-        //{
-        //    return await _context.calendars.ToListAsync();
-           
-        //}
+       
 
         [HttpGet]
 
@@ -36,32 +30,15 @@ namespace API.Controllers
             return await _context.psychoanalysts.ToListAsync();
         }
 
-        //// GET: api/Psychoanalysts/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Psychoanalyst>> GetPsychoanalyst(int id)
-        //{
-        //    var psychoanalyst = await _context.psychoanalysts.FindAsync(id);
 
-        //    if (psychoanalyst == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpGet("{mobile}")]
+        public async Task<ActionResult<IEnumerable<Psychoanalyst>>> GetPatientByNum(string mobile)
+        {
+            var result = await _context.psychoanalysts.Where(x => x.Phone == mobile).ToListAsync();
+            return Ok(result);
 
-        //    return psychoanalyst;
-        //}
+        }
 
-        //[HttpGet("{mobile}")]
-        //public async Task<ActionResult<IEnumerable<Patient>>> GetPatientByNum(string mobile)
-        //{
-        //    var result = await _context.psychoanalysts.Where(x => x.Phone == mobile).ToListAsync();
-        //    return Ok(result);
-
-        //}
-
-
-        // PUT: api/Psychoanalysts/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPsychoanalyst(int id, Psychoanalyst psychoanalyst)
         {
