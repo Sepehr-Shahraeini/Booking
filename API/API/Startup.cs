@@ -32,8 +32,7 @@ namespace API
                 {
                     builder.WithOrigins("http://localhost:8080")
                     .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowAnyOrigin();
+                    .AllowAnyMethod();
                 });
             });
 

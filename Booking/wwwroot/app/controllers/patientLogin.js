@@ -53,7 +53,22 @@
                     $scope.selectedTime = starttime;
                     $scope.registeredDate = $scope.selectedDate + $scope.selectedTime
 
-                    console.log($scope.registeredDate)
+
+                    var dateBox = ["sun", "mon", "tues", "wed", "thur", "fri", "sat"];
+                    angular.forEach(dateBox, function (x) {
+                        document.getElementById(x).style.display = "none";
+                        document.getElementById(x).style.backgroundColor = "#ffffff";
+                     });
+
+                    var timesPopup = ["popSat", "popSun", "popMon", "popTues", "popWed", "popThur", "popFri"];
+                    angular.forEach(timesPopup, function (x) {
+                        document.getElementById(x).style.display = "none";
+                    });
+
+                    document.getElementById("choosePsychoanalyst").style.display = "none";
+               
+
+                    alert("شما به درگاه پرداخت هدایت شده اید")
 
 
                     var dto_calendar = {
@@ -98,7 +113,7 @@
 
                     if ($scope.time !== $scope.PatientsTime) {
                         if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(0) + "/0/" + $scope.time) == -1) {
-                            authService.getUnselectedTime(1, 0, $scope.time).then(function (response) {
+                            authService.getUnselectedTime(ID, 0, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.sunDay.length; i++) { }
                                 $scope.sunDay[i] = $scope.records
@@ -118,7 +133,7 @@
 
                     if ($scope.time !== $scope.PatientsTime) {
                         if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(1) + "/1/" + $scope.time) == -1) {
-                            authService.getUnselectedTime(1, 1, $scope.time).then(function (response) {
+                            authService.getUnselectedTime(ID, 1, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.monDay.length; i++) { }
                                 $scope.monDay[i] = $scope.records
@@ -136,7 +151,7 @@
 
                     if ($scope.time !== $scope.PatientsTime) {
                         if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(2) + "/2/" + $scope.time) == -1) {
-                            authService.getUnselectedTime(1, 2, $scope.time).then(function (response) {
+                            authService.getUnselectedTime(ID, 2, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.tuesDay.length; i++) { }
                                 $scope.tuesDay[i] = $scope.records
@@ -155,7 +170,7 @@
 
                     if ($scope.time !== $scope.PatientsTime) {
                         if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(3) + "/3/" + $scope.time) == -1) {
-                            authService.getUnselectedTime(1, 3, $scope.time).then(function (response) {
+                            authService.getUnselectedTime(ID, 3, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.wednesDay.length; i++) { }
                                 $scope.wednesDay[i] = $scope.records
@@ -174,7 +189,7 @@
 
                     if ($scope.time !== $scope.PatientsTime) {
                         if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(4) + "/4/" + $scope.time) == -1) {
-                            authService.getUnselectedTime(1, 4, $scope.time).then(function (response) {
+                            authService.getUnselectedTime(ID, 4, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.thursDay.length; i++) { }
                                 $scope.thursDay[i] = $scope.records
@@ -194,7 +209,7 @@
 
                     if ($scope.time !== $scope.PatientsTime) {
                         if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(5) + "/5/" + $scope.time) == -1) {
-                            authService.getUnselectedTime(1, 5, $scope.time).then(function (response) {
+                            authService.getUnselectedTime(ID, 5, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.friDay.length; i++) { }
                                 $scope.friDay[i] = $scope.records
@@ -214,7 +229,7 @@
 
                     if ($scope.time !== $scope.PatientsTime) {
                         if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(6) + "/6/" + $scope.time) == -1) {
-                            authService.getUnselectedTime(1, 6, $scope.time).then(function (response) {
+                            authService.getUnselectedTime(ID, 6, $scope.time).then(function (response) {
                                 $scope.records = response.data
                                 for (var i = 0; i < $scope.saturDay.length; i++) { }
                                 $scope.saturDay[i] = $scope.records
@@ -222,6 +237,8 @@
                         }
                     }
                 });
+
+               
             });
         });
 
@@ -350,10 +367,10 @@
                 dateBoxs[i].style.backgroundColor = "#ffffff";
             }
 
-            document.getElementById("popSat").style.display = "block";
+            document.getElementById("popSun").style.display = "block";
             $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(0)
             $scope.selectedDate = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(0) + "/0/"
-            document.getElementById("sat").style.backgroundColor = "#ff9900"
+            document.getElementById("sun").style.backgroundColor = "#ff9900"
         };
 
 
