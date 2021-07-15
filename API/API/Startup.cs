@@ -26,15 +26,9 @@ namespace API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(builder =>
-                {
-                    builder.WithOrigins("http://localhost:8080")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod();
-                });
-            });
+
+
+
 
             services.AddAuthentication(opt =>
                         {
@@ -49,18 +43,32 @@ namespace API
                        ValidateAudience = true,
                        ValidateLifetime = true,
                        ValidateIssuerSigningKey = true,
-                       ValidIssuer = "http://localhost:63136",
-                       ValidAudience = "http://localhost:63136",
+                       ValidIssuer = "http://localhost:8081",
+                       ValidAudience = "http://localhost:8081",
+                       //ValidIssuer = "http://localhost:63136",
+                       //ValidAudience = "http://localhost:63136",
                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
                    };
                });
 
 
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    //builder.WithOrigins("http://localhost:8080")
+                    builder.WithOrigins("http://localhost:8080")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
+
             services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
             services.AddDbContext<DatabaseContext>(options =>
                  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.Configure<FormOptions>(o => {
+            services.Configure<FormOptions>(o =>
+            {
                 o.ValueLengthLimit = int.MaxValue;
                 o.MultipartBodyLengthLimit = int.MaxValue;
                 o.MemoryBufferThreshold = int.MaxValue;
@@ -76,7 +84,9 @@ namespace API
 
             app.UseRouting();
 
+
             app.UseCors();
+
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions()
             {

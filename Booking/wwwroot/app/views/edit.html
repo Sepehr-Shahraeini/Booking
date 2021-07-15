@@ -1,0 +1,140 @@
+﻿
+<style>
+
+
+    @media (min-width:900px) {
+        .dateBox {
+            background-color: white;
+            width: 20%;
+            height: 10%;
+            text-align: center;
+            margin: 10px;
+            border-radius: 5px;
+            display: none;
+            border: 2px solid #d9d9d9;
+        }
+
+        .signedUp {
+            cursor: pointer;
+        }
+
+            .signedUp:hover {
+                color: lightgray
+            }
+
+        .selectPsychoanalyst {
+            background-color: white !important;
+            color: black !important;
+            border: 1px solid black;
+            display: inline-block;
+            border-radius: 5px;
+            width: 40%;
+            margin: 5%
+        }
+
+        .topnav {
+            display: none
+        }
+    }
+
+
+    @media only screen and (max-device-width: 900px) {
+        .dateBox {
+            background-color: white;
+            width: 40%;
+            height: 10%;
+            text-align: center;
+            margin: 10px;
+            border-radius: 5px;
+            display: none;
+            border: 2px solid #d9d9d9
+        }
+
+        .selectPsychoanalyst {
+            background-color: white !important;
+            color: black !important;
+            border: 1px solid black;
+            margin: 2% auto 2% auto !important;
+            display: inline-block;
+            border-radius: 5px;
+            width: 100%
+        }
+    }
+
+
+    @media only screen and (max-device-height :1400px) {
+        .button {
+            background-color: white;
+            height: 30px;
+            width: 100px;
+            border: 1px solid black;
+            border-radius: 5px;
+            margin: 2px 8px;
+            position: center;
+            color: black;
+            width: 44%
+        }
+
+        .dateBox {
+            background-color: white;
+            width: 25%;
+            height: 10%;
+            text-align: center;
+            margin: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            border: 2px solid #d9d9d9
+        }
+    }
+</style>
+
+<div class="field">
+
+    
+    <p class="inputTitle">نام</p>
+    <input ng-model="Name" class="input" />
+
+    <p class="inputTitle">نام خانوادگی</p>
+    <input ng-model="LastName" class="input" />
+
+    <p class="inputTitle">تلفن همراه</p>
+    <input ng-model="Mobile" class="input" />
+
+    <p class="inputTitle">ایمیل</p>
+    <input ng-model="Email" class="input" />
+
+    <p class="inputTitle">سن</p>
+    <input ng-model="Age" class="input" />
+
+    <p class="inputTitle">تعداد فرزند</p>
+    <input ng-model="ChildrenNum" class="input" />
+
+    <p class="inputTitle">شغل</p>
+    <input ng-model="Job" class="input" />
+
+    <p class="inputTitle">وضعیت تحصیلی</p>
+    <input ng-model="Education" class="input" />
+
+    <p class="inputTitle">رشته تحصیلی</p>
+    <input ng-model="FieldOfStudy" class="input" />
+
+    <p class="inputTitle">وضعیت ازدواج</p>
+    <input ng-model="MaritalStatus" class="input" />
+
+    <p class="inputTitle">موضوع</p>
+    <input ng-model="Subject" class="input" />
+
+    <p class="inputTitle">علت مراجعه</p>
+    <input ng-model="Reason" class="input" />
+
+    <p class="inputTitle">معرف</p>
+    <input ng-model="Introduced" class="input" />
+
+    <p class="inputTitle">رمز عبور</p>
+    <input ng-model="Password" class="input" />
+
+    <p class="inputTitle">تکرار رمز عبور</p>
+    <input ng-model="ConfirmPassword" class="input" />
+
+    <button ng-click="btn_showPsychoanalyst()" class="confirmBtn">تایید</button>
+</div>

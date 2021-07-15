@@ -31,8 +31,23 @@ namespace API.Controllers
             return Ok(result);
         }
 
+        //[HttpGet("{Id}")]
+        //public async Task<ActionResult<IEnumerable<Patient>>> GetPatients(int Id)
+        //{
+        //    var Calendars = await _context.calendars.Where(q => q.PsychoanalystId == Id).ToListAsync();
+        //    var Patients = await _context.patients.ToListAsync();
+        //    var Psychonalyst = await _context.patients.ToListAsync();
+
+        //    var query = from Calendar in Calendars
+        //                join Patient in Patients on Calendar.PatientId equals Patient.Id into JoinResaults
+        //                from JoinResult in JoinResaults.DefaultIfEmpty()
+        //                select new { Calendar, Name = JoinResult?.Name ?? String.Empty, LastName = JoinResult?.LastName ?? String.Empty, Mobile = JoinResult?.Mobile ?? String.Empty, Subject = JoinResult?.Subject ?? String.Empty, Reason = JoinResult?.Reason ?? String.Empty, Email = JoinResult?.Email ?? String.Empty, MaritalStatus = JoinResult?.MaritalStatus ?? String.Empty, Age = JoinResult?.Age ?? String.Empty, ChildrenNum = JoinResult?.ChildrenNum ?? String.Empty, Introduced = JoinResult?.Introduced ?? String.Empty, Education = JoinResult?.Education ?? String.Empty, Job = JoinResult?.Job ?? String.Empty, FieldOfStudy = JoinResult?.FieldOfStudy ?? String.Empty};
+
+        //    return Ok(query);
+        //}
+
         [HttpGet("{Id}")]
-        public async Task<ActionResult<IEnumerable<Patient>>> GetPatients(int Id)
+        public async Task<ActionResult<IEnumerable<Models.Calendar>>> GetPatients(int Id)
         {
             var Calendars = await _context.calendars.Where(q => q.PsychoanalystId == Id).ToListAsync();
             var Patients = await _context.patients.ToListAsync();
@@ -52,7 +67,7 @@ namespace API.Controllers
             _context.calendars.Add(calendar);
             await _context.SaveChangesAsync();
             CreatedAtAction("GetCalendar", new { id = calendar.Id }, calendar);
-            return Ok();
+            return Ok(calendar.Id);
         }
 
         [HttpPost("savePatient")]
@@ -99,6 +114,35 @@ namespace API.Controllers
             await _context.SaveChangesAsync();
 
             return patient;
+        }
+
+        [HttpPut("edit/{id}")]
+        public async Task<IActionResult> PutVisitingTime(int id, Patient patient)
+        {
+            if (id != patient.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(patient).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PatientExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
         private bool PatientExists(int id)

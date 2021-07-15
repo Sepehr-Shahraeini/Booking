@@ -61,6 +61,26 @@ app.config(function ($routeProvider) {
          templateUrl: "/app/views/about.html"
     });
 
+    $routeProvider.when("/contact", {
+        controller: "contactUsController",
+        templateUrl: "/app/views/contactUs.html"
+    });
+
+        $routeProvider.when("/factor", {
+        controller: "factorController",
+        templateUrl: "/app/views/factor.html"
+    });
+
+     $routeProvider.when("/rules", {
+        controller: "rulesController",
+        templateUrl: "/app/views/Rules.html"
+    });
+
+     $routeProvider.when("/edit", {
+        controller: "editController",
+        templateUrl: "/app/views/edit.html"
+    });
+
 
     $routeProvider.otherwise({ redirectTo: "/blog" });
 
@@ -69,7 +89,7 @@ app.config(function ($routeProvider) {
 
 
 
-var serviceBase = 'http://localhost:63136/';
+var serviceBase = 'http://localhost:8081/';
 
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,

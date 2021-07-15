@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.Context;
 using API.Models;
-
+using Microsoft.AspNetCore.Cors;
 
 namespace API.Controllers
 {
@@ -76,7 +76,7 @@ namespace API.Controllers
             _context.visitingTimes.Add(visitingTime);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVisitingTime", new { id = visitingTime.ID }, visitingTime);
+            return CreatedAtAction("GetvisitingTimes", new { id = visitingTime.ID }, visitingTime);
         }
 
         [HttpGet("{psychoanalustId}/{weekday}/{starttime}")]

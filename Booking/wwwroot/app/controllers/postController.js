@@ -9,6 +9,5 @@
         }
     }
 
-    console.log($rootScope.post)
-
+    
 }]);

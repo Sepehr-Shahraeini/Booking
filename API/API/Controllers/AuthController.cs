@@ -164,7 +164,7 @@ namespace API.Controllers
             _context.users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.ID }, user);
+            return CreatedAtAction("GetUsers", new { id = user.ID }, user);
         }
 
         [HttpDelete("{id}")]

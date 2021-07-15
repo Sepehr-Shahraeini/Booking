@@ -5,7 +5,7 @@
     $scope.uploadFile = function () {
 
         var file = $scope.myFile;
-        var uploadUrl = "http://localhost:63136/api/Post/";
+        var uploadUrl = $rootScope.serviceUrl + "api/Post/";
         uploadFileToUrl(file, uploadUrl);
 
         function uploadFileToUrl(file, uploadUrl) {
@@ -24,7 +24,7 @@
                     DatePublish: null,
                     AuthorId: 2,
                     CategoryId: 1,
-                    Image: serviceBase + response.data.dbPath
+                    Image: $rootScope.serviceUrl + response.data.dbPath
                 }
 
                 authService.uploadPost(dto).then(function (response) {

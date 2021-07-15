@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.Context;
 using API.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace API.Controllers
 {
@@ -21,10 +22,9 @@ namespace API.Controllers
             _context = context;
         }
 
-       
+
 
         [HttpGet]
-
         public async Task<ActionResult<IEnumerable<Psychoanalyst>>> Getpsychoanalysts()
         {
             return await _context.psychoanalysts.ToListAsync();
@@ -35,6 +35,15 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<Psychoanalyst>>> GetPatientByNum(string mobile)
         {
             var result = await _context.psychoanalysts.Where(x => x.Phone == mobile).ToListAsync();
+            return Ok(result);
+
+        }
+
+
+        [HttpGet("id/{id}")]
+        public async Task<ActionResult<IEnumerable<Psychoanalyst>>> GetPatientById(int id)
+        {
+            var result = await _context.psychoanalysts.Where(x => x.ID == id).ToListAsync();
             return Ok(result);
 
         }
@@ -68,19 +77,18 @@ namespace API.Controllers
             return NoContent();
         }
 
-        // POST: api/Psychoanalysts
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+     
         [HttpPost]
-        public async Task<ActionResult<Psychoanalyst>> PostPsychoanalyst(Psychoanalyst psychoanalyst)
+        public async Task<ActionResult<IEnumerable<Psychoanalyst>>> SavePsychoanalyst(Psychoanalyst psychoanalyst)
         {
             _context.psychoanalysts.Add(psychoanalyst);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPsychoanalyst", new { id = psychoanalyst.ID }, psychoanalyst);
+            CreatedAtAction("GetPsychoanalysts", new { id = psychoanalyst.ID }, psychoanalyst);
+            return Ok();
         }
 
-        // DELETE: api/Psychoanalysts/5
+        
+      
         [HttpDelete("{id}")]
         public async Task<ActionResult<Psychoanalyst>> DeletePsychoanalyst(int id)
         {

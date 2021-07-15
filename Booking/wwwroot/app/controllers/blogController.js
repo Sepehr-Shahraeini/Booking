@@ -18,8 +18,9 @@
         $scope.posts = response.data
         $scope.posts.forEach(function (x) {
             $scope.Image = x.Image
-            $rootScope.uploadPath = "http://localhost:63136/"
-            $scope.imagePath = $rootScope.uploadPath + $scope.Image;   
+          //  $rootScope.uploadPath = "http://localhost:8081/"
+        //    $scope.imagePath = $rootScope.serviceUrl + $scope.Image;
+        //    console.log($scope.imagePath)
         });
 
         $scope.navPost = function (title) {

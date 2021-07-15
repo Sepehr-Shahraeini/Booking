@@ -551,6 +551,13 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         })
     }
 
+    var _PsychoanalystById = function (psychoanalystId) {
+        return $http.get(serviceBase + 'api/Psychoanalysts/id/' + psychoanalystId ).then(function (response) {
+            return response;
+
+        })
+    }
+
     var _uploadImage = function (fd) {
         return $http.post(serviceBase + 'api/Post/upload', fd, { transformRequest: angular.identity, headers: { 'Content-Type': undefined } }).then(function (response) {
             return response
@@ -562,11 +569,15 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
             return response
         })
     }
+     var _editPatientData = function (id, data) {
+        return $http.put(serviceBase + 'api/Patients/edit/' + id, data).then(function (response) {
+            return response
+        })
+    }
 
-    var _GetPsychoanalystId = function (drPhone) {
-        return $http.get(serviceBase + 'api/Psycoanalysts/' + drPhone).then(function (response) {
+    var _newVisitingTime = function (newVisitingTime) {
+        $http.post(serviceBase + 'api/VisitingTimes', newVisitingTime).then(function (response) {
             return response;
-            console.log(response)
         })
     }
 
@@ -574,7 +585,9 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
 
     authServiceFactory.newTime = _newTime;
-    authServiceFactory.GetPsychoanalystId = _GetPsychoanalystId;
+    authServiceFactory.newVisitingTime = _newVisitingTime;
+    authServiceFactory.editPatientData = _editPatientData;
+    authServiceFactory.PsychoanalystById = _PsychoanalystById;
     authServiceFactory.uploadPost = _uploadPost;
     authServiceFactory.getPost = _getPost;
     authServiceFactory.getPosts = _getPosts;
