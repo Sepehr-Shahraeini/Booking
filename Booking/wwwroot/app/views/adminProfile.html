@@ -1,0 +1,495 @@
+﻿<style>
+    body {
+        background-color: #f5f5f5
+    }
+
+
+    @media (min-width:900px) {
+
+        body {
+            max-width: 1220px;
+            margin: 0 auto
+        }
+
+
+        .navButton {
+            cursor: pointer;
+            border: 1px solid black;
+            color: black;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+            .navButton:hover {
+                color: lightgray
+            }
+
+
+        .topnav {
+            display: none
+        }
+
+
+
+        .doctorsCard {
+            padding: 3%;
+            margin: 0 auto 0 auto;
+            width: 70%;
+        }
+
+        .w3-modal-content {
+            background-color: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            width: 30% !important;
+        }
+
+        .w3-modal {
+            z-index: 3;
+            display: none;
+            padding-top: 100px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4)
+        }
+
+
+        .input {
+            width: 100%;
+            margin: 0 auto 0 auto;
+            background-color: #f5f5f5;
+            border: 1px solid #d6d6d6;
+            border-radius: 5px
+        }
+
+
+        .btn_savePsychoanalyst {
+            display: block;
+            width: 80%;
+            background-color: black;
+            color: white;
+            margin: 4% auto 10% auto;
+            border-radius: 5px;
+            text-align: center;
+            padding: 2%
+        }
+
+        .bigNav {
+            max-width: 884px;
+            margin: 10px auto 20px auto
+        }
+
+        .infoPopup {
+            background-color: white;
+            width: 30%;
+            border-radius: 8px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #d6d6d6
+        }
+
+        .form {
+            width: 80% !important;
+            margin: 0 auto 0 auto;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .fieldInfo {
+            background-color: #f5f5f5;
+            margin: 0 auto;
+            border-radius: 10px;
+        }
+
+        .timesBox {
+            background-color: #699CFC;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            margin: 0 5px 0 5px
+        }
+
+        .inputTitle {
+            display: inline-block
+        }
+
+        .monthBox {
+            text-align: center;
+            border-radius: 8px;
+            max-width: 900px;
+            margin: 5% auto;
+        }
+
+        .daysBox {
+            text-align: center;
+            border-radius: 8px;
+            max-width: 900px;
+            margin: 5% auto;
+        }
+
+        #btn_close {
+            background-color: #ff2b2b;
+            text-align: center;
+            color: white;
+            padding: 10px;
+            border-radius: 30px
+        }
+
+        #btn_spinner {
+            display: none;
+            background-color: #699CFC;
+            text-align: center;
+            color: white;
+            padding: 10px;
+            border-radius: 30px
+        }
+
+        #btn_check {
+            display: none;
+            background-color: #95ff6b;
+            text-align: center;
+            padding: 10px;
+            border-radius: 30px;
+            color: white
+        }
+
+        #btn_err {
+            display: none;
+            background-color: #ff2b2b;
+            text-align: center;
+            padding: 10px;
+            border-radius: 30px;
+            color: white
+        }
+
+        #btn_saveTime {
+            background-color: #699CFC;
+            text-align: center;
+            color: white;
+            padding: 10px;
+            border-radius: 30px
+        }
+        .fnButtons{
+            padding:10px;
+        }
+    }
+
+
+
+    @media only screen and (max-device-width: 900px) {
+        .w3-modal-content {
+            width: 95% !important;
+            height: 60% !important;
+            background-color: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            padding: 6% 2% 7% 2%;
+            text-align: center;
+            margin: 0 !important
+        }
+
+        .w3-modal {
+            z-index: 3;
+            display: none;
+            padding-top: 10%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4)
+        }
+
+        .input {
+            width: 100%;
+            margin: 0 auto 0 auto;
+            background-color: white;
+            border: 1px solid #d6d6d6;
+            border-radius: 5px
+        }
+
+        .btn_savePsychoanalyst {
+            display: block;
+            width: 80%;
+            background-color: black;
+            color: white;
+            margin: 4% auto 10% auto;
+            border-radius: 5px;
+            text-align: center;
+            padding: 2%
+        }
+
+        .monthBox {
+            text-align: center;
+            border-radius: 8px;
+            max-width: 900px;
+            margin: 8% auto;
+        }
+
+        .daysBox {
+            text-align: center;
+            border-radius: 8px;
+            max-width: 500px;
+            margin: 8% auto;
+        }
+
+
+        .fieldInfo {
+            background-color: #f5f5f5;
+            margin: 2%;
+            border-radius: 10px;
+        }
+
+        #btn_close {
+            background-color: #ff2b2b;
+            text-align: center;
+            color: white;
+            padding: 10px;
+            border-radius: 30px
+        }
+
+        #btn_spinner {
+            display: none;
+            background-color: #699CFC;
+            text-align: center;
+            color: white;
+            padding: 10px;
+            border-radius: 30px
+        }
+
+        #btn_check {
+            display: none;
+            background-color: #95ff6b;
+            text-align: center;
+            padding: 10px;
+            border-radius: 30px;
+            color: white
+        }
+
+        #btn_err {
+            display: none;
+            background-color: #ff2b2b;
+            text-align: center;
+            padding: 10px;
+            border-radius: 30px;
+            color: white
+        }
+
+        #btn_saveTime {
+            background-color: #699CFC;
+            text-align: center;
+            color: white;
+            padding: 10px;
+            border-radius: 30px;
+        }
+
+        .timeinput{
+            width:300px;
+        }
+
+        .fnButtons {
+            padding: 10px 5px 0 16px;
+        }
+
+        .timesBox {
+            background-color: #699CFC;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            margin: 0 5px 0 5px
+        }
+    }
+</style>
+
+
+
+<div class="topnav">
+    <a ng-click="backHome()" class="navbar">مرکز دکتر محمد رضا خدابخش</a>
+    <div id="menu">
+        <a ng-click="newDoctor()">دکتر جدید</a>
+    </div>
+    <a ng-click="openMenu()" class="icon">
+        <i class="fa fa-bars"></i>
+    </a>
+</div>
+
+
+<div style="overflow-x:auto;" class="bigNav">
+    <div ng-click="newDoctor()" class="col-lg-4 col-md-4 " style="padding:5px">
+        <div class="navButton">دکتر جدید</div>
+    </div>
+    <div ng-click="newDoctor()" class="col-lg-4 col-md-4 " style="padding:5px">
+        <div class="navButton">ویرایش اطلاعات</div>
+    </div>
+    <div ng-click="timeRegister()" class="col-lg-4 col-md-4 " style="padding:5px">
+        <div class="navButton">ویرایش زمان ها</div>
+    </div>
+    <br />
+    <div style="border-bottom: 1px solid lightgray;margin-top:15px"></div>
+</div>
+
+
+<div style="overflow-x:auto;">
+    <table>
+        <thead>
+            <tr>
+                <th>موضوع</th>
+                <th>نام</th>
+                <th>نام خانوادگی</th>
+                <th>تلفن همراه</th>
+                <th>تاریخ</th>
+                <th>زمان</th>
+                <th>دلیل مراجعه</th>
+                <th>وضعیت ازدواج</th>
+                <th>سن</th>
+                <th>تعداد فرزند</th>
+                <th>معرف</th>
+                <th>تحصیلات</th>
+                <th>رشته تحصیلی</th>
+                <th>شغل</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in PatientsData track by $index">
+                <td>{{x.Subject}}</td>
+                <td>{{x.Name}}</td>
+                <td>{{x.LastName}}</td>
+                <td>{{x.PatientMobile}}</td>
+                <td>{{x.PDate}}</td>
+                <td>{{x.Start}} - {{x.End}}</td>
+                <td>{{x.Reason}}</td>
+                <td>{{x.MaritalStatus}}</td>
+                <td>{{x.Age}}</td>
+                <td>{{x.ChildrenNum}}</td>
+                <td>{{x.Introduced}}</td>
+                <td>{{x.Education}}</td>
+                <td>{{x.FieldOfStudy}}</td>
+                <td>{{x.Job}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div id="infoPopup" class="w3-modal" style="display:none">
+    <div class="w3-modal-content w3-animate-zoom">
+        <a onclick="document.getElementById('infoPopup').style.display = 'none'" style="display:block;margin:7px 17px 0 0">x</a>
+        <div class="form">
+            <p class="inputTitle">نام</p><p id="name" style="color:red;margin:0; display:none">*</p>
+            <input ng-model="Name" name="Name" class="input" required />
+
+            <p class="inputTitle">نام خانوادگی</p><p id="lastname" style="color:red;margin:0; display:none">*</p>
+            <input ng-model="LastName" class="input" />
+
+            <p class="inputTitle">تلفن همراه</p><p id="mobile" style="color:red;margin:0; display:none">*</p><p id="checkMobile" style="color:red;margin:0; display:none">لطفا تلفن موبایل صحیح را وارد کنید</p>
+            <input ng-model="Mobile" class="input" />
+
+            <p class="inputTitle">جنسیت</p><p id="mobile" style="color:red;margin:0; display:none">*</p><p id="checkMobile" style="color:red;margin:0; display:none">لطفا تلفن موبایل صحیح را وارد کنید</p>
+            <select ng-model="Sex" style="height:30px" ng-options="x for x in sex" class="input"></select>
+        </div>
+        <div ng-click="btn_savePsychoanalyst()" class="btn_savePsychoanalyst">تایید</div>
+    </div>
+</div>
+
+
+<div id="timeRegister" class="w3-modal" style="display:none">
+    <div class="w3-animate-zoom" style="max-width: 900px;margin:auto">
+        <div class="fieldInfo ">
+            <p id="err" style="display:none;color:red">لطفا همه فیلد ها را پر کنید</p>
+
+            <div style="display:inline-block">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6" style="padding:10px">
+                    <div class="timeinput">
+                        <p class="inputTitle">ساعت شروع</p>
+                        <input ng-model="StartTime_minute" class="input" style="width: 15% !important; display: inline-block" required />
+                        <p style="display: inline-block; font-size:x-large">:</p>
+                        <input ng-model="StartTime_hour" class="input" style="width: 15% !important; display: inline-block" required />
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6" style="padding:10px">
+                    <div class="timeinput">
+                        <p class="inputTitle">ساعت پایان</p>
+                        <input ng-model="EndTime_minute" class="input" style="width: 15% !important; display: inline-block" required />
+                        <p style="display: inline-block; font-size:x-large">:</p>
+                        <input ng-model="EndTime_hour" class="input" style="width: 15% !important; display: inline-block" required />
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 fnButtons" >
+                    <div ng-click="btn_saveTime()" id="btn_saveTime">ذخیره</div>
+                    <div id="btn_spinner"><img style="width:30px" src="img/loading.gif" /></div>
+                    <span id="btn_check"><i class="fas fa-check"></i></span>
+                    <span id="btn_err"><i class="fas fa-times"></i></span>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 fnButtons" >
+                    <div ng-click="btn_close()" id="btn_close">بازگشت</div>
+                </div>
+            </div>
+            <div style="display:inline-block;width:100%">
+                <div ng-repeat="x in availabeTimes" ng-click="selectTime(x.Id, x.StartTime, x.EndTime, x.DateId, x.PsychoanalystId, x.DateConfirmed, x.PatientId)">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                        <div class="timesBox">
+                            <p>{{x.EndTime}} - {{x.StartTime}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="monthsBox" class="w3-modal" style="display:none">
+    <div class="w3-animate-zoom" style="max-width: 900px;margin:auto">
+        <div class="fieldInfo">
+            <div class="monthBox" style="display:inline-block;width:100%">
+                <div style="text-align:right;padding-right:5px" ng-click="monthsBoxBack()"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+                <div ng-repeat="x in AvailabeMonth">
+                    <div class="col-lg-1 col-md-1 col-sm-3 col-xs-3" style="padding:5px" ng-click="getDays(x.Pyear, x.PMonth)">
+                        <div class="days" style="background-color: #65db60 ;border-radius: 7px;text-align:center">
+                            <p class="monthParag">{{x.PMonthName}}</p>
+                            <p class="monthParag">{{x.Pyear}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="daysBox" class="w3-modal" style="display:none">
+    <div class="w3-animate-zoom" style="max-width: 900px;margin:auto">
+        <div class="fieldInfo">
+            <div class="daysBox" style="display:inline-block;width:100%">
+                <div style="text-align:right;padding-right:5px" ng-click="daysBoxBack()"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+                <div ng-repeat="x in AvailabeDays">
+                    <div class="col-lg-1 col-md-1  col-sm-2 col-xs-2" style="padding:5px" ng-click="registerTime(x.Id)">
+                        <div class="days" style="background-color: #65db60; color: #095407;border-radius: 7px;text-align:center">
+                            <p class="monthParag"> {{x.PDayName}}</p>
+                            <p class="monthParag"> {{x.PDate % 100}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

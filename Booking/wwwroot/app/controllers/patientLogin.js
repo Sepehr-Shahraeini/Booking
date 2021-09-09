@@ -1,5 +1,60 @@
 ﻿app.controller('patientLoginController', ['$scope', '$rootScope', '$location', 'authService', '$route', '$routeParams', 'localStorageService', '$http', function ($scope, $rootScope, $location, authService, $route, $routeParams, $http, localStorageService) {
 
+    function convertDate(x) {
+        var day = { 'day': '2-digit' };
+        var month = { 'month': 'long' };
+        var monthNum = { 'month': '2-digit' };
+        var year = { 'year': 'numeric' };
+
+        var result = x.toLocaleString('en-US', year) + '-' + x.toLocaleString('en-US', monthNum) + '-' + x.toLocaleString('en-US', day);
+        return result;
+    }
+
+
+    $scope.yFromDate = new Date();
+    $scope.yToDate = $scope.yFromDate.addDays(365);
+
+    $scope.yFrom = convertDate($scope.yFromDate);
+    $scope.yTo = convertDate($scope.yToDate);
+
+
+    $scope.btn_save = function () {
+
+        var dto = {
+            UserName: $scope.UserName,
+            Password: $scope.Password
+        }
+
+        authService.patientLogin(dto).then(function (response) {
+
+            $location.path("/doctors")
+
+            var data = response.data.patientData;
+            angular.forEach(data, function (x) {
+                $rootScope.PatientId = x.Id;
+                $rootScope.Name = x.Name;
+                $rootScope.LastName = x.LastName;
+                $rootScope.Mobile = x.Mobile;
+                $rootScope.Subject = x.Subject;
+                $rootScope.Reason = x.Reason;
+                $rootScope.Email = x.Email;
+                $rootScope.MaritalStatus = x.MaritalStatus;
+                $rootScope.Age = x.Age;
+                $rootScope.ChildrenNum = x.ChildrenNum;
+                $rootScope.Introduced = x.Introduced;
+                $rootScope.Education = x.Education;
+                $rootScope.Job = x.Job;
+                $rootScope.FieldOfStudy = x.FieldOfStudy;
+                $rootScope.Amount = "170000";
+                $rootScope.TrackingNO = 230;
+            })
+
+
+
+        })
+    }
+
+
     $scope.openMenu = function () {
         var x = document.getElementById("menu");
         if (x.style.display === "block") {
@@ -21,558 +76,12 @@
         $location.path('/about')
     };
 
+    $scope.btn_login = function () {
+        $location.path('/login')
+    };
 
-    $scope.btn_save = function () {
 
-        var dto = {
-            UserName: $scope.UserName,
-            Password: $scope.Password
-        }
 
-        authService.patientLogin(dto).then(function (response) {
 
 
-            document.getElementById("choosePsychoanalyst").style.display = "block";
-
-
-
-            var data = response.data.patientData;
-            angular.forEach(data, function (x) {
-                $scope.dto_Patient = {
-                    Name: x.Name,
-                    LastName: x.LastName,
-                    Mobile: x.Mobile,
-                    Subject: x.Subject,
-                    Reason: x.Reason,
-                    Email: x.Email,
-                    MaritalStatus: x.MaritalStatus,
-                    Age: x.Age,
-                    ChildrenNum: x.ChildrenNum,
-                    Introduced: x.Introduced,
-                    Education: x.Education,
-                    Job: x.Job,
-                    FieldOfStudy: x.FieldOfStudy,
-                }
-
-                $rootScope.Id = x.Id
-                $rootScope.Name = x.Name
-                $rootScope.LastName = x.LastName
-                $rootScope.Mobile = x.Mobile,
-                    $rootScope.Subject = x.Subject,
-                    $rootScope.Reason = x.Reason,
-                    $rootScope.Email = x.Email,
-                    $rootScope.MaritalStatus = x.MaritalStatus,
-                    $rootScope.Age = x.Age,
-                    $rootScope.ChildrenNum = x.ChildrenNum,
-                    $rootScope.Introduced = x.Introduced,
-                    $rootScope.Education = x.Education,
-                    $rootScope.Job = x.Job,
-                    $rootScope.FieldOfStudy = x.FieldOfStudy,
-                    $rootScope.Amount = "170000"
-                $rootScope.TrackingNO = 230
-
-            })
-
-
-
-            $scope.UserName = null
-            $scope.Password = null
-
-
-            $scope.timeRegistration = function (starttime, endtime) {
-                $scope.registeredTime = starttime + "-" + endtime;
-                $scope.selectedTime = starttime;
-                $scope.registeredDate = $scope.selectedDate + $scope.selectedTime
-
-
-                var dateBox = ["sun", "mon", "tues", "wed", "thur", "fri", "sat"];
-                angular.forEach(dateBox, function (x) {
-                    document.getElementById(x).style.display = "none";
-                    document.getElementById(x).style.backgroundColor = "#ffffff";
-                });
-
-                var timesPopup = ["popSat", "popSun", "popMon", "popTues", "popWed", "popThur", "popFri"];
-                angular.forEach(timesPopup, function (x) {
-                    document.getElementById(x).style.display = "none";
-                });
-
-                document.getElementById("choosePsychoanalyst").style.display = "none";
-
-
-                $location.path("/factor")
-
-
-                //var dto_calendar = {
-                //    Amount: "20000",
-                //    TrackingNO: 223,
-                //    IsEmergency: true,
-                //    PatientId: $rootScope.Id,
-                //    PsychoanalystId: $scope.psychoanalystId,
-                //    DatePersian: $scope.registeredDate,
-                //    DateAmount: $scope.registeredDate,
-                //    time: $scope.registeredTime
-                //}
-
-                $rootScope.PsychoanalystId = $scope.psychoanalystId
-                $rootScope.DatePersian = $scope.registeredDate
-                $rootScope.DateAmount = $scope.registeredDate
-                $rootScope.Amount = "170000"
-                $rootScope.TrackingNO = 223
-                $rootScope.Time = $scope.registeredTime
-                
-                //authService.saveCalendar(dto_calendar).then(function (response) {
-
-                //})
-
-            }
-
-        })
-    }
-
-
-    function getWeekdays(ID, weekdays) {
-        authService.getExistTime(ID).then(function (response) {
-            $scope.Patients = response.data;
-            $scope.Patients.forEach(function (x) {
-                $scope.PatientsTime = x.Time
-            })
-        })
-
-        authService.getExistTime(ID).then(function (response) {
-            $scope.Patient = JSON.stringify(response)
-
-            authService.getVisitingTime(ID, 0).then(function (response) {
-                var data = response.data;
-                $scope.sunDay = [];
-                $scope.selectedSunDay = [];
-                data.forEach(function (y) {
-                    $scope.time = y.StartTime
-
-                    if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(0) + "/0/" + $scope.time) > -1) {
-                        authService.getUnselectedTime(ID, 0, $scope.time).then(function (response) {
-                            $scope.selectedrecords = response.data
-                            console.log($scope.selectedrecords)
-                            for (var i = 0; i < $scope.selectedSunDay.length; i++) { }
-                            $scope.selectedSunDay[i] = $scope.selectedrecords
-                        });
-                    }
-
-                    if ($scope.time !== $scope.PatientsTime) {
-                        if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(0) + "/0/" + $scope.time) == -1) {
-                            authService.getUnselectedTime(ID, 0, $scope.time).then(function (response) {
-                                $scope.records = response.data
-                                for (var i = 0; i < $scope.sunDay.length; i++) { }
-                                $scope.sunDay[i] = $scope.records
-                            });
-                        }
-                    }
-                });
-
-
-            });
-
-            authService.getVisitingTime(ID, 1).then(function (response) {
-                var data = response.data;
-                $scope.monDay = [];
-                $scope.selectedMonDay = [];
-                data.forEach(function (y) {
-                    $scope.time = y.StartTime
-
-                    if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(1) + "/1/" + $scope.time) > -1) {
-                        authService.getUnselectedTime(ID, 1, $scope.time).then(function (response) {
-                            $scope.selectedrecords = response.data
-                            for (var i = 0; i < $scope.selectedMonDay.length; i++) { }
-                            $scope.selectedMonDay[i] = $scope.selectedrecords
-                        });
-                    }
-
-                    if ($scope.time !== $scope.PatientsTime) {
-                        if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(1) + "/1/" + $scope.time) == -1) {
-                            authService.getUnselectedTime(ID, 1, $scope.time).then(function (response) {
-                                $scope.records = response.data
-                                for (var i = 0; i < $scope.monDay.length; i++) { }
-                                $scope.monDay[i] = $scope.records
-                            });
-                        }
-                    }
-
-
-
-
-
-                });
-            });
-
-            authService.getVisitingTime(ID, 2).then(function (response) {
-                var data = response.data;
-                $scope.tuesDay = [];
-                selectedTuesDay = []
-                data.forEach(function (y) {
-                    $scope.time = y.StartTime
-
-                    if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(2) + "/2/" + $scope.time) > -1) {
-                        authService.getUnselectedTime(ID, 2, $scope.time).then(function (response) {
-                            $scope.selectedrecords = response.data
-                            console.log($scope.selectedrecords)
-                            for (var i = 0; i < $scope.selectedTuesDay.length; i++) { }
-                            $scope.selectedTuesDay[i] = $scope.selectedrecords
-                        });
-                    }
-
-                    if ($scope.time !== $scope.PatientsTime) {
-                        if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(2) + "/2/" + $scope.time) == -1) {
-                            authService.getUnselectedTime(ID, 2, $scope.time).then(function (response) {
-                                $scope.records = response.data
-                                for (var i = 0; i < $scope.tuesDay.length; i++) { }
-                                $scope.tuesDay[i] = $scope.records
-                            });
-                        }
-                    }
-                });
-
-            });
-
-            authService.getVisitingTime(ID, 3).then(function (response) {
-                var data = response.data;
-                $scope.wednesDay = [];
-                $scope.selectedWednesDay = []
-                data.forEach(function (y) {
-                    $scope.time = y.StartTime
-
-                    if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(3) + "/3/" + $scope.time) > -1) {
-                        authService.getUnselectedTime(ID, 3, $scope.time).then(function (response) {
-                            $scope.selectedrecords = response.data
-                            console.log($scope.selectedrecords)
-                            for (var i = 0; i < $scope.selectedWednesDay.length; i++) { }
-                            $scope.selectedWednesDay[i] = $scope.selectedrecords
-                        });
-                    }
-
-                    if ($scope.time !== $scope.PatientsTime) {
-                        if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(3) + "/3/" + $scope.time) == -1) {
-                            authService.getUnselectedTime(ID, 3, $scope.time).then(function (response) {
-                                $scope.records = response.data
-                                for (var i = 0; i < $scope.wednesDay.length; i++) { }
-                                $scope.wednesDay[i] = $scope.records
-                            });
-                        }
-                    }
-                });
-
-            });
-
-            authService.getVisitingTime(ID, 4).then(function (response) {
-                var data = response.data;
-                $scope.thursDay = [];
-                $scope.selectedThursDay = [];
-                data.forEach(function (y) {
-                    $scope.time = y.StartTime
-
-                    if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(4) + "/4/" + $scope.time) > -1) {
-                        authService.getUnselectedTime(ID, 4, $scope.time).then(function (response) {
-                            $scope.selectedrecords = response.data
-                            console.log($scope.selectedrecords)
-                            for (var i = 0; i < $scope.selectedThursDay.length; i++) { }
-                            $scope.selectedThursDay[i] = $scope.selectedrecords
-                        });
-                    }
-
-                    if ($scope.time !== $scope.PatientsTime) {
-                        if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(4) + "/4/" + $scope.time) == -1) {
-                            authService.getUnselectedTime(ID, 4, $scope.time).then(function (response) {
-                                $scope.records = response.data
-                                for (var i = 0; i < $scope.thursDay.length; i++) { }
-                                $scope.thursDay[i] = $scope.records
-                            });
-                        }
-                    }
-                });
-
-
-            });
-
-            authService.getVisitingTime(ID, 5).then(function (response) {
-                var data = response.data;
-                $scope.friDay = [];
-                $scope.selectedFriDay = []
-                data.forEach(function (y) {
-                    $scope.time = y.StartTime
-
-                    if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(5) + "/5/" + $scope.time) > -1) {
-                        authService.getUnselectedTime(ID, 5, $scope.time).then(function (response) {
-                            $scope.selectedrecords = response.data
-                            console.log($scope.selectedrecords)
-                            for (var i = 0; i < $scope.selectedFriDay.length; i++) { }
-                            $scope.selectedFriDay[i] = $scope.selectedrecords
-                        });
-                    }
-
-                    if ($scope.time !== $scope.PatientsTime) {
-                        if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(5) + "/5/" + $scope.time) == -1) {
-                            authService.getUnselectedTime(ID, 5, $scope.time).then(function (response) {
-                                $scope.records = response.data
-                                for (var i = 0; i < $scope.friDay.length; i++) { }
-                                $scope.friDay[i] = $scope.records
-                            });
-                        }
-                    }
-                });
-
-
-            });
-
-            authService.getVisitingTime(ID, 6).then(function (response) {
-                var data = response.data;
-                $scope.saturDay = [];
-                $scope.selectedSaturDay = [];
-
-                data.forEach(function (y) {
-                    $scope.time = y.StartTime
-
-                    if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(6) + "/6/" + $scope.time) > -1) {
-                        authService.getUnselectedTime(ID, 6, $scope.time).then(function (response) {
-                            $scope.selectedrecords = response.data
-                            console.log($scope.selectedrecords)
-                            for (var i = 0; i < $scope.selectedSaturDay.length; i++) { }
-                            $scope.selectedSaturDay[i] = $scope.selectedrecords
-                        });
-                    }
-
-                    if ($scope.time !== $scope.PatientsTime) {
-                        if ($scope.Patient.indexOf($scope.Year + "/" + $scope.MonthNum + "/" + calDate(6) + "/6/" + $scope.time) == -1) {
-                            authService.getUnselectedTime(ID, 6, $scope.time).then(function (response) {
-                                $scope.records = response.data
-                                for (var i = 0; i < $scope.saturDay.length; i++) { }
-                                $scope.saturDay[i] = $scope.records
-                            });
-                        }
-                    }
-                });
-
-
-            });
-        });
-
-        $scope.weekDay = weekdays;
-
-        if ($scope.weekDay[6] == "1") {
-            document.getElementById("sat").style.display = "inline-block";
-        }
-
-        if ($scope.weekDay[0] == "1") {
-            document.getElementById("sun").style.display = "inline-block";
-        }
-
-        if ($scope.weekDay[1] == "1") {
-            document.getElementById("mon").style.display = "inline-block";
-        }
-
-        if ($scope.weekDay[2] == "1") {
-            document.getElementById("tues").style.display = "inline-block";
-        }
-
-        if ($scope.weekDay[3] == "1") {
-            document.getElementById("wed").style.display = "inline-block";
-        }
-
-        if ($scope.weekDay[4] == "1") {
-            document.getElementById("thur").style.display = "inline-block";
-        }
-
-        if ($scope.weekDay[5] == "1") {
-            document.getElementById("fri").style.display = "inline-block";
-        }
-    }
-
-    authService.getPsychoanalysts().then(function (response) {
-        $scope.Psychoanalysts = response.data
-    })
-
-
-
-
-
-    function calDate(x) {
-
-        var d = new Date();
-        d.setDate(d.getDate() + (x + 7 - d.getDay()) % 7);
-
-        if (d.getDay() == 3 && d.getHours() > 19 && d.getMinutes() > 30) {
-            d.setDate(d.getDate() + (x + 7 - d.getDay()));
-        }
-
-        var day = { 'day': '2-digit' };
-        var month = { 'month': 'long' };
-        var monthNum = { 'month': '2-digit' };
-        var year = { 'year': 'numeric' };
-        var Day = d.toLocaleString('fa-Ir', day);
-        $scope.Month = d.toLocaleString('fa-Ir', month);
-        $scope.MonthNum = d.toLocaleString('fa-Ir', monthNum);
-        $scope.Year = d.toLocaleString('fa-Ir', year);
-        return (Day)
-    }
-
-    $scope.showPsychoanalysts = function (ID, name, lastname, weekdays) {
-
-
-        var dateBoxs = document.getElementsByClassName("dateBox");
-        for (var i = 0; i < dateBoxs.length; i++) {
-            dateBoxs[i].style.display = "none";
-        }
-
-
-        $scope.psychoanalystId = ID
-
-
-        getWeekdays(ID, weekdays);
-
-
-
-
-
-        document.getElementById("dateSun").innerHTML = calDate(0);
-        document.getElementById("dateMon").innerHTML = calDate(1);
-        document.getElementById("dateTues").innerHTML = calDate(2);
-        document.getElementById("dateWed").innerHTML = calDate(3);
-        document.getElementById("dateThur").innerHTML = calDate(4);
-        document.getElementById("dateFri").innerHTML = calDate(5);
-        document.getElementById("dateSat").innerHTML = calDate(6);
-
-
-        document.getElementById("monthSun").innerHTML = $scope.Month;
-        document.getElementById("monthMon").innerHTML = $scope.Month;
-        document.getElementById("monthTues").innerHTML = $scope.Month;
-        document.getElementById("monthWed").innerHTML = $scope.Month;
-        document.getElementById("monthThur").innerHTML = $scope.Month;
-        document.getElementById("monthFri").innerHTML = $scope.Month;
-        document.getElementById("monthSat").innerHTML = $scope.Month;
-
-
-
-        $scope.satBtn = function () {
-            var Times = document.getElementsByClassName("Time");
-            for (var i = 0; i < Times.length; i++) {
-                Times[i].style.display = "none";
-            }
-
-            var dateBoxs = document.getElementsByClassName("dateBox");
-            for (var i = 0; i < dateBoxs.length; i++) {
-                dateBoxs[i].style.backgroundColor = "#ffffff";
-            }
-
-            document.getElementById("popSat").style.display = "block";
-            $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(6)
-            $scope.selectedDate = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(6) + "/6/"
-            document.getElementById("sat").style.backgroundColor = "#ff9900"
-        };
-
-
-        $scope.sunBtn = function () {
-            var Times = document.getElementsByClassName("Time");
-            for (var i = 0; i < Times.length; i++) {
-                Times[i].style.display = "none";
-            }
-
-            var dateBoxs = document.getElementsByClassName("dateBox");
-            for (var i = 0; i < dateBoxs.length; i++) {
-                dateBoxs[i].style.backgroundColor = "#ffffff";
-            }
-
-            document.getElementById("popSun").style.display = "block";
-            $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(0)
-            $scope.selectedDate = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(0) + "/0/"
-            document.getElementById("sun").style.backgroundColor = "#ff9900"
-        };
-
-
-        $scope.monBtn = function () {
-            var Times = document.getElementsByClassName("Time");
-            for (var i = 0; i < Times.length; i++) {
-                Times[i].style.display = "none";
-            }
-
-            var dateBoxs = document.getElementsByClassName("dateBox");
-            for (var i = 0; i < dateBoxs.length; i++) {
-                dateBoxs[i].style.backgroundColor = "#ffffff";
-            }
-
-            document.getElementById("popMon").style.display = "block";
-            $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(1)
-            $scope.selectedDate = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(1) + "/1/"
-            document.getElementById("mon").style.backgroundColor = "#ff9900"
-        };
-
-
-        $scope.tuesBtn = function () {
-            var Times = document.getElementsByClassName("Time");
-            for (var i = 0; i < Times.length; i++) {
-                Times[i].style.display = "none";
-            }
-
-            var dateBoxs = document.getElementsByClassName("dateBox");
-            for (var i = 0; i < dateBoxs.length; i++) {
-                dateBoxs[i].style.backgroundColor = "#ffffff";
-            }
-
-            document.getElementById("popTues").style.display = "block";
-            $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(2)
-            $scope.selectedDate = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(2) + "/2/"
-            document.getElementById("tues").style.backgroundColor = "#ff9900"
-        };
-
-
-        $scope.wedBtn = function () {
-            var Times = document.getElementsByClassName("Time");
-            for (var i = 0; i < Times.length; i++) {
-                Times[i].style.display = "none";
-            }
-
-            var dateBoxs = document.getElementsByClassName("dateBox");
-            for (var i = 0; i < dateBoxs.length; i++) {
-                dateBoxs[i].style.backgroundColor = "#ffffff";
-            }
-
-            document.getElementById("popWed").style.display = "block";
-            $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(3)
-            $scope.selectedDate = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(3) + "/3/"
-            document.getElementById("wed").style.backgroundColor = "#ff9900"
-        };
-
-        $scope.thurBtn = function () {
-            var Times = document.getElementsByClassName("Time");
-            for (var i = 0; i < Times.length; i++) {
-                Times[i].style.display = "none";
-            }
-
-            var dateBoxs = document.getElementsByClassName("dateBox");
-            for (var i = 0; i < dateBoxs.length; i++) {
-                dateBoxs[i].style.backgroundColor = "#ffffff";
-            }
-
-            document.getElementById("popThur").style.display = "block";
-            $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(4)
-            $scope.selectedDate = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(4) + "/4/"
-            document.getElementById("thur").style.backgroundColor = "#ff9900"
-        };
-
-
-        $scope.friBtn = function () {
-            var Times = document.getElementsByClassName("Time");
-            for (var i = 0; i < Times.length; i++) {
-                Times[i].style.display = "none";
-            }
-
-            var dateBoxs = document.getElementsByClassName("dateBox");
-            for (var i = 0; i < dateBoxs.length; i++) {
-                dateBoxs[i].style.backgroundColor = "#ffffff";
-            }
-
-
-            document.getElementById("popFri").style.display = "block";
-            $scope.Date = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(5)
-            $scope.selectedDate = $scope.Year + "/" + $scope.MonthNum + "/" + calDate(5) + "/5/"
-            document.getElementById("fri").style.backgroundColor = "#ff9900"
-        };
-
-    }
 }]);

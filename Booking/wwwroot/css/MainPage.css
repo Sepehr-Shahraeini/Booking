@@ -1,5 +1,5 @@
-﻿body, h1, h2, h3, h4, h5, h6 {
-    font-family: "Lato", sans-serif;
+﻿body {
+    /*font-family: "Lato", sans-serif;*/
 }
 
 body, html {
@@ -16,13 +16,8 @@ body, html {
     background-size: cover;
 }
 
-/* First image (Logo. Full height) */
-.bgimg-1 {
-    background-image: url('/img/adrian-FrSEEdYr418-unsplash.jpg');
-    min-height: 100%;
-}
 
-/* Second image (Portfolio) */
+
 
 .w3-wide {
     letter-spacing: 10px;
@@ -32,27 +27,14 @@ body, html {
     cursor: pointer;
 }
 
-#discription {
-    padding-top: 120px
-}
-
-#about {
-    padding-top: 120px;
-}
-
-
-
 .Time {
     display: none
 }
 
 
 
-@media (min-width:900px) {
-    .bgimg-1, .bgimg-2, .bgimg-3 {
-        background-attachment: scroll;
-        min-height: 400px;
-    }
+@media (min-width:1200px) {
+
 
     .reserveBtn {
         margin-top: 18% !important;
@@ -77,12 +59,7 @@ body, html {
             color: white
         }
 
-    .field {
-        width: 50%;
-        margin: 0 auto 0 auto;
-        height: auto;
-        padding: 0.05%;
-    }
+
 
     .dx-placeholder {
         color: black !important;
@@ -90,7 +67,7 @@ body, html {
         width: 100% !important;
     }
 
-    .dateBox {
+    /*.dateBox {
         background-color: white;
         width: 20%;
         height: 10%;
@@ -100,7 +77,7 @@ body, html {
         display: none;
         border: 2px solid #d9d9d9;
     }
-
+*/
     .selectDoctor {
         width: 40%;
         height: 27%
@@ -127,13 +104,14 @@ body, html {
         margin-bottom: 0 !important
     }
 
-    .input {
+    /* .input {
         background: white;
-        border: 1px solid black;
+        box-shadow: 0 0 14px 0 rgba(0, 0, 0, .3);
         margin-top: 0 !important;
         border-radius: 4px !important;
-        width: 100%
-    }
+        width: 100%;
+        border: 1px solid lightgray
+    }*/
 
     .selectDr {
         background-color: white !important;
@@ -168,7 +146,7 @@ body, html {
 
 
 /* Turn off parallax scrolling for tablets and phones */
-@media only screen and (max-device-width: 900px) {
+@media only screen and (max-device-width:1200px) {
     .bgimg-1, .bgimg-2, .bgimg-3 {
         background-attachment: scroll;
         min-height: 400px;
@@ -237,21 +215,22 @@ body, html {
         margin-bottom: 1px !important
     }
 
-    .input {
+    /* .input {
         background: white;
         margin-top: 7px;
-        border: 1px solid black;
+        box-shadow: 0 0 14px 0 rgba(0, 0, 0, .3);
         width: 100%;
         margin-top: 0 !important;
-        border-radius: 4px !important
-    }
+        border-radius: 4px !important;
+        border:none
+    }*/
 
     .confirmBtn {
         color: white;
         background-color: black;
         width: 100%;
         margin: 4% 0 4% 0;
-        border-radius:5px
+        border-radius: 5px
     }
 
     .selectDoctor {
@@ -305,7 +284,6 @@ body, html {
         overflow: hidden;
         background-color: white;
         position: relative;
-        border-bottom: 1px solid lightgray
     }
 
         .topnav #myLinks {
@@ -314,7 +292,7 @@ body, html {
 
         .topnav a {
             color: black;
-            padding: 10px 14px 0 16px;
+            padding: 10px 14px 10px 16px;
             text-decoration: none;
             font-size: 17px;
             display: block;
@@ -329,10 +307,7 @@ body, html {
                 top: 0;
             }
 
-            .topnav a:hover {
-                background-color: #ddd;
-                color: black;
-            }
+
 
     .navbar {
         background-color: white;
@@ -340,12 +315,16 @@ body, html {
         margin: 0 !important
     }
 
-    #menu{
+    .navItem {
+        border-bottom: 1px solid lightgray
+    }
+
+    #menu {
         display: none
     }
 }
 
-@media only screen and (max-device-height :1400px) {
+/*@media only screen and (max-device-height :1400px) {
     .button {
         background-color: white;
         height: 30px;
@@ -368,4 +347,4 @@ body, html {
         display: inline-block;
         border: 2px solid #d9d9d9
     }
-}
+}*/

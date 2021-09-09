@@ -1,192 +1,119 @@
-﻿﻿
-<style>
+﻿<style>
+    body {
+        background-color: #f5f5f5 !important
+    }
 
+    @font-face {
+        font-family: 'IRANSansWeb';
+        src: url('content/fonts/eot/IRANSansWeb.eot') format(‘eot’), url('content/fonts/woff/IRANSansWeb.woff') format('woff'), url('content/fonts/ttf/IRANSansWeb.ttf') format(‘truetype’);
+    }
 
-    @media (min-width:900px) {
-        .dateBox {
+    h2 {
+        text-align: center;
+        margin: 10% 0 10% 0
+    }
+
+    @media (min-width:756px) {
+        .login {
             background-color: white;
-            width: 20%;
-            height: 10%;
+            width: 30%;
+            border-radius: 8px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #d6d6d6
+        }
+
+        .btn_save {
+            display: block;
+            width: 80%;
+            background-color: black;
+            color: white;
+            margin: 4% auto 10% auto;
+            border-radius: 5px;
             text-align: center;
-            margin: 10px;
-            border-radius: 5px;
-            display: none;
-            border: 2px solid #d9d9d9;
+            padding: 2%
         }
 
-        .signedUp {
-            cursor: pointer;
+        .loginInput {
+            width: 100%;
+            margin: 0 auto 0 auto;
+            background-color: white;
+            border: 1px solid #d6d6d6;
+            border-radius: 5px
         }
 
-            .signedUp:hover {
-                color: lightgray
-            }
-
-        .selectPsychoanalyst {
-            background-color: white !important;
-            color: black !important;
-            border: 1px solid black;
-            display: inline-block;
-            border-radius: 5px;
-            width: 38%;
-            margin: 5%
-        }
-
-        .topnav {
-            display: none
+        .loginField {
+            width: 80%;
+            margin: 0 auto 0 auto;
+            border: none;
+            border-radius: 5px
         }
     }
 
-
-    @media only screen and (max-device-width: 900px) {
-        .dateBox {
+    @media (max-width:756px) {
+        .login {
             background-color: white;
-            width: 40%;
-            height: 10%;
+            width: 85%;
+            border-radius: 8px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #d6d6d6
+        }
+
+        .btn_save {
+            display: block;
+            width: 80%;
+            background-color: black;
+            color: white;
+            margin: 4% auto 10% auto;
+            border-radius: 5px;
             text-align: center;
-            margin: 10px;
-            border-radius: 5px;
-            display: none;
-            border: 2px solid #d9d9d9
+            padding: 2%
         }
 
-        .selectPsychoanalyst {
-            background-color: white !important;
-            color: black !important;
-            border: 1px solid black;
-            margin: 2% auto 2% auto !important;
-            display: inline-block;
-            border-radius: 5px;
-            width: 100%
-        }
-    }
-
-
-    @media only screen and (max-device-height :1400px) {
-        .button {
+        .loginInput {
+            width: 100%;
+            margin: 0 auto 0 auto;
             background-color: white;
-            height: 30px;
-            width: 100px;
-            border: 1px solid black;
-            border-radius: 5px;
-            margin: 2px 8px;
-            position: center;
-            color: black;
-            width: 44%
+            border: 1px solid #d6d6d6;
+            border-radius: 5px
         }
 
-        .disButton {
-            color: red;
-        }
-
-        .dateBox {
-            background-color: white;
-            width: 25%;
-            height: 10%;
-            text-align: center;
-            margin: 10px;
-            border-radius: 5px;
-            display: inline-block;
-            border: 2px solid #d9d9d9
+        .loginField {
+            width: 80%;
+            margin: 0 auto 0 auto;
+            border: none;
+            border-radius: 5px
         }
     }
 </style>
 
-
-<body>
-
-    <div class="topnav">
-        <a ng-click="backHome()" class="navbar">مرکز دکتر محمد رضا خدابخش</a>
-        <div id="menu">
-            <a ng-click="btn_reserve()">رزرو وقت ویزیت</a>
-            <a ng-click="btn_about()">درباره دکتر محمد رضا خدا بخش</a>
-        </div>
-        <a ng-click="openMenu()" class="icon">
-            <i class="fa fa-bars"></i>
-        </a>
+<div class="topnav">
+    <a ng-click="backHome()" class="navbar">مرکز دکتر محمد رضا خدابخش</a>
+    <div id="menu">
+        <a ng-click="btn_reserve()">رزرو وقت ویزیت</a>
+        <a ng-click="btn_about()">درباره دکتر محمد رضا خدا بخش</a>
     </div>
+    <a ng-click="openMenu()" class="icon">
+        <i class="fa fa-bars"></i>
+    </a>
+</div>
+<div class="login">
+    <h2>ورود جهت رزور وقت</h2>
 
-
-    <div class="field">
+    <div class="loginField">
         <p class="inputTitle">نام کاربری</p>
-        <input ng-model="UserName" class="input" />
+        <input ng-model="UserName" class="loginInput" />
+    </div>
+    <div class="loginField">
         <p class="inputTitle">رمز</p>
-        <input ng-model="Password" class="input" />
-        <button ng-click="btn_save()" class="confirmBtn">ورود</button>
+        <input ng-model="Password" class="loginInput" />
     </div>
+    <div ng-click="btn_save()" class="btn_save">ورود</div>
+</div>
 
 
-    <div id="choosePsychoanalyst" class="w3-modal" style="display:none">
-        <div class="w3-modal-content w3-animate-zoom" style="width:45%;height:auto;border-radius:5px;background-color:#fff">
-            <div class="field w3-modal-content w3-animate-zoom">
-                <button class="selectPsychoanalyst" ng-repeat="x in Psychoanalysts" ng-click="showPsychoanalysts(x.ID, x.Name, x.LastName, x.WeekDays)">{{x.Name}} {{x.LastName}}</button>
-                <div style="margin:0px auto 0px auto">
-                    <button id="sun" class="dateBox" style="display:none" ng-click="sunBtn()">
-                        <p>یکشنبه</p>
-                        <p id="dateSun"></p>
-                        <p id="monthSun"></p>
-                    </button>
-                    <button id="mon" class="dateBox" style="display:none" ng-click="monBtn()">
-                        <p>دوشنبه</p>
-                        <p id="dateMon"></p>
-                        <p id="monthMon"></p>
-                    </button>
-                    <button id="tues" class="dateBox" style="display:none" ng-click="tuesBtn()">
-                        <p>سه شنبه</p>
-                        <p id="dateTues"></p>
-                        <p id="monthTues"></p>
-                    </button>
-                    <button id="wed" class="dateBox" style="display:none" ng-click="wedBtn()">
-                        <p>چهار شنبه</p>
-                        <p id="dateWed"></p>
-                        <p id="monthWed"></p>
-                    </button>
-                    <button id="thur" class="dateBox" style="display:none" ng-click="thurBtn()">
-                        <p>پنج شنبه</p>
-                        <p id="dateThur"></p>
-                        <p id="monthThur"></p>
-                    </button>
-                    <button id="fri" class="dateBox" style="display:none" ng-click="friBtn()">
-                        <p>جمعه</p>
-                        <p id="dateFri"></p>
-                        <p id="monthFri"></p>
-                    </button>
-                    <button id="sat" class="dateBox" style="display:none" ng-click="satBtn()">
-                        <p>شنبه</p>
-                        <p id="dateSat"></p>
-                        <p id="monthSat"></p>
-                    </button>
-                </div>
-                <div id="popSat" class="Time">
-                    <button class="button" ng-repeat="x in saturDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.EndTime}} - {{x.StartTime}}</button>
-                    <button class="button disButton" ng-repeat="x in selectedSaturDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)" disabled>{{x.EndTime}} - {{x.StartTime}}</button>
-                </div>
-                <div id="popSun" class="Time">
-                    <button class="button disButton" ng-repeat="x in selectedSunDay track by $index" disabled>{{x.EndTime}} - {{x.StartTime}}</button>
-                    <button class="button" ng-repeat="x in sunDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.EndTime}} - {{x.StartTime}}</button>
-                </div>
-                <div id="popMon" class="Time">
-                    <button class="button" ng-repeat="x in monDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.EndTime}} - {{x.StartTime}}</button>
-                    <button class="button disButton" ng-repeat="x in selectedMonDay track by $index"  ng-click="timeRegistration(x.StartTime , x.EndTime)"  disabled>{{x.EndTime}} - {{x.StartTime}}</button>
-                </div>
-                <div id="popTues" class="Time">
-                    <button class="button disButton" ng-repeat="x in selectedTuesDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)" disabled>{{x.EndTime}} - {{x.StartTime}}</button>
-                    <button class="button" ng-repeat="x in tuesDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.EndTime}} - {{x.StartTime}}</button>
-                </div>
-                <div id="popWed" class="Time">
-                    <button class="button disButton" ng-repeat="x in selectedWednesDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)" disabled>{{x.EndTime}} - {{x.StartTime}}</button>
-                    <button class="button" ng-repeat="x in wednesDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.EndTime}} - {{x.StartTime}}</button>
-                </div>
-                <div id="popThur" class="Time">
-                    <button class="button disButton" ng-repeat="x in selectedThursDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)" disabled>{{x.EndTime}} - {{x.StartTime}}</button>
-                    <button class="button" ng-repeat="x in thursDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.EndTime}} - {{x.StartTime}}</button>
-                </div>
-                <div id="popFri" class="Time">
-                    <button class="button disButton" ng-repeat="x in selectedFriDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)" disabled>{{x.EndTime}} - {{x.StartTime}}</button>
-                    <button class="button" ng-repeat="x in friDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.EndTime}} - {{x.StartTime}}</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</body>

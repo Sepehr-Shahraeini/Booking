@@ -12,10 +12,30 @@ html {
     -webkit-text-size-adjust: 100%
 }
 
+@font-face {
+    font-family: Shabnam;
+    src: url('Shabnam.eot');
+    src: url('Shabnam.eot?#iefix') format('embedded-opentype'), url('Shabnam.woff') format('woff'), url('Shabnam.ttf') format('truetype');
+    font-weight: normal;
+}
 
+@font-face {
+    font-family: Shabnam;
+    src: url('Shabnam-Bold.eot');
+    src: url('Shabnam-Bold.eot?#iefix') format('embedded-opentype'), url('Shabnam-Bold.woff') format('woff'), url('Shabnam-Bold.ttf') format('truetype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Shabnam;
+    src: url('Shabnam-Light.eot');
+    src: url('Shabnam-Light.eot?#iefix') format('embedded-opentype'), url('Shabnam-Light.woff') format('woff'), url('Shabnam-Light.ttf') format('truetype');
+    font-weight: 300;
+}
 
 body {
-    margin: 0
+    margin: 0;
+    font-family: Shabnam;
 }
 
 article, aside, details, figcaption, figure, footer, header, main, menu, nav, section {
@@ -98,7 +118,6 @@ img {
 }
 
 code, kbd, pre, samp {
-    font-family: monospace,monospace;
     font-size: 1em
 }
 
@@ -179,7 +198,7 @@ textarea {
 }
 /* End extract */
 html, body {
-    font-family: Verdana,sans-serif;
+   
     font-size: 15px;
     line-height: 1.5
 }
@@ -217,7 +236,7 @@ h6 {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Segoe UI",Arial,sans-serif;
+    
     font-weight: 400;
     margin: 10px 0
 }
@@ -460,7 +479,7 @@ a {
     transition: margin-left .4s
 }
 
-.w3-modal {
+/*.w3-modal {
     z-index: 3;
     display: none;
     padding-top: 100px;
@@ -472,7 +491,7 @@ a {
     overflow: auto;
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4)
-}
+}*/
 
 .w3-modal-content {
     margin: auto;
@@ -979,7 +998,7 @@ a {
 }
 
 .w3-code, .w3-codespan {
-    font-family: Consolas,"courier new";
+    
     font-size: 16px
 }
 

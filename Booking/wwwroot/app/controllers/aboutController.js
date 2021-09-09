@@ -1,7 +1,7 @@
 ﻿'use strict';
 app.controller('aboutController', ['$scope', '$routeParams', '$location', 'authService', 'ngAuthSettings', '$rootScope', 'orderService', '$http', 'Psychoanalyst', function ($scope, $routeParams, $location, authService, ngAuthSettings, $rootScope, orderService, $http, Psychoanalyst) {
 
-
+    window.scrollTo(0, 0);
 
     $scope.openMenu = function () {
         var x = document.getElementById("menu");

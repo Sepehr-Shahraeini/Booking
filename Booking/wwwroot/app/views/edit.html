@@ -1,140 +1,200 @@
-﻿
-<style>
+﻿<style>
+    body {
+        background-color: #f5f5f5 !important
+    }
 
+    @font-face {
+        font-family: 'IRANSansWeb';
+        src: url('content/fonts/eot/IRANSansWeb.eot') format(‘eot’), url('content/fonts/woff/IRANSansWeb.woff') format('woff'), url('content/fonts/ttf/IRANSansWeb.ttf') format(‘truetype’);
+    }
 
-    @media (min-width:900px) {
-        .dateBox {
+    h2 {
+        text-align: center;
+        margin: 10% 0 10% 0
+    }
+
+    @media (min-width:756px) {
+        .login {
             background-color: white;
-            width: 20%;
-            height: 10%;
-            text-align: center;
-            margin: 10px;
-            border-radius: 5px;
-            display: none;
-            border: 2px solid #d9d9d9;
-        }
-
-        .signedUp {
-            cursor: pointer;
-        }
-
-            .signedUp:hover {
-                color: lightgray
-            }
-
-        .selectPsychoanalyst {
-            background-color: white !important;
-            color: black !important;
-            border: 1px solid black;
-            display: inline-block;
-            border-radius: 5px;
-            width: 40%;
-            margin: 5%
+            width: 30%;
+            border-radius: 8px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #d6d6d6
         }
 
         .topnav {
             display: none
         }
+
+        .form {
+            width: 45%;
+            display: inline-block;
+            margin: 2% 3% 0 0;
+        }
+
+        .field {
+            width: 60%;
+            margin: 0 auto 0 auto;
+            border: 1px solid #d6d6d6;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border-radius: 8px
+        }
+
+        .input {
+            width: 94%;
+            margin: 0 3% 0 auto;
+            background-color: white;
+            border: 1px solid #d6d6d6;
+            border-radius: 5px
+        }
+
+        .btn_save {
+            width: 45%;
+            text-align: center;
+            background-color: black;
+            margin: 2% 3% 1% 0;
+            color: white;
+            border-radius: 8px;
+            padding: 1%;
+            display: inline-block
+        }
+
+        .textarea {
+            width: 94%;
+            margin: 0 3% 0 0;
+            background-color: white;
+            border: 1px solid #d6d6d6;
+            border-radius: 5px;
+        }
     }
 
+    @media (max-width:756px) {
+        .inputTitle {
+            text-align: right;
+            font-size: 12px;
+            margin: 2% 3% 0 0 !important;
+        }
 
-    @media only screen and (max-device-width: 900px) {
-        .dateBox {
+        .form {
+            width: 100%;
+            display: block;
+            /*margin: 2% 3% 0 0;*/
+        }
+
+        .field {
+            width: 94%;
+            margin: 3% auto 0 auto;
+            border: 1px solid #d6d6d6;
+            height: auto;
             background-color: white;
-            width: 40%;
-            height: 10%;
+            border-radius: 8px
+        }
+
+        .input {
+            width: 94%;
+            margin: 0 3% 0 auto;
+            background-color: white;
+            border: 1px solid #d6d6d6;
+            border-radius: 5px
+        }
+
+        .btn_save {
+            width: 45%;
             text-align: center;
-            margin: 10px;
-            border-radius: 5px;
-            display: none;
-            border: 2px solid #d9d9d9
+            background-color: black;
+            margin: 2% 3% 1% 0;
+            color: white;
+            border-radius: 8px;
+            padding: 1%;
+            display: inline-block
         }
 
-        .selectPsychoanalyst {
-            background-color: white !important;
-            color: black !important;
-            border: 1px solid black;
-            margin: 2% auto 2% auto !important;
-            display: inline-block;
-            border-radius: 5px;
-            width: 100%
-        }
-    }
-
-
-    @media only screen and (max-device-height :1400px) {
-        .button {
+        .textarea {
+            width: 94%;
+            margin: 0 3% 0 0;
             background-color: white;
-            height: 30px;
-            width: 100px;
-            border: 1px solid black;
+            border: 1px solid #d6d6d6;
             border-radius: 5px;
-            margin: 2px 8px;
-            position: center;
-            color: black;
-            width: 44%
-        }
-
-        .dateBox {
-            background-color: white;
-            width: 25%;
-            height: 10%;
-            text-align: center;
-            margin: 10px;
-            border-radius: 5px;
-            display: inline-block;
-            border: 2px solid #d9d9d9
         }
     }
 </style>
 
+<div class="topnav">
+    <a ng-click="backHome()" class="navbar">مرکز دکتر محمد رضا خدابخش</a>
+    <div id="menu">
+        <a ng-click="btn_reserve()">رزرو وقت ویزیت</a>
+        <a ng-click="btn_about()">درباره دکتر محمد رضا خدا بخش</a>
+    </div>
+    <a ng-click="openMenu()" class="icon">
+        <i class="fa fa-bars"></i>
+    </a>
+</div>
+
+
+
 <div class="field">
+    <div>
+        <div class="form">
+            <p class="inputTitle">نام</p>
+            <input ng-model="Name" class="input" />
 
-    
-    <p class="inputTitle">نام</p>
-    <input ng-model="Name" class="input" />
+            <p class="inputTitle">نام خانوادگی</p>
+            <input ng-model="LastName" class="input" />
 
-    <p class="inputTitle">نام خانوادگی</p>
-    <input ng-model="LastName" class="input" />
+            <p class="inputTitle">تلفن همراه</p>
+            <input ng-model="Mobile" class="input" />
 
-    <p class="inputTitle">تلفن همراه</p>
-    <input ng-model="Mobile" class="input" />
+            <p class="inputTitle">ایمیل</p>
+            <input ng-model="Email" class="input" />
 
-    <p class="inputTitle">ایمیل</p>
-    <input ng-model="Email" class="input" />
+            <p class="inputTitle">سن</p>
+            <input ng-model="Age" class="input" />
 
-    <p class="inputTitle">سن</p>
-    <input ng-model="Age" class="input" />
+            <p class="inputTitle">تعداد فرزند</p>
+            <input ng-model="ChildrenNum" class="input" />
 
-    <p class="inputTitle">تعداد فرزند</p>
-    <input ng-model="ChildrenNum" class="input" />
+            <p class="inputTitle">شغل</p>
+            <input ng-model="Job" class="input" />
 
-    <p class="inputTitle">شغل</p>
-    <input ng-model="Job" class="input" />
+        </div>
+        <div class="form">
+            <p class="inputTitle">رشته تحصیلی</p>
+            <input ng-model="FieldOfStudy" class="input" />
 
-    <p class="inputTitle">وضعیت تحصیلی</p>
-    <input ng-model="Education" class="input" />
+            <p class="inputTitle">وضعیت ازدواج</p>
+            <input ng-model="MaritalStatus" class="input" />
 
-    <p class="inputTitle">رشته تحصیلی</p>
-    <input ng-model="FieldOfStudy" class="input" />
+            <p class="inputTitle">موضوع</p>
+            <input ng-model="Subject" class="input" />
 
-    <p class="inputTitle">وضعیت ازدواج</p>
-    <input ng-model="MaritalStatus" class="input" />
 
-    <p class="inputTitle">موضوع</p>
-    <input ng-model="Subject" class="input" />
+            <p class="inputTitle">معرف</p>
+            <input ng-model="Introduced" class="input" />
 
-    <p class="inputTitle">علت مراجعه</p>
-    <input ng-model="Reason" class="input" />
+            <p class="inputTitle">رمز عبور</p>
+            <input ng-model="Password" class="input" />
 
-    <p class="inputTitle">معرف</p>
-    <input ng-model="Introduced" class="input" />
+            <p class="inputTitle">تکرار رمز عبور</p>
+            <input ng-model="ConfirmPassword" class="input" />
 
-    <p class="inputTitle">رمز عبور</p>
-    <input ng-model="Password" class="input" />
+            <p class="inputTitle">وضعیت تحصیلی</p>
+            <input ng-model="Education" class="input" />
+        </div>
 
-    <p class="inputTitle">تکرار رمز عبور</p>
-    <input ng-model="ConfirmPassword" class="input" />
 
-    <button ng-click="btn_showPsychoanalyst()" class="confirmBtn">تایید</button>
+        <p class="inputTitle" style="margin-right:5%">علت مراجعه</p>
+        <textarea ng-model="Reason" class="textarea" />
+
+        <div ng-click="btn_showPsychoanalyst()" class="btn_save">تایید</div>
+        <p ng-click="signedUp()" style="margin:3% 0 0 4%; display:inline-block; float:left; color:#a8a8a8">قبلا ثبت نام کرده اید ؟</p>
+
+    </div>
 </div>

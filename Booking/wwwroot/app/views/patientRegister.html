@@ -1,234 +1,203 @@
-﻿﻿
-<style>
+﻿<style>
+    body {
+        background-color: #f5f5f5 !important
+    }
 
+    @font-face {
+        font-family: 'IRANSansWeb';
+        src: url('content/fonts/eot/IRANSansWeb.eot') format(‘eot’), url('content/fonts/woff/IRANSansWeb.woff') format('woff'), url('content/fonts/ttf/IRANSansWeb.ttf') format(‘truetype’);
+    }
 
-    @media (min-width:900px) {
-        .dateBox {
+    h2 {
+        text-align: center;
+        margin: 10% 0 10% 0
+    }
+
+    p{
+        display:inline-block
+    }
+    @media (min-width:756px) {
+        .login {
             background-color: white;
-            width: 20%;
-            height: 10%;
-            text-align: center;
-            margin: 10px;
-            border-radius: 5px;
-            display: none;
-            border: 2px solid #d9d9d9;
-        }
-
-        .signedUp {
-            cursor: pointer;
-        }
-
-            .signedUp:hover {
-                color: lightgray
-            }
-
-        .selectPsychoanalyst {
-            background-color: white !important;
-            color: black !important;
-            border: 1px solid black;
-            display: inline-block;
-            border-radius: 5px;
-            width: 40%;
-            margin: 5%
+            width: 30%;
+            border-radius: 8px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #d6d6d6
         }
 
         .topnav {
             display: none
         }
+
+        .form {
+            width: 45%;
+            display: inline-block;
+            margin: 2% 3% 0 0;
+        }
+
+        .field {
+            width: 60%;
+            margin: 0 auto 0 auto;
+            border: 1px solid #d6d6d6;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border-radius: 8px
+        }
+
+        .input {
+            width: 101%;
+            margin: 0 0 0 auto;
+            background-color: white;
+            border: 1px solid #d6d6d6;
+            border-radius: 5px
+        }
+
+        .btn_save {
+            width: 45%;
+            text-align: center;
+            background-color: black;
+            margin: 2% 3% 1% 0;
+            color: white;
+            border-radius: 8px;
+            padding: 1%;
+            display: inline-block
+        }
+
+        .textarea {
+            width: 94%;
+            margin: 0 3% 0 0;
+            background-color: white;
+            border: 1px solid #d6d6d6;
+            border-radius: 5px;
+        }
     }
 
+    @media (max-width:756px) {
+        .inputTitle {
+            text-align: right;
+            font-size: 12px;
+            margin: 2% 3% 0 0 !important;
+        }
 
-    @media only screen and (max-device-width: 900px) {
-        .dateBox {
+        .form {
+            width: 100%;
+            display: block;
+            /*margin: 2% 3% 0 0;*/
+        }
+
+        .field {
+            width: 94%;
+            margin: 3% auto 0 auto;
+            border: 1px solid #d6d6d6;
+            height: auto;
             background-color: white;
-            width: 40%;
-            height: 10%;
+            border-radius: 8px
+        }
+
+        .input {
+            width: 94%;
+            margin: 0 3% 0 auto;
+            background-color: white;
+            border: 1px solid #d6d6d6;
+            border-radius: 5px
+        }
+
+        .btn_save {
+            width: 45%;
             text-align: center;
-            margin: 10px;
-            border-radius: 5px;
-            display: none;
-            border: 2px solid #d9d9d9
+            background-color: black;
+            margin: 2% 3% 1% 0;
+            color: white;
+            border-radius: 8px;
+            padding: 1%;
+            display: inline-block
         }
 
-        .selectPsychoanalyst {
-            background-color: white !important;
-            color: black !important;
-            border: 1px solid black;
-            margin: 2% auto 2% auto !important;
-            display: inline-block;
-            border-radius: 5px;
-            width: 100%
-        }
-    }
-
-
-    @media only screen and (max-device-height :1400px) {
-        .button {
+        .textarea {
+            width: 94%;
+            margin: 0 3% 0 0;
             background-color: white;
-            height: 30px;
-            width: 100px;
-            border: 1px solid black;
+            border: 1px solid #d6d6d6;
             border-radius: 5px;
-            margin: 2px 8px;
-            position: center;
-            color: black;
-            width: 44%
-        }
-
-        .dateBox {
-            background-color: white;
-            width: 25%;
-            height: 10%;
-            text-align: center;
-            margin: 10px;
-            border-radius: 5px;
-            display: inline-block;
-            border: 2px solid #d9d9d9
         }
     }
 </style>
 
+<div class="topnav">
+    <a ng-click="backHome()" class="navbar">مرکز دکتر محمد رضا خدابخش</a>
+    <div id="menu">
+        <a ng-click="btn_reserve()">رزرو وقت ویزیت</a>
+        <a ng-click="btn_about()">درباره دکتر محمد رضا خدا بخش</a>
+    </div>
+    <a ng-click="openMenu()" class="icon">
+        <i class="fa fa-bars"></i>
+    </a>
+</div>
 
 
-<body>
 
-    <div class="topnav">
-        <a ng-click="backHome()" class="navbar">مرکز دکتر محمد رضا خدابخش</a>
-        <div id="menu">
-            <a ng-click="btn_reserve()">رزرو وقت ویزیت</a>
-            <a ng-click="btn_about()">درباره دکتر محمد رضا خدا بخش</a>
+<div class="field">
+    <div>
+        <form class="form" name="form">
+            <p class="inputTitle">نام</p><p id="name" style="color:red;margin:0; display:none">*</p>
+            <input ng-model="Name" name="Name" class="input" required />
+
+            <p class="inputTitle">نام خانوادگی</p><p id="lastname" style="color:red;margin:0; display:none">*</p>
+            <input ng-model="LastName" class="input" />
+
+            <p class="inputTitle">تلفن همراه</p><p id="mobile" style="color:red;margin:0; display:none">*</p><p id="checkMobile" style="color:red;margin:0; display:none">لطفا تلفن موبایل صحیح را وارد کنید</p>
+            <input ng-model="Mobile" class="input" />
+
+            <p class="inputTitle">ایمیل</p><p id="email" style="color:red;margin:0; display:none">*</p>
+            <input ng-model="Email" class="input" />
+
+            <p class="inputTitle">سن</p><p id="age" style="color:red;margin:0; display:none">*</p>
+            <input ng-model="Age" class="input" />
+
+            <p class="inputTitle">تعداد فرزند</p><p id="childNo" style="color:red;margin:0; display:none">*</p>
+            <input ng-model="ChildrenNum" class="input" />
+
+            <p class="inputTitle">شغل</p><p id="job" style="color:red;margin:0; display:none">*</p>
+            <input ng-model="Job" class="input" />
+
+        </form>
+        <div class="form">
+            <p class="inputTitle">وضعیت ازدواج</p><p id="marital" style="color:red;margin:0; display:none">*</p>
+            <select ng-model="MaritalStatus" ng-options="x for x in MaritalStatusList" class="input" style="height:30px"></select>
+
+            <p class="inputTitle">موضوع</p><p id="subject" style="color:red;margin:0; display:none">*</p>
+            <input ng-model="Subject" class="input" />
+
+            <p class="inputTitle">معرف</p><p id="introduced" style="color:red;margin:0; display:none">*</p>
+            <input ng-model="Introduced" class="input" />
+
+            <p class="inputTitle">رمز عبور</p><p id="password" style="color:red;margin:0; display:none">*</p>
+            <input ng-model="Password" type="password" class="input" />
+
+            <p class="inputTitle">تکرار رمز عبور</p><p id="confirmPassword" style="color:red;margin:0; display:none">*</p>
+            <input ng-model="ConfirmPassword" type="password" class="input" />
+
+            <p class="inputTitle">وضعیت تحصیلی</p><p id="education" style="color:red;margin:0; display:none">*</p>
+            <select ng-model="Education" style="height:30px" ng-options="x for x in EducationList" class="input"></select>
+
+            <p class="inputTitle">رشته تحصیلی</p><p id="fieldOfStudy" style="color:red;margin:0; display:none">*</p>
+            <input ng-model="FieldOfStudy" class="input" />
+
         </div>
-        <a ng-click="openMenu()" class="icon">
-            <i class="fa fa-bars"></i>
-        </a>
+
+
+        <p class="inputTitle" style="margin-right:5%">علت مراجعه</p><p id="reason" style="color:red;margin:0; display:none">*</p>
+        <textarea ng-model="Reason" class="textarea" />
+
+        <div ng-click="btn_showPsychoanalyst()" class="btn_save">تایید</div>
+        <p ng-click="signedUp()" style="margin:3% 0 0 4%; display:inline-block; float:left; color:#a8a8a8">قبلا ثبت نام کرده اید ؟</p>
+
     </div>
-
-
-    <div id="choosePsychoanalyst" class="w3-modal" style="display:none">
-        <div class="w3-modal-content w3-animate-zoom" style="width:45%;height:auto;border-radius:5px;background-color:#fff">
-            <div class="field w3-modal-content w3-animate-zoom">
-                <button class="selectPsychoanalyst" ng-repeat="x in Psychoanalysts" ng-click="showPsychoanalysts(x.ID, x.Name, x.LastName, x.WeekDays)">{{x.Name}} {{x.LastName}} {{x.Id}}</button>
-                <div style="margin:0px auto 0px auto">
-                    <button id="sun" class="dateBox" style="display:none" ng-click="sunBtn()">
-                        <p>یکشنبه</p>
-                        <p id="dateSun"></p>
-                        <p id="monthSun"></p>
-                    </button>
-                    <button id="mon" class="dateBox" style="display:none" ng-click="monBtn()">
-                        <p>دوشنبه</p>
-                        <p id="dateMon"></p>
-                        <p id="monthMon"></p>
-                    </button>
-                    <button id="tues" class="dateBox" style="display:none" ng-click="tuesBtn()">
-                        <p>سه شنبه</p>
-                        <p id="dateTues"></p>
-                        <p id="monthTues"></p>
-                    </button>
-                    <button id="wed" class="dateBox" style="display:none" ng-click="wedBtn()">
-                        <p>چهار شنبه</p>
-                        <p id="dateWed"></p>
-                        <p id="monthWed"></p>
-                    </button>
-                    <button id="thur" class="dateBox" style="display:none" ng-click="thurBtn()">
-                        <p>پنج شنبه</p>
-                        <p id="dateThur"></p>
-                        <p id="monthThur"></p>
-                    </button>
-                    <button id="fri" class="dateBox" style="display:none" ng-click="friBtn()">
-                        <p>جمعه</p>
-                        <p id="dateFri"></p>
-                        <p id="monthFri"></p>
-                    </button>
-                    <button id="sat" class="dateBox" style="display:none" ng-click="satBtn()">
-                        <p>شنبه</p>
-                        <p id="dateSat"></p>
-                        <p id="monthSat"></p>
-                    </button>
-                </div>
-                <div id="popSat" class="Time">
-                    <button class="button" ng-repeat="x in saturDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.EndTime}} - {{x.StartTime}}</button>
-                    <button class="button disButton" ng-repeat="x in selectedSaturDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)" disabled>{{x.EndTime}} - {{x.StartTime}}</button>
-                </div>
-                <div id="popSun" class="Time">
-                    <button class="button disButton" ng-repeat="x in selectedSunDay track by $index" disabled>{{x.EndTime}} - {{x.StartTime}}</button>
-                    <button class="button" ng-repeat="x in sunDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.EndTime}} - {{x.StartTime}}</button>
-                </div>
-                <div id="popMon" class="Time">
-                    <button class="button" ng-repeat="x in monDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.EndTime}} - {{x.StartTime}}</button>
-                    <button class="button disButton" ng-repeat="x in selectedMonDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)" disabled>{{x.EndTime}} - {{x.StartTime}}</button>
-                </div>
-                <div id="popTues" class="Time">
-                    <button class="button disButton" ng-repeat="x in selectedTuesDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)" disabled>{{x.EndTime}} - {{x.StartTime}}</button>
-                    <button class="button" ng-repeat="x in tuesDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.EndTime}} - {{x.StartTime}}</button>
-                </div>
-                <div id="popWed" class="Time">
-                    <button class="button disButton" ng-repeat="x in selectedWednesDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)" disabled>{{x.EndTime}} - {{x.StartTime}}</button>
-                    <button class="button" ng-repeat="x in wednesDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.EndTime}} - {{x.StartTime}}</button>
-                </div>
-                <div id="popThur" class="Time">
-                    <button class="button disButton" ng-repeat="x in selectedThursDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)" disabled>{{x.EndTime}} - {{x.StartTime}}</button>
-                    <button class="button" ng-repeat="x in thursDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.EndTime}} - {{x.StartTime}}</button>
-                </div>
-                <div id="popFri" class="Time">
-                    <button class="button disButton" ng-repeat="x in selectedFriDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)" disabled>{{x.EndTime}} - {{x.StartTime}}</button>
-                    <button class="button" ng-repeat="x in friDay track by $index" ng-click="timeRegistration(x.StartTime , x.EndTime)">{{x.EndTime}} - {{x.StartTime}}</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="field">
-
-        <h4 ng-click="signedUp()" class="signedUp">قبلا ثبت نام کرده اید ؟</h4>
-
-        <p class="inputTitle">نام</p>
-        <input ng-model="Name" class="input" />
-
-        <p class="inputTitle">نام خانوادگی</p>
-        <input ng-model="LastName" class="input" />
-
-        <p class="inputTitle">تلفن همراه</p>
-        <input ng-model="Mobile" class="input" />
-
-        <p class="inputTitle">ایمیل</p>
-        <input ng-model="Email" class="input" />
-
-        <p class="inputTitle">سن</p>
-        <input ng-model="Age" class="input" />
-
-        <p class="inputTitle">تعداد فرزند</p>
-        <input ng-model="ChildrenNum" class="input" />
-
-        <p class="inputTitle">شغل</p>
-        <input ng-model="Job" class="input" />
-
-        <p class="inputTitle">وضعیت تحصیلی</p>
-        <input ng-model="Education" class="input" />
-
-        <p class="inputTitle">رشته تحصیلی</p>
-        <input ng-model="FieldOfStudy" class="input" />
-
-        <p class="inputTitle">وضعیت ازدواج</p>
-        <input ng-model="MaritalStatus" class="input" />
-
-        <p class="inputTitle">موضوع</p>
-        <input ng-model="Subject" class="input" />
-
-        <p class="inputTitle">علت مراجعه</p>
-        <input ng-model="Reason" class="input" />
-
-        <p class="inputTitle">معرف</p>
-        <input ng-model="Introduced" class="input" />
-
-        <p class="inputTitle">رمز عبور</p>
-        <input ng-model="Password" class="input" />
-
-        <p class="inputTitle">تکرار رمز عبور</p>
-        <input ng-model="ConfirmPassword" class="input" />
-
-        <button ng-click="btn_showPsychoanalyst()" class="confirmBtn">تایید</button>
-    </div>
-
-
-
-</body>
+</div>

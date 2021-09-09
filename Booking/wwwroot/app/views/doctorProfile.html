@@ -1,0 +1,202 @@
+﻿<style>
+    @font-face {
+        font-family: 'IRANSansWeb';
+        src: url('content/fonts/eot/IRANSansWeb.eot') format(‘eot’), url('content/fonts/woff/IRANSansWeb.woff') format('woff'), url('content/fonts/ttf/IRANSansWeb.ttf') format(‘truetype’);
+    }
+
+    body {
+        color: black;
+        font-family: IRANSansWeb;
+        background-color: #f5f5f5
+    }
+
+
+    @media (min-width:900px) {
+        .navbar {
+            display: none
+        }
+
+        .doctorImage {
+            width: 10%;
+            display: block;
+            margin: 5% auto 0 auto;
+            border-radius: 100%
+        }
+
+        .doctorName {
+            display: block;
+            text-align: center;
+            font-size: 35px
+        }
+
+        .expertise {
+            font-size: 130%;
+            text-align: center;
+        }
+
+        .aboutDoctor {
+            font-size: 130%;
+            max-width: 900px;
+            margin: 0 auto 0 auto;
+            text-align: center;
+        }
+
+        .month {
+            max-width: 900px
+        }
+
+        .monthBox {
+            text-align: center;
+            border-radius: 8px;
+            max-width: 900px;
+            margin: 5% auto;
+        }
+
+        .daysBox {
+            text-align: center;
+            border-radius: 8px;
+            max-width: 900px;
+            margin: 5% auto;
+        }
+
+        .borderBottom {
+            border-bottom: 1px solid lightgray;
+            margin: 3% auto;
+            max-width: 900px;
+        }
+
+        .days {
+            border-radius: 10%;
+        }
+
+        .monthParag {
+            margin: 0 !important;
+        }
+    }
+
+
+    @media only screen and (max-device-width: 900px) {
+        .doctorImage {
+            width: 30%;
+            display: block;
+            margin: 10% auto 0 auto;
+            border-radius: 100%
+        }
+
+        .doctorName {
+            display: block;
+            text-align: center;
+            font-size: 25px
+        }
+
+        .expertise {
+            font-size: 85%;
+            text-align: center
+        }
+
+        .aboutDoctor {
+        }
+
+        .borderBottom {
+            border-bottom: 1px solid lightgray;
+            margin: 3% auto;
+            max-width: 900px;
+        }
+
+        .monthBox {
+            text-align: center;
+            border-radius: 8px;
+            max-width: 900px;
+            margin: 8% auto;
+        }
+
+        .daysBox {
+            text-align: center;
+            border-radius: 8px;
+            max-width: 500px;
+            margin: 8% auto;
+        }
+
+        .aboutDoctor {
+            width: 80%;
+            font-size: 18px;
+            margin: 2% auto 0 auto;
+        }
+    }
+</style>
+
+<div class="topnav">
+    <a ng-click="backHome()" class="navbar">مرکز دکتر محمد رضا خدابخش</a>
+    <div id="menu">
+        <a ng-click="btn_reserve()">رزرو وقت ویزیت</a>
+        <a ng-click="btn_about()">درباره دکتر محمد رضا خدا بخش</a>
+        <a ng-click="btn_login()">ورود به حساب کاربری</a>
+    </div>
+    <a ng-click="openMenu()" class="icon">
+        <i class="fa fa-bars"></i>
+    </a>
+</div>
+
+
+<div ng-repeat="x in doctorInfo">
+    <img ng-src="{{x.ImageUrl}}" class="doctorImage" />
+    <b class="doctorName">{{x.Name}}</b>
+    <b class="doctorName" style="margin-top:-15px">{{x.LastName}}</b>
+    <p class="expertise">{{x.Expertise}}</p>
+    <p class="aboutDoctor">{{x.About}}</p>
+    <p class="borderBottom"></p>
+</div>
+
+<div id="monthsBox" class="monthBox">
+    <div ng-repeat="x in doctorAvailabeMonth">
+        <div class="col-lg-1 col-md-1 col-sm-3 col-xs-3" ng-if="x.available == null || x.PMonth < thisMonthNo " style="padding:5px">
+            <div class="days" style="background-color:#e5e5e5;color:#a6a6a6;border-radius: 7px;text-align:center">
+                <p class="monthParag">{{x.PMonthName}}</p>
+                <p class="monthParag">{{x.Pyear}}</p>
+            </div>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-3 col-xs-3" ng-if="x.available == 1 && x.PMonth >= thisMonthNo " style="padding:5px" ng-click="getDays(x.Pyear, x.PMonth)">
+            <div class="days" style="background-color: #65db60; color: #095407;border-radius: 7px;text-align:center">
+                <p class="monthParag">{{x.PMonthName}}</p>
+                <p class="monthParag">{{x.Pyear}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="daysBox" class="daysBox" style="display:none">
+
+    <div style="text-align:right;padding-right:5px" ng-click="monthsBoxBack()"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+    <div ng-repeat="x in doctorAvailabeDays">
+        <div class="col-lg-1 col-md-1  col-sm-2 col-xs-2" ng-if="(x.available == 0 || x.available == null) && x.availableCount == 0" style="padding: 5px">
+            <div class="days" style="background-color: #e5e5e5; color: #a6a6a6;border-radius: 7px;text-align:center">
+                <p class="monthParag"> {{x.PDayName}}</p>
+                <p class="monthParag"> {{x.PDate % 100}}</p>
+            </div>
+        </div>
+        <div class="col-lg-1 col-md-1  col-sm-2 col-xs-2" ng-if="x.availableCount > 0 " style="padding:5px" ng-click="getTimes(x.Id)">
+            <div class="days" style="background-color: #65db60; color: #095407;border-radius: 7px;text-align:center">
+                <p class="monthParag"> {{x.PDayName}}</p>
+                <p class="monthParag"> {{x.PDate % 100}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="timesBox" class="monthBox" style="display:none">
+
+    <div style="text-align:right;padding-right:5px" ng-click="daysBoxBack()"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+    <div ng-repeat="x in Times">
+        <div class="col-lg-2 col-md-2  col-sm-4 col-xs-4" ng-if="x.DateConfirmed == 1 || x.DateConfirmed == 2" style="padding: 5px">
+            <div style="background-color: #e5e5e5; color: #a6a6a6;border-radius:5px">
+                <p>{{x.End}} - {{x.Start}}</p>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2  col-sm-4 col-xs-4" ng-if="x.DateConfirmed == 0 || x.DateConfirmed == null" style="padding:5px" ng-click="getTimes(x.Id)">
+            <div style="background-color: #65db60; color: #095407;border-radius:5px" ng-click="registerTime(x.Start, x.End, x.Id, y.GDate, y.PDate)">
+                <p>{{x.End}} - {{x.Start}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+

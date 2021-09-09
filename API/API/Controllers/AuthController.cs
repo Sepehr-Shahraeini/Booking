@@ -1,5 +1,4 @@
-﻿using API.Context;
-using API.Models;
+﻿using API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -17,19 +16,21 @@ using EntityState = Microsoft.EntityFrameworkCore.EntityState;
 
 namespace API.Controllers
 {
-    [Route("api/auth")]
+
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly DatabaseContext _context;
+        private readonly drkh_databaseContext _context;
 
-        public AuthController(DatabaseContext context)
+        public AuthController(drkh_databaseContext context)
         {
             _context = context;
         }
 
-        [HttpPost, Route("login")]
-        public IActionResult Login([FromBody] User user)
+
+        [HttpPost]
+        [Route("api/user/login")]
+        public IActionResult Login([FromBody] users user)
         {
 
             if (string.IsNullOrEmpty(user.UserName) || string.IsNullOrEmpty(user.Password))
@@ -42,10 +43,10 @@ namespace API.Controllers
                 return null;
 
 
-            var pass = _context.users.SingleOrDefault(x => x.Password == user.Password);
+            // var pass = _context.users.SingleOrDefault(x => x.Password == user.Password);
 
             //check if username exists
-            if (pass == null)
+            if (resault.Password != user.Password)
                 return null;
 
 
@@ -57,6 +58,8 @@ namespace API.Controllers
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
             var tokeOptions = new JwtSecurityToken(
+                //issuer: "http://localhost:8088",
+                //audience: "http://localhost:8088",
                 issuer: "https://dr-khodabakhsh.ir",
                 audience: "https://dr-khodabakhsh.ir",
                 claims: new List<Claim>(),
@@ -68,15 +71,16 @@ namespace API.Controllers
 
         }
 
-        [HttpPost, Route("{login}/{patients}")]
-        public async Task<IActionResult> LoginPatient([FromBody]  User user)
+        [HttpPost]
+        [Route("api/patient/login")]
+        public async Task<IActionResult> LoginPatient([FromBody] users user)
         {
 
             if (string.IsNullOrEmpty(user.UserName) || string.IsNullOrEmpty(user.Password))
                 return null;
 
             var resault = _context.users.SingleOrDefault(q => q.UserName == user.UserName);
-            var patientData = await _context.patients.Where(q => q.Mobile == user.UserName).ToListAsync();
+            var patientData = await _context.Patients.Where(q => q.Mobile == user.UserName).ToListAsync();
 
 
             // check if username exists
@@ -84,11 +88,12 @@ namespace API.Controllers
                 return null;
 
 
-            var pass = _context.users.SingleOrDefault(x => x.Password == user.Password);
+            //var pass = _context.users.SingleOrDefault(x => x.Password == user.Password);
 
             //check if username exists
-            if (pass == null)
+            if (resault.Password != user.Password)
                 return null;
+
 
 
             if (user == null)
@@ -101,90 +106,88 @@ namespace API.Controllers
             var tokeOptions = new JwtSecurityToken(
                 issuer: "https://dr-khodabakhsh.ir",
                 audience: "https://dr-khodabakhsh.ir",
+                //issuer: "http://localhost:8080",
+                //audience: "http://localhost:8080",
                 claims: new List<Claim>(),
                 expires: DateTime.Now.AddMinutes(5),
                 signingCredentials: signinCredentials
             );
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
-            return Ok(new { Token = tokenString , patientData} );
+            return Ok(new { Token = tokenString, patientData });
 
         }
 
 
 
         // GET: api/Users
-        [HttpGet, Route("user"), Authorize]
-        public IEnumerable<User> Getusers()
-        {
-            return _context.users.ToList();
-        }
+        //[HttpGet, Authorize]
+        //[Route("api/user/get")]
+        //public IEnumerable<users> Getusers()
+        //{
+        //    return _context.users.ToList();
+        //}
 
         // GET: api/Users/username
-        [HttpGet("user/{username}")]
-        public ActionResult<User> Getuser(string username)
+        [HttpGet]
+        [Route("api/user/get/{username}")]
+        public ActionResult<users> Getuser(string username)
         {
             var result = _context.users.Where(x => x.UserName == username).FirstOrDefault();
             return Ok(result);
         }
-      
+
         // PUT: api/Users/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
-        {
-            if (id != user.ID)
-            {
-                return BadRequest();
-            }
 
-            _context.Entry(user).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
 
         // POST: api/Users
-        [HttpPost, Route("user")]
-        public async Task<ActionResult<User>> PostUser(User user)
+        [HttpPost]
+        [Route("api/user/save")]
+        public async Task<DataResponse> saveUser(users user)
         {
-            _context.users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUsers", new { id = user.ID }, user);
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(int id)
-        {
-            var user = await _context.users.FindAsync(id);
-            if (user == null)
+            var entity = await _context.users.SingleOrDefaultAsync(q => q.ID == user.ID);
+            if (entity == null)
             {
-                return NotFound();
+                entity = new users();
+                _context.users.Add(entity);
             }
 
-            _context.users.Remove(user);
-            await _context.SaveChangesAsync();
+            entity.UserName = user.UserName;
+            entity.Password = user.Password;
+            entity.Role = user.Role;
 
-            return user;
+
+            var saveResult = await _context.SaveAsync();
+            if (saveResult.Succeed)
+                return new DataResponse()
+                {
+                    IsSuccess = true,
+                    Data = entity
+                };
+            else
+                return new DataResponse() { IsSuccess = false };
+
+
         }
-        private bool UserExists(int id)
-        {
-            return _context.users.Any(e => e.ID == id);
-        }
+
+        //[HttpDelete("{id}")]
+        //[Route("api/auth/login")]
+        //public async Task<ActionResult<users>> DeleteUser(int id)
+        //{
+        //    var user = await _context.users.FindAsync(id);
+        //    if (user == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    _context.users.Remove(user);
+        //    await _context.SaveChangesAsync();
+
+        //    return user;
+        //}
+        //private bool UserExists(int id)
+        //{
+        //    return _context.users.Any(e => e.ID == id);
+        //}
 
 
 

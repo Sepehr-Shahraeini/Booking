@@ -1,23 +1,57 @@
 ﻿app.controller('editController', ['$scope', '$rootScope', '$location', 'authService', '$route', '$routeParams', '$http', '$q', 'Psychoanalyst', function ($scope, $rootScope, $location, authService, $route, $routeParams, $http, $q, fileReader, $timeout, Psychoanalyst) {
 
-    $scope.Name = $rootScope.Name,
-        $scope.LastName = $rootScope.LastName,
-        $scope.Mobile = $rootScope.Mobile,
-        $scope.Subject = $rootScope.Subject,
-        $scope.Reason = $rootScope.Reason,
-        $scope.Email = $rootScope.Email,
-        $scope.MaritalStatus = $rootScope.MaritalStatus,
-        $scope.Age = $rootScope.Age,
-        $scope.ChildrenNum = $rootScope.ChildrenNum,
-        $scope.Introduced = $rootScope.Introduced,
-        $scope.Education = $rootScope.Education,
-        $scope.Job = $rootScope.Job,
-        $scope.FieldOfStudy = $rootScope.FieldOfStudy
+
+    $scope.openMenu = function () {
+        var x = document.getElementById("menu");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }
+
+    $scope.btn_reserve = function () {
+        $location.path('/patientRegister')
+    };
+
+    $scope.backHome = function () {
+        $location.path('/blog')
+    };
+
+    $scope.btn_about = function () {
+        $location.path('/about')
+    };
+
+    $scope.btn_login = function () {
+        $location.path('/login')
+    };
+
+    var data = $rootScope.PatientsInfo;
+
+    angular.forEach(data, function (x) {
+        $scope.Name = x.Name;
+        $scope.LastName = x.LastName;
+        $scope.Mobile = x.Mobile;
+        $scope.Subject = x.Subject;
+        $scope.Reason = x.Reason;
+        $scope.Email = x.Email;
+        $scope.MaritalStatus = x.MaritalStatus;
+        $scope.Age = x.Age;
+        $scope.ChildrenNum = x.ChildrenNum;
+        $scope.Introduced = x.Introduced;
+        $scope.Education = x.Education;
+            $scope.Job = x.Job;
+        $scope.FieldOfStudy = x.FieldOfStudy;
+            $scope.Id = x.PatientId;
+    })
+
+
+
 
     $scope.btn_showPsychoanalyst = function () {
 
         var dto_Patient = {
-            Id: $rootScope.Id,
+            Id: $scope.Id,
             Name: $scope.Name,
             LastName: $scope.LastName,
             Mobile: $scope.Mobile,
@@ -33,59 +67,13 @@
             FieldOfStudy: $scope.FieldOfStudy,
         }
 
-
-        authService.editPatientData($rootScope.Id, dto_Patient).then(function (response) {
+        authService.editPatientData($scope.Id, dto_Patient).then(function (response) {
             $rootScope.Name = $scope.Name
             $rootScope.LastName = $scope.LastName
         });
-        //authService.patientRegistration(dto_Patient).then(function (response) {
-        //    $scope.patientId = response.data
 
+        $location.path("/patientProfile")
 
-            
-        //    $scope.timeRegistration = function (starttime, endtime) {
-        //        $scope.registeredTime = starttime + "-" + endtime;
-        //        $scope.selectedTime = starttime;
-        //        $scope.registeredDate = $scope.selectedDate + $scope.selectedTime
-
-        //        var dateBox = ["sun", "mon", "tues", "wed", "thur", "fri", "sat"];
-        //        angular.forEach(dateBox, function (x) {
-        //            document.getElementById(x).style.display = "none";
-        //            document.getElementById(x).style.backgroundColor = "#ffffff";
-        //        });
-
-        //        var timesPopup = ["popSat", "popSun", "popMon", "popTues", "popWed", "popThur", "popFri"];
-        //        angular.forEach(timesPopup, function (x) {
-        //            document.getElementById(x).style.display = "none";
-        //        });
-
-        //        document.getElementById("choosePsychoanalyst").style.display = "none";
-
-
-               $location.path("/factor")
-
-
-
-        //        var dto_calendar = {
-        //            Amount: "20000",
-        //            TrackingNO: 223,
-        //            IsEmergency: true,
-        //            PatientId: $scope.patientId,
-        //            PsychoanalystId: $scope.psychoanalystId,
-        //            DatePersian: $scope.registeredDate,
-        //            DateAmount: $scope.registeredDate,
-        //            time: $scope.registeredTime
-
-        //        }
-
-        //        $rootScope.Time = $scope.registeredTime
-        //        $rootScope.PsychoanalystId = $scope.psychoanalystId
-
-        //        authService.saveCalendar(dto_calendar).then(function (response) {
-        //        })
-
-        //    }
-        //})
     }
 
 }]);

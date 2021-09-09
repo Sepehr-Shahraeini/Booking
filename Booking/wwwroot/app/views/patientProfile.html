@@ -1,0 +1,45 @@
+﻿﻿
+<style>
+
+
+    @media (min-width:756px) {
+      .btn_edit{
+          display:block
+      } 
+    }
+
+    @media (max-width:756px) {
+      .btn_edit{
+          display:none
+      }
+    }
+</style>
+
+<div class="topnav">
+    <a ng-click="backHome()" class="navbar">مرکز دکتر محمد رضا خدابخش</a>
+    <div id="menu">
+        <a ng-click="btn_reserve()">رزرو وقت ویزیت</a>
+        <a ng-click="btn_about()">درباره دکتر محمد رضا خدا بخش</a>
+        <a ng-click="btn_edit()">ویرایش اطلاعات</a>
+    </div>
+    <a ng-click="openMenu()" class="icon">
+        <i class="fa fa-bars"></i>
+    </a>
+</div>
+
+<div ng-click="btn_edit()" class="btn_edit"></div>
+
+<table>
+    <tr>
+        <th>دکتر</th>
+        <th>تاریخ</th>
+        <th>زمان</th>
+        <th>مبلغ</th>
+    </tr>
+    <tr ng-repeat="x in PatientsData track by $index">
+        <td>{{x.psychoanalystsName}} {{x.psychoanalystsLastName}}</td>
+        <td>{{x.PDate}}</td>
+        <td>{{x.Start}} - {{x.End}}</td>
+        <td>{{x.Amount}}</td>
+    </tr>
+</table>

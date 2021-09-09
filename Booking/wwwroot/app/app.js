@@ -6,7 +6,7 @@ var app = angular.module('AngularJSApp', ['ngRoute', 'LocalStorageModule', 'angu
 
 
 app.config(function ($routeProvider) {
-    
+
     $routeProvider.when("/main", {
         controller: "indexController",
         templateUrl: "/app/views/main.html"
@@ -22,43 +22,43 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/adminCustomer.html"
     });
 
-     $routeProvider.when("/user", {
-         controller: "UserController",
-         templateUrl: "/app/views/User.html"
+    $routeProvider.when("/user", {
+        controller: "UserController",
+        templateUrl: "/app/views/User.html"
     });
 
 
     $routeProvider.when("/blog", {
-         controller: "blogController",
+        controller: "blogController",
         templateUrl: "/app/views/blog.html"
     });
 
-     $routeProvider.when("/patientRegister", {
-         controller: "patientRegisterController",
-         templateUrl: "/app/views/patientRegister.html"
+    $routeProvider.when("/patientRegister", {
+        controller: "patientRegisterController",
+        templateUrl: "/app/views/patientRegister.html"
     });
 
 
-     $routeProvider.when("/patientLogin", {
-         controller: "patientLoginController",
-         templateUrl: "/app/views/patientLogin.html"
+    $routeProvider.when("/patientLogin", {
+        controller: "patientLoginController",
+        templateUrl: "/app/views/patientLogin.html"
     });
 
     $routeProvider.when("/blogAdmin", {
-         controller: "blogAdminController",
-         templateUrl: "/app/views/blogAdmin.html"
+        controller: "blogAdminController",
+        templateUrl: "/app/views/blogAdmin.html"
     });
 
 
     $routeProvider.when("/post", {
         controller: "postController",
-         templateUrl: "/app/views/post.html"
+        templateUrl: "/app/views/post.html"
     });
 
 
     $routeProvider.when("/about", {
         controller: "aboutController",
-         templateUrl: "/app/views/about.html"
+        templateUrl: "/app/views/about.html"
     });
 
     $routeProvider.when("/contact", {
@@ -66,20 +66,49 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/contactUs.html"
     });
 
-        $routeProvider.when("/factor", {
+    $routeProvider.when("/factor", {
         controller: "factorController",
         templateUrl: "/app/views/factor.html"
     });
 
-     $routeProvider.when("/rules", {
+    $routeProvider.when("/rules", {
         controller: "rulesController",
         templateUrl: "/app/views/Rules.html"
     });
 
-     $routeProvider.when("/edit", {
+    $routeProvider.when("/edit", {
         controller: "editController",
         templateUrl: "/app/views/edit.html"
     });
+
+
+    $routeProvider.when("/patientProfile", {
+        controller: "patientProfileController",
+        templateUrl: "/app/views/patientProfile.html"
+    });
+
+
+    $routeProvider.when("/adminProfile", {
+        controller: "adminProfileController",
+        templateUrl: "/app/views/adminProfile.html"
+    });
+
+    $routeProvider.when("/doctorProfile", {
+        controller: "doctorProfileController",
+        templateUrl: "/app/views/doctorProfile.html"
+    });
+
+     $routeProvider.when("/doctors", {
+        controller: "doctorsController",
+        templateUrl: "/app/views/doctors.html"
+    });
+
+      $routeProvider.when("/newDoctorForm", {
+          controller: "newDoctorFormController",
+          templateUrl: "/app/views/newDoctorForm.html"
+    });
+
+
 
 
     $routeProvider.otherwise({ redirectTo: "/blog" });
@@ -90,6 +119,7 @@ app.config(function ($routeProvider) {
 
 
 var serviceBase = 'http://localhost:8081/';
+//var serviceBase = 'https://dr-khodabakhsh.ir/api/';
 
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
@@ -100,11 +130,11 @@ app.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
 }]);
 app.run(['$rootScope', '$location', '$window', 'authService', function ($rootScope, $location, $window, authService) {
-  
 
 
-    
-    
+
+
+
 
     //////////////////////////
     $rootScope.serviceUrl = serviceBase;
@@ -113,10 +143,10 @@ app.run(['$rootScope', '$location', '$window', 'authService', function ($rootSco
 
     });
 
-    
 
 
-    $rootScope.isContentVisible = true;
+
+    //$rootScope.isContentVisible = true;
 
 
 
@@ -125,3 +155,8 @@ app.run(['$rootScope', '$location', '$window', 'authService', function ($rootSco
 }]);
 
 
+Date.prototype.addDays = function (days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+};

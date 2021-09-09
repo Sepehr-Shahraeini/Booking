@@ -1,18 +1,13 @@
 ﻿<style>
 
-    @font-face {
-        font-family: 'IRANSansWeb';
-        src: url('content/fonts/eot/IRANSansWeb.eot') format(‘eot’), url('content/fonts/woff/IRANSansWeb.woff') format('woff'), url('content/fonts/ttf/IRANSansWeb.ttf') format(‘truetype’);
-    }
 
     body {
         color: black;
-        font-family: IRANSansWeb
     }
 
 
 
-    @media (min-width:900px) {
+    @media (min-width:1200px) {
         .postImage {
             width: 80%;
             height: 50%;
@@ -83,11 +78,15 @@
             width: 80%;
             margin: auto
         }
+
+        .topnav {
+            display: none
+        }
     }
 
 
-    @media only screen and (max-device-width: 900px) {
-        
+    @media only screen and (max-device-width: 1200px) {
+
         .postImage {
             width: 100%;
             height: 50%;
@@ -134,7 +133,6 @@
             width: 80%;
             font-size: 18px;
             margin: 2% auto 0 auto;
-            
         }
 
         .title {
@@ -159,33 +157,32 @@
             margin: auto
         }
     }
-
-
-    @media only screen and (max-device-height :1400px) {
-    }
 </style>
 
+
 <div class="topnav">
-    <a href="#home" class="navbar">مرکز دکتر محمد رضا خدابخش</a>
+    <a ng-click="backHome()" class="navItem">مرکز دکتر محمد رضا خدابخش</a>
     <div id="menu">
-        <a ng-click="btn_reserve()">رزرو وقت ویزیت</a>
-        <a ng-click="btn_about()">درباره دکتر محمد رضا خدا بخش</a>
+        <a ng-click="backHome()" class="navItem">وبلاگ</a>
+        <!--<a ng-click="btn_reserve()">رزرو وقت ویزیت</a>
+        <a ng-click="btn_about()">درباره دکتر محمد رضا خدا بخش</a>-->
     </div>
     <a ng-click="openMenu()" class="icon">
         <i class="fa fa-bars"></i>
     </a>
 </div>
 
-<div class=" post" ng-repeat="x in post">
+
+<div class="post" ng-repeat="x in post">
     <div class="topInfo">
         <h4 ng-click="navPost(x.Title)" class="title"><b>{{x.Title}}</b></h4>
-        <p class="summery">{{x.Summery}}</p>
+        <p ng-bind-html="x.Summery" class="summery"></p>
     </div>
     <div class="w3-xlarge w3-section socialBar">
-        <a href="https://t.me/Dr_answer"><i class="fa fa-telegram w3-hover-opacity"></i></a>
-        <a href="https://www.instagram.com/dr_mrkhodabakhsh/"><i class="fa fa-instagram w3-hover-opacity"></i></a>
+        <a href="https://t.me/Dr_answer"><i class="fab fa-telegram w3-hover-opacity"></i></a>
+        <a href="https://www.instagram.com/dr_mrkhodabakhsh/"><i class="fab fa-instagram w3-hover-opacity"></i></a>
     </div>
     <img ng-src="{{x.Image}}" class="postImage" />
-    <p class="mainText">{{x.Body}}</p>
+    <p ng-bind-html="x.Body" class="mainText"></p>
 </div>
 

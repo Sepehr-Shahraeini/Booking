@@ -1,12 +1,7 @@
 ﻿
 <style>
     body {
-        color: black
-    }
-
-    @font-face {
-        font-family: 'IRANSansWeb';
-        src: url('content/fonts/eot/IRANSansWeb.eot') format(‘eot’), url('content/fonts/woff/IRANSansWeb.woff') format('woff'), url('content/fonts/ttf/IRANSansWeb.ttf') format(‘truetype’);
+        color: black;
     }
 
     @media (min-width:900px) {
@@ -16,28 +11,35 @@
     }
 
 
-    @media only screen and (max-device-width: 900px) {
+    @media only screen and (max-device-width: 1200px) {
+        .about {
+            padding: 3%
+        }
     }
 
-    @media only screen and (max-device-height :1400px) {
+    @media only screen and (max-device-height :1200px) {
+        .about {
+            padding: 3%
+        }
     }
 </style>
 
 
 <div class="topnav">
-    <a ng-click="backHome()" class="navbar">مرکز دکتر محمد رضا خدابخش</a>
+    <a ng-click="backHome()" class="navItem">مرکز دکتر محمد رضا خدابخش</a>
     <div id="menu">
-        <a ng-click="btn_reserve()">رزرو وقت ویزیت</a>
-        <a ng-click="btn_about()">درباره دکتر محمد رضا خدا بخش</a>
+        <a ng-click="backHome()"class="navItem">وبلاگ</a>
+        <!--<a ng-click="btn_reserve()">رزرو وقت ویزیت</a>
+    <a ng-click="btn_about()">درباره دکتر محمد رضا خدا بخش</a>-->
     </div>
     <a ng-click="openMenu()" class="icon">
         <i class="fa fa-bars"></i>
     </a>
 </div>
 
-<div class="w3-content w3-container" id="about">
+<div class="w3-content w3-container about" style=" padding: 12px 24px">
 
-    <h3 class="w3-center">درباره ما</h3>
+    <h3 class="w3-center">درباره من</h3>
     <p style="font-size:17px; text-align:justify">
         سلام من محمدرضا خدابخش هستم
         دکتري تخصصي روانشناسی از دانشگاه علامه طباطبائی تهران
@@ -74,9 +76,9 @@
     </p>
     <div class="w3-row" id="discription">
         <div class="w3-col m6 w3-center w3-padding-large">
-            <img src="../../img/folder.jpg" class="w3-round w3-image" alt="Photo of Me" width="500" height="333">
+            <img src="img/dr.jpg" class="w3-round w3-image" alt="Photo of Me" width="500" height="333">
         </div>
-        <div class="w3-col m6  w3-padding-large">
+        <div class="w3-col m6 ">
             <p style="font-size:17px; text-align:justify">
                 در زمينه هاي زير ميتونم به شما كمك كنم :
 

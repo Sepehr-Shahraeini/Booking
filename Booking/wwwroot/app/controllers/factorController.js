@@ -11,9 +11,7 @@ app.controller('factorController', ['$scope', '$routeParams', '$location', 'auth
     })
 
 
-    $scope.btn_edit = function () {
-        $location.path("/edit")
-    } 
+   
 
     $scope.btn_pay = function () {
         alert("این پاپ اپ به صورت موقت قرار دارد و پس از دریافت درگاه پرداخت با فشار دادن دکمه پرداخت به درگاه پرداخت هدایت میشوید  ")
@@ -23,18 +21,31 @@ app.controller('factorController', ['$scope', '$routeParams', '$location', 'auth
             Amount: $rootScope.Amount,
             TrackingNO: $rootScope.TrackingNO,
             IsEmergency: true,
-            PatientId: $rootScope.Id,
+            PatientId: $rootScope.PatientId,
             PsychoanalystId: $rootScope.PsychoanalystId,
-            DatePersian: $rootScope.DatePersian,
             DateAmount: $rootScope.DateAmount,
-            time: $rootScope.Time
-
+            AvailableId: $rootScope.availableTimeId,
+            
         }
-
-        console.log(dto_calendar)
 
         authService.saveCalendar(dto_calendar).then(function (response) {
 
+            $rootScope.PatientId = null;
+            $rootScope.Name = null;
+            $rootScope.LastName = null;
+            $rootScope.Mobile = null;
+            $rootScope.Subject = null;
+            $rootScope.Reason = null;
+            $rootScope.Email = null;
+            $rootScope.MaritalStatus = null;
+            $rootScope.Age = null;
+            $rootScope.ChildrenNum = null;
+            $rootScope.Introduced = null;
+            $rootScope.Education = null;
+            $rootScope.Job = null;
+            $rootScope.FieldOfStudy = null;
+            $rootScope.Amount = null;
+            $rootScope.TrackingNO = null;
         })
 
 

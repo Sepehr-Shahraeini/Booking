@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using API.Context;
 using API.Models;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
@@ -13,7 +12,7 @@ using System.Net.Http.Headers;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
     [ApiController]
     public class PostController : ControllerBase
     {
@@ -28,8 +27,8 @@ namespace API.Controllers
 
 
 
-        [HttpPost("upload"), DisableRequestSizeLimit]
-
+        [HttpPost, DisableRequestSizeLimit]
+        [Route("api/image/upload")]
         public async Task<IActionResult> UploadIamge()
         {
             try
@@ -64,7 +63,8 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Post>> Post(Post post)
+        [Route("api/post/upload")]
+        public async Task<ActionResult<posts>> Post(posts post)
         {
             _context.posts.Add(post);
             await _context.SaveChangesAsync();
@@ -103,15 +103,19 @@ namespace API.Controllers
                 || fileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase);
         }
 
-        [HttpGet("GetPosts")]
-        public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
+        [HttpGet]
+        [Route("api/posts/get")]
+        public async Task<ActionResult<IEnumerable<posts>>> GetPosts()
         {
-            return await _context.posts.ToListAsync();
+            var resault = _context.posts.ToList().OrderByDescending(q => q.Id);
+            return Ok(resault);
+            //return await _context.posts.ToListAsync();
         }
 
 
-        [HttpGet("{GetPost}/{title}")]
-        public async Task<ActionResult<IEnumerable<Post>>> GetPost(string title)
+        [HttpGet]
+        [Route("api/post/get/{title}")]
+        public async Task<ActionResult<IEnumerable<posts>>> GetPost(string title)
         {
             var resault = await _context.posts.Where(q => q.Title == title).ToListAsync();
             return resault;

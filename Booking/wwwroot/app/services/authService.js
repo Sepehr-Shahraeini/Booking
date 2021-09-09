@@ -40,7 +40,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         var deferred = $q.defer();
 
 
-        $http.post(serviceBase + 'api/auth/login', data, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
+        $http.post(serviceBase + 'api/user/login', data, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
             var responseData = response.data;
             angular.forEach(responseData, function (x) {
                 var token = x
@@ -92,7 +92,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         var deferred = $q.defer();
 
 
-        $http.post(serviceBase + 'api/auth/login/patient', data, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
+        $http.post(serviceBase + 'api/patient/login', data, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
             var responseData = response.data;
             angular.forEach(responseData, function (x) {
                 var token = x
@@ -355,17 +355,17 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         _fillModuleData();
 
     };
-    var _register2 = function (entity) {
-        var deferred = $q.defer();
-        $http.post($rootScope.serviceUrl + 'api/users/register', entity).then(function (response) {
-            deferred.resolve(response.data);
-        }, function (err, status) {
+    //var _register2 = function (entity) {
+    //    var deferred = $q.defer();
+    //    $http.post($rootScope.serviceUrl + 'api/users/register', entity).then(function (response) {
+    //        deferred.resolve(response.data);
+    //    }, function (err, status) {
 
-            deferred.reject(Exceptions.getMessage(err));
-        });
+    //        deferred.reject(Exceptions.getMessage(err));
+    //    });
 
-        return deferred.promise;
-    };
+    //    return deferred.promise;
+    //};
     //var _changePassword = function (entity) {
     //    var deferred = $q.defer();
     //    $http.post($rootScope.serviceUrl + 'api/password/change', entity).then(function (response) {
@@ -425,7 +425,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
 
     var _getPatients = function (psychoanalystId) {
-        return $http.get(serviceBase + 'api/Patients/' + psychoanalystId).then(function (response) {
+        return $http.get(serviceBase + 'api/getpatient/' + psychoanalystId).then(function (response) {
             return response;
         })
     };
@@ -452,11 +452,11 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     }
 
 
-    var _deletePsychoanalyst = function (id) {
-        return $http.delete(serviceBase + 'api/Psychoanalysts/' + id).then(function (response) {
-            return response;
-        })
-    }
+    //var _deletePsychoanalyst = function (id) {
+    //    return $http.delete(serviceBase + 'api/Psychoanalysts/' + id).then(function (response) {
+    //        return response;
+    //    })
+    //}
 
 
     var _deleteVisitingTime = function (id) {
@@ -476,7 +476,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
 
     var _patientRegistration = function (data) {
-        return $http.post(serviceBase + 'api/Patients', data).then(function (response) {
+        return $http.post(serviceBase + 'api/patient/save', data).then(function (response) {
 
             return response;
         });
@@ -484,13 +484,13 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     };
 
     var _savePatient = function (data) {
-        return $http.post(serviceBase + 'api/Patients/savePatient', data).then(function (response) {
+        return $http.post(serviceBase + 'api/patient/save', data).then(function (response) {
             return responsel
         })
     }
 
     var _saveCalendar = function (data) {
-        return $http.post(serviceBase + 'api/Patients/saveCalendar ', data).then(function (response) {
+        return $http.post(serviceBase + 'api/calendar/save ', data).then(function (response) {
             return response
         })
     }
@@ -503,13 +503,13 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     };
 
     var _getUserByUsername = function (phone) {
-        return $http.get(serviceBase + 'api/auth/user/' + phone).then(function (response) {
+        return $http.get(serviceBase + 'api/user/get/' + phone).then(function (response) {
             return response;
         })
     };
 
     var _getPsychoanalysts = function () {
-        return $http.get(serviceBase + 'api/Psychoanalysts').then(function (response) {
+        return $http.get(serviceBase + 'api/psychoanalyst/get').then(function (response) {
             return response;
         })
     };
@@ -521,19 +521,19 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     };
 
     var _getVisitingTime = function (pyschoanalystId, day) {
-        return $http.get(serviceBase + 'api/VisitingTimes/' + pyschoanalystId + '/' + day).then(function (response) {
+        return $http.get(serviceBase + 'api/Psychoanalysts/available/' + pyschoanalystId + '/' + day).then(function (response) {
             return response;
         })
     };
 
     var _getPosts = function () {
-        return $http.get(serviceBase + 'api/Post/GetPosts' ).then(function (response) {
+        return $http.get(serviceBase + 'api/posts/get' ).then(function (response) {
             return response;
         })
     };
 
     var _getPost = function (title) {
-        return $http.get(serviceBase + 'api/Post/GetPost/' + title).then(function (response) {
+        return $http.get(serviceBase + 'api/post/get/' + title).then(function (response) {
             return response;
         })
     };
@@ -552,39 +552,133 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     }
 
     var _PsychoanalystById = function (psychoanalystId) {
-        return $http.get(serviceBase + 'api/Psychoanalysts/id/' + psychoanalystId ).then(function (response) {
+        return $http.get(serviceBase + 'api/psychoanalyst/' + psychoanalystId ).then(function (response) {
             return response;
 
         })
     }
 
     var _uploadImage = function (fd) {
-        return $http.post(serviceBase + 'api/Post/upload', fd, { transformRequest: angular.identity, headers: { 'Content-Type': undefined } }).then(function (response) {
+        return $http.post(serviceBase + 'api/image/upload', fd, { transformRequest: angular.identity, headers: { 'Content-Type': undefined } }).then(function (response) {
             return response
         })
     }
 
     var _uploadPost = function (fd) {
-        return $http.post(serviceBase + 'api/Post', fd).then(function (response) {
+        return $http.post(serviceBase + 'api/post/upload', fd).then(function (response) {
             return response
         })
     }
-     var _editPatientData = function (id, data) {
-        return $http.put(serviceBase + 'api/Patients/edit/' + id, data).then(function (response) {
+
+    var _editPatientData = function (id, data) {
+        return $http.post(serviceBase + 'api/Patients/edit/', data).then(function (response) {
+            return response
+        })
+    }
+
+    var _editConfirmedDate = function (data) {
+        return $http.post(serviceBase + 'api/confirmdate/update', data).then(function (response) {
             return response
         })
     }
 
     var _newVisitingTime = function (newVisitingTime) {
-        $http.post(serviceBase + 'api/VisitingTimes', newVisitingTime).then(function (response) {
+        return $http.post(serviceBase + 'api/availabetime/save', newVisitingTime).then(function (response) {
             return response;
         })
     }
 
+    //var _psychoanalystWeekDays = function (id, dtFrom, dtTo) {
+    //    return $http.get(serviceBase + 'api/Psychoanalysts/available/' + id + '/' + dtFrom + '/' + dtTo).then(function (response) {
+    //        return response;
+    //    })
+    //}
 
+    //var _unAvailableDays = function (id, dtFrom, dtTo) {
+    //    return $http.get(serviceBase + 'api/Psychoanalysts/unAvailable/' + id + '/' + dtFrom + '/' + dtTo).then(function (response) {
+    //        return response;
+    //    })
+    //}
 
+    var _psychoanalystMonths = function (id, year, month) {
+        return $http.get(serviceBase + 'api/getmonths/' + id + '/' + year ).then(function (response) {
+            return response;
+        })
+    }
+
+    var _Days = function (id, pyear, pmonth) {
+        return $http.get(serviceBase + 'api/days/'+ id + '/'  + pyear + '/' + pmonth ).then(function (response) {
+            return response;
+        })
+    }
+
+    var _Times = function (id, dateId) {
+        return $http.get(serviceBase + 'api/times/' + id + '/' + dateId ).then(function (response) {
+            return response;
+        })
+    }
+
+    var _checkConfirmDate = function (id) {
+        return $http.get(serviceBase + 'api/confirmdate/' + id).then(function (response) {
+            return response;
+        })
+    }
+
+    var _getPatientTimes = function (mobile) {
+        return $http.get(serviceBase + 'api/patient/times/' + mobile).then(function (response) {
+            return response;
+        })
+    }
+
+    var _getPatientInfo = function (mobile) {
+        return $http.get(serviceBase + 'api/patient/info/' + mobile).then(function (response) {
+            return response;
+        })
+    }
+
+    var _getDoctorPatients = function (mobile) {
+        return $http.get(serviceBase + 'api/getdoctorPatients/' + mobile).then(function (response) {
+            return response;
+        })
+    }
+    
+    var _checkPatient = function (mobile) {
+        return $http.get(serviceBase + 'api/checkPatient/' + mobile).then(function (response) {
+            return response
+        })
+    }
+
+    var _newPsychoanalyst = function (newPsychoanalyst) {
+        return $http.post(serviceBase + 'api', newPsychoanalyst).then(function (response) {
+            return response;
+        })
+    }
+
+    var _newUser = function (newUserData) {
+        return $http.post(serviceBase + 'api/user/save', newUserData).then(function (response) {
+            return response;
+        })
+    }
+
+    var _newAvailableTime = function (data) {
+       return $http.post(serviceBase + 'api/saveAvailableTime', data).then(function (response) {
+            return response;
+        })
+    }
 
     authServiceFactory.newTime = _newTime;
+    authServiceFactory.newUser = _newUser;
+    authServiceFactory.newAvailableTime = _newAvailableTime;
+    authServiceFactory.newPsychoanalyst = _newPsychoanalyst;
+    authServiceFactory.checkPatient = _checkPatient;
+    authServiceFactory.checkConfirmDate = _checkConfirmDate;
+    authServiceFactory.getPatientTimes = _getPatientTimes;
+    authServiceFactory.getPatientInfo = _getPatientInfo;
+    authServiceFactory.getDoctorPatients = _getDoctorPatients;
+    authServiceFactory.editConfirmedDate = _editConfirmedDate;
+    authServiceFactory.psychoanalystMonths = _psychoanalystMonths;
+    authServiceFactory.Days = _Days;
+    authServiceFactory.Times = _Times;
     authServiceFactory.newVisitingTime = _newVisitingTime;
     authServiceFactory.editPatientData = _editPatientData;
     authServiceFactory.PsychoanalystById = _PsychoanalystById;
@@ -594,7 +688,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     authServiceFactory.uploadImage = _uploadImage;
     authServiceFactory.getUnselectedTime = _getUnselectedTime;
     authServiceFactory.deleteUser = _deleteUser;
-    authServiceFactory.deletePsychoanalyst = _deletePsychoanalyst;
+   // authServiceFactory.deletePsychoanalyst = _deletePsychoanalyst;
     authServiceFactory.deleteVisitingTime = _deleteVisitingTime;
     authServiceFactory.editVisitingTime = _editVisitingTime;
     authServiceFactory.visitingTimeByDrPhone = _VisitingTimeByDrPhone;
